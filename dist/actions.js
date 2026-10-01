@@ -2,11 +2,12 @@ import { actionStateOptions } from './action-state.js';
 import { actionPacks, extensionAction, executeExtension } from './extensions.js';
 import { iconPath } from './icons.js';
 import { deviceMapping } from './config.js';
-import { readdir, readFile, stat } from 'node:fs/promises';
+import { readdir, readFile, stat, access } from 'node:fs/promises';
 import { join, delimiter } from 'node:path';
 import { homedir } from 'node:os';
 import { plainText, root, deckModels, updateProfile, pageSet } from './config.js';
 import { launch } from './process.js';
+import { constants } from 'node:fs';
 export const keyActions = {
     key_home: 'Home', key_end: 'End', key_page_up: 'Page_Up', key_page_down: 'Page_Down',
     key_left: 'Left', key_right: 'Right', key_up: 'Up', key_down: 'Down', key_enter: 'Return',
@@ -128,7 +129,20 @@ export async function catalog() {
     const actions = [...Object.entries(builtin), ...Object.entries(keyActions)].map(([value, label]) => ({ value, label: `${value.startsWith('key_') ? 'Key' : 'Function'} · ${label}` }));
     for (const { id, entry } of await applications())
         actions.push({ value: 'app:' + id, label: 'Application · ' + plainText(entry.Name) });
-    const base = await Promise.all(actions.map(async (a) => ({ ...a, controls: actionControls(a.value), states: await actionStateOptions(a.value), icon: await actionIcon(a.value) })));
+    const available = await Promise.all(actions.map(async (action) => {
+        const executable = commandFor(action.value)?.[0];
+        if (!executable)
+            return action;
+        for (const directory of (process.env.PATH || '').split(delimiter).filter(Boolean)) {
+            try {
+                await access(join(directory, executable), constants.X_OK);
+                return action;
+            }
+            catch { }
+        }
+        return undefined;
+    }));
+    const base = await Promise.all(available.filter((action) => !!action).map(async (a) => ({ ...a, controls: actionControls(a.value), states: await actionStateOptions(a.value), icon: await actionIcon(a.value) })));
     return [...base, ...await Promise.all((await actionPacks()).actions.map(async (a) => ({ value: a.value, label: `${plainText(a.pack)} · ${plainText(a.label)}`, controls: a.controls, states: await actionStateOptions(a.value), icon: a.icon })))];
 }
 export async function setControl(kind, index, slot, action, model, pageId) {

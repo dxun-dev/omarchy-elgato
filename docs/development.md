@@ -28,6 +28,7 @@ checkout directory, user name, connected serial number, or light address.
 - `src/`: TypeScript backend; `dist/`: compiled backend shipped with the plugin.
 - `BarWidget.qml`, `Panel.qml`, `Service.qml`: interface and daemon lifecycle.
 - `defaults/`, `assets/`: generic model layouts, initial mappings, and artwork.
+- `scripts/system-setup.sh`: first-enable system requirement checks and confirmed installation through Omarchy.
 - `scripts/setup.mjs`: automatic runtime preparation on enable; manual repair and offline development setup.
 - `scripts/install.mjs`: staged local development installation.
 - `test/`: profile, action, artwork, mock hardware, and lifecycle coverage.

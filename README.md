@@ -24,16 +24,20 @@ The interface uses QML and runs within Omarchy Shell; the backend uses Node.js.
 
 ## Requirements
 
-- Omarchy Quattro with Omarchy Shell and the `omarchy plugin` commands.
-- Node.js 22.18 or newer and npm.
-- ImageMagick (`magick`), Fontconfig (`fc-match`), and an installed sans-serif font.
-- USB access to the Stream Deck for the logged-in user; consult the device
-  library's [USB permission instructions](https://github.com/Julusian/node-elgato-stream-deck).
-- Avahi (`avahi-browse`) for network Key Light discovery.
+Omarchy Quattro with Omarchy Shell and the `omarchy plugin` commands.
+First enable checks system requirements and opens a terminal prompt if setup is
+needed. Accept the prompt to install missing packages through `omarchy pkg add`
+and configure Stream Deck USB access. Administrator authentication may be
+requested. The plugin then prepares its locked Node.js runtime automatically.
 
-Individual actions may require PipeWire/WirePlumber (`wpctl`), `wtype`,
-`uwsm-app`, or another executable declared by an action pack. Missing optional
-integrations do not install packages automatically.
+Setup covers Node.js 22.18+, npm, ImageMagick, Fontconfig and a font, Avahi,
+WirePlumber, keyboard input, and application-launch tools. Most of these are
+already part of Omarchy. USB rules grant access to the active desktop user for
+supported Stream Deck devices; other USB devices are unaffected. Reconnect the
+Stream Deck if it is not detected after setup.
+
+Actions for optional applications appear only when their executable is
+available. User-installed action packs provide their own dependency checks.
 
 ## Install
 
@@ -43,10 +47,14 @@ Install and enable through Omarchy:
 omarchy plugin add https://github.com/dxun-dev/omarchy-elgato.git --enable
 ```
 
-Omarchy asks where to place the widget. On first enable, the service installs its
-locked runtime dependencies in the user data directory. This requires internet
-access and may take a moment. Click the Elgato icon when it appears to configure
-your devices.
+Omarchy asks where to place the widget. On first enable, accept any system setup
+prompt; the service then installs its locked runtime dependencies in the user
+data directory. This requires internet access and may take a moment. Click the
+Elgato icon when it appears to configure your devices.
+
+Without `--enable`, setup waits until you enable the plugin. If you decline the
+system setup prompt, no packages or USB rules are changed; use **Retry setup**
+in the editor when you are ready.
 
 For an earlier development install, disable `omarchy-elgato` before enabling
 this plugin. Existing profiles, icons, and action packs are preserved.
@@ -105,8 +113,9 @@ omarchy plugin remove dxun-dev.omarchy-elgato
 Disabling stops the daemon. Removal deletes or backs up the plugin through
 Omarchy. User profiles, icons, action packs, state, cache, and runtime dependencies
 remain available for reinstalling. To delete those too, first back up anything
-you want to keep and remove the locations in **User files** manually. No system
-files, packages, or USB rules are removed.
+you want to keep and remove the locations in **User files** manually. System
+packages and the Stream Deck USB access rule installed during setup remain
+available after removal.
 
 ## Compatibility and limitations
 
@@ -136,9 +145,10 @@ omarchy plugin enable dxun-dev.omarchy-elgato
 For detailed diagnostics, run
 `~/.config/omarchy/plugins/dxun-dev.omarchy-elgato/bin/elgato-control doctor`.
 Manual `bin/elgato-control setup` remains available to repair the runtime.
-USB permission failures require the appropriate device rule and a new login or
-device reconnect. Network lights must be reachable on the local network and
-discoverable through Avahi.
+To check or repair system requirements, run
+`bin/elgato-control install-requirements` in a terminal. Reconnect the Stream Deck
+after USB access setup if needed. Network lights must be reachable on the local
+network and discoverable through Avahi.
 
 For action packs, run `bin/elgato-control action-packs`. Runtime and status-query
 errors are reported by `bin/elgato-control status --json`. Shell load errors

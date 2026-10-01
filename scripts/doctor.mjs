@@ -18,6 +18,6 @@ for(const command of ['omarchy','omarchy-shell','magick','fc-match','flock']) {
 }
 check('Runtime modules',()=>{const require=createRequire(join(runtime,'package.json')); require('@elgato-stream-deck/node');require('node-hid').getHidapiVersion();require('@julusian/jpeg-turbo');});
 check('Artwork font',()=>{if(process.env.OMARCHY_ELGATO_FONT){if(!existsSync(process.env.OMARCHY_ELGATO_FONT))throw new Error('Font override is missing');}else{const font=execFileSync('fc-match',['-f','%{file}','sans-serif'],{encoding:'utf8'}).trim();if(!font||!existsSync(font))throw new Error('Install a sans-serif font');}});
-for(const command of ['avahi-browse','wpctl','wtype','uwsm-app']) if(!(process.env.PATH||'').split(delimiter).some(p=>existsSync(join(p,command)))) console.log('OPTIONAL '+command+' is unavailable; related actions/discovery may not work.');
+check('System requirements',()=>{try { execFileSync('bash',[join(source,'scripts/system-setup.sh'),'--check'],{encoding:'utf8'}); } catch(error) { throw new Error((error.stdout?.toString().trim() || error.message) + '\nRun bin/elgato-control install-requirements in a terminal.'); }});
 console.log('Runtime: '+runtime);
 process.exitCode=failed?1:0;

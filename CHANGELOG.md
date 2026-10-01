@@ -14,7 +14,8 @@ Prepared for the first public release; publication and tagging are pending.
 - Network Key Light discovery and individual or grouped controls.
 - User-installed action packs with command handlers and status queries.
 - Installation and updates through Omarchy's plugin commands, with automatic
-  runtime preparation, visible setup errors, and retry from the editor.
+  system-requirement prompts, Stream Deck USB access setup, automatic runtime
+  preparation, visible setup errors, and retry from the editor.
 - Serialized profile initialization, migration, and edits; queued editor saves
   preserve captions when switching controls, pages, or closing the editor.
 

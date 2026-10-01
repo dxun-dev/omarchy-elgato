@@ -549,7 +549,7 @@ Panel {
           width: parent.width; spacing: Style.space(8)
           Text {
             width: parent.width; wrapMode: Text.WordWrap; textFormat: Text.PlainText
-            text: root.runtimePreparing ? "Preparing runtime… First setup may take a moment." : "Runtime preparation failed. Check your internet connection and the details below, then retry."
+            text: root.runtimePreparing ? ((root.status.runtime || {}).message || "Preparing runtime… First setup may take a moment.") : "Runtime preparation failed. Check your internet connection and the details below, then retry."
             color: root.runtimeFailed ? Color.urgent : Color.foreground
             font.family: Style.font.family; font.pixelSize: Style.font.body
           }

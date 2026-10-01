@@ -10,7 +10,7 @@ process.env.XDG_DATA_HOME = join(dir, 'user');
 process.env.XDG_DATA_DIRS = join(dir, 'system');
 process.env.XDG_CONFIG_HOME = join(dir, 'config');
 process.env.XDG_STATE_HOME = join(dir, 'state');
-const { desktopEntry, applications, actionIcon } = await import('../dist/actions.js');
+const { desktopEntry, applications, actionIcon, catalog } = await import('../dist/actions.js');
 test('application entries and icons follow user and system XDG locations', async () => {
   for (const [root, id] of [[process.env.XDG_DATA_HOME, 'portable-user'], [process.env.XDG_DATA_DIRS, 'portable-system']]) {
     await mkdir(join(root, 'applications'), { recursive: true });
@@ -80,4 +80,19 @@ test('failed setup publishes actionable status without creating a profile', asyn
   await mkdir(join(env.XDG_CONFIG_HOME, 'omarchy-elgato'), { recursive: true });
   await writeFile(join(env.XDG_CONFIG_HOME, 'omarchy-elgato/profile.json'), 'invalid JSON');
   assert.equal(spawnSync(process.execPath, ['dist/cli.js', 'status', '--json'], { env }).status, 0);
+});
+
+test('action catalog hides unavailable executables and offers them after installation', async () => {
+  const previousPath = process.env.PATH;
+  const bin = join(dir, 'optional-actions');
+  await mkdir(bin);
+  process.env.PATH = bin;
+  try {
+    const unavailable = await catalog();
+    assert.ok(!unavailable.some(action => action.value === 'voxtype_push_to_talk'));
+    assert.ok(unavailable.some(action => action.value === 'page_next'));
+    await writeFile(join(bin, 'voxtype'), '#!/bin/sh\nexit 0\n');
+    await chmod(join(bin, 'voxtype'), 0o755);
+    assert.ok((await catalog()).some(action => action.value === 'voxtype_push_to_talk'));
+  } finally { process.env.PATH = previousPath; }
 });

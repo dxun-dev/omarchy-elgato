@@ -38,8 +38,11 @@ runtimes are checked without downloading dependencies. A preparation failure
 stops automatic restarts, avoiding repeated downloads. The panel shows
 preparation progress and failure details; **Retry setup** restarts the service
 through shell IPC. Disabling and re-enabling is also supported.
-No system packages or USB rules are changed. Removal is handled by Omarchy and
-preserves user data as documented in the README.
+First enable opens a terminal confirmation for missing system packages,
+Stream Deck USB access rules, and Avahi discovery. Packages are installed using
+`omarchy pkg add`; USB access and service changes use administrator
+authentication. Removal is handled by Omarchy and preserves user data as
+documented in the README.
 
 The repository was supplied by the maintainer. No marketplace submission or
 published listing has been created by this preparation work.

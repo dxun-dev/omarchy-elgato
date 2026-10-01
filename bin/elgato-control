@@ -1,6 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 plugin_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+if [[ ${1:-} == install-requirements ]]; then
+  exec bash "$plugin_dir/scripts/system-setup.sh" --install
+fi
+# A managed Node version can shadow the system version installed by setup.
+if ! node -e 'const [a,b]=process.versions.node.split(".").map(Number);process.exit(a>22||(a===22&&b>=18)?0:1)' >/dev/null 2>&1 && [[ -x /usr/bin/node ]]; then
+  export PATH=/usr/bin:$PATH
+fi
+if [[ ${1:-} == status ]] && ! node -e 'const [a,b]=process.versions.node.split(".").map(Number);process.exit(a>22||(a===22&&b>=18)?0:1)' >/dev/null 2>&1; then
+  state=${XDG_STATE_HOME:-$HOME/.local/state}/omarchy-elgato/runtime-status.json
+  if [[ -f $state ]]; then jq '{running:false,devices:[],lights:[],runtime:.}' "$state"
+  else printf '%s\n' '{"running":false,"devices":[],"lights":[]}'
+  fi
+  exit 0
+fi
 if [[ ${1:-} == setup || ${1:-} == doctor ]]; then
   command=$1
   shift
@@ -17,6 +31,10 @@ if [[ ${1:-} == daemon ]]; then
   mkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}/omarchy-elgato"
   exec 9>"${XDG_STATE_HOME:-$HOME/.local/state}/omarchy-elgato/daemon.lock"
   flock -n 9 || { echo 'omarchy-elgato daemon is already running' >&2; exit 1; }
+  if [[ ${2:-} != --no-hardware ]] && ! bash "$plugin_dir/scripts/system-setup.sh" --check; then
+    bash "$plugin_dir/scripts/system-setup.sh" --request 9>&-
+    exit 78
+  fi
   # Enabling the plugin prepares dependencies; updates are detected from the lockfile.
   # Source checkouts already have their development dependencies.
   if [[ $runtime != "$plugin_dir" ]]; then
