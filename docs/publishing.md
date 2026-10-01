@@ -14,7 +14,7 @@ and [development guide](https://plugins.omarchy.org/develop.html).
   before enabling the new ID to avoid duplicate hardware services.
 
 Author attribution is publisher metadata, not a dependency on a particular
-machine. Keep the original copyright and third-party notices.
+machine. Keep the license copyright and third-party notices.
 
 ## Release validation
 

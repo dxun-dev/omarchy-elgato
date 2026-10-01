@@ -48,15 +48,8 @@ locked runtime dependencies in the user data directory. This requires internet
 access and may take a moment. Click the Elgato icon when it appears to configure
 your devices.
 
-If you used an earlier Elgato plugin, disable it first so only one service
-controls the hardware:
-
-```bash
-omarchy plugin disable io.github.amitcpatel.elgato-control
-```
-
-For an earlier development install, disable `omarchy-elgato` instead. Existing
-profiles, icons, and action packs are preserved.
+For an earlier development install, disable `omarchy-elgato` before enabling
+this plugin. Existing profiles, icons, and action packs are preserved.
 
 ## Use and configure
 
@@ -161,8 +154,8 @@ release validation and submission checklist.
 
 ## License and attribution
 
-MIT licensed. The QML interface and supplied artwork were adapted from
+MIT licensed. This project began as a port of
 [Amit Patel's Elgato Control](https://github.com/amitcpatel/omarchy-elgato-control).
-The [original license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md)
+The [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md)
 are retained. Elgato product names identify compatible hardware and do not imply
 endorsement or affiliation.

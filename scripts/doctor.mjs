@@ -13,7 +13,7 @@ function check(name, fn) {
 }
 check('Node.js 22.18+',()=>{const [major,minor]=process.versions.node.split('.').map(Number);if(major<22||(major===22&&minor<18))throw new Error('Upgrade Node.js');});
 check('Compiled backend',()=>{if(!existsSync(join(source,'dist/cli.js')))throw new Error('Run npm run build in the source checkout');});
-for(const command of ['omarchy','omarchy-shell','magick','fc-match','flock','pgrep']) {
+for(const command of ['omarchy','omarchy-shell','magick','fc-match','flock']) {
   check(command,()=>{if(!(process.env.PATH||'').split(delimiter).some(p=>existsSync(join(p,command))))throw new Error('Install the package that provides '+command);});
 }
 check('Runtime modules',()=>{const require=createRequire(join(runtime,'package.json')); require('@elgato-stream-deck/node');require('node-hid').getHidapiVersion();require('@julusian/jpeg-turbo');});
