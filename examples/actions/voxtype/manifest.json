@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "voxtype",
+  "name": "VOXtype",
+  "requires": ["voxtype"],
+  "actions": [
+    {
+      "id": "cancel",
+      "label": "Discard recording",
+      "controls": ["button", "dialPress"],
+      "press": ["voxtype", "record", "cancel"]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "omarchy-elgato",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "check": "tsc --noEmit",
+    "install:local": "npm run build && node scripts/install.mjs",
+    "dev": "npm run install:local -- --offline && omarchy restart shell",
+    "package:plugin": "npm run build && node scripts/package.mjs",
+    "previews": "npm run build && node scripts/generate-previews.mjs",
+    "test:editor": "npm run build && node scripts/generate-previews.mjs --verify && node scripts/verify-service.mjs"
+  },
+  "dependencies": {
+    "@elgato-stream-deck/node": "^7.7.1",
+    "node-hid": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
+  }
+}

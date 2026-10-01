@@ -1,0 +1,36 @@
+#!/bin/bash
+set -euo pipefail
+plugin_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+if [[ ${1:-} == setup || ${1:-} == doctor ]]; then
+  command=$1
+  shift
+  exec node "$plugin_dir/scripts/$command.mjs" "$@"
+fi
+if [[ ! -f $plugin_dir/dist/cli.js ]]; then
+  echo "omarchy-elgato needs a build. Run npm ci and npm run build in $plugin_dir" >&2
+  exit 1
+fi
+if [[ ${1:-} == daemon ]]; then
+  runtime=${OMARCHY_ELGATO_RUNTIME:-${XDG_DATA_HOME:-$HOME/.local/share}/omarchy-elgato/runtime}
+  [[ -d $plugin_dir/node_modules ]] && runtime=${OMARCHY_ELGATO_RUNTIME:-$plugin_dir}
+  # Omarchy owns the process lifetime; flock prevents duplicate local services.
+  mkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}/omarchy-elgato"
+  exec 9>"${XDG_STATE_HOME:-$HOME/.local/state}/omarchy-elgato/daemon.lock"
+  flock -n 9 || { echo 'omarchy-elgato daemon is already running' >&2; exit 1; }
+  # The source plugin controls the same USB endpoints, so do not run both.
+  if [[ ${2:-} != --no-hardware ]] && pgrep -f '/io.github.amitcpatel.elgato-control/bin/elgato-control daemon' >/dev/null; then
+    echo 'Disable the original Elgato Control plugin before starting omarchy-elgato.' >&2
+    exit 1
+  fi
+  # Enabling the plugin prepares dependencies; updates are detected from the lockfile.
+  # Source checkouts already have their development dependencies.
+  if [[ $runtime != "$plugin_dir" ]]; then
+    if ! node "$plugin_dir/scripts/setup.mjs" --if-needed; then
+      echo 'Runtime preparation failed. Check journalctl --user -t omarchy-shell, then use Retry setup in the panel or disable and enable the plugin.' >&2
+      exit 78
+    fi
+  else
+    node --input-type=module -e 'import(process.argv[1]).then(m => m.writeRuntimeState("ready"))' "file://$plugin_dir/scripts/runtime-state.mjs"
+  fi
+fi
+exec node "$plugin_dir/dist/cli.js" "$@"

@@ -1,0 +1,2761 @@
+[
+  {
+    "id": "classic",
+    "name": "Stream Deck Classic",
+    "models": [
+      "original",
+      "originalv2",
+      "original-mk2",
+      "original-mk2-scissor"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 4,
+        "index": 4,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 5,
+        "hidIndex": 9,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 6,
+        "hidIndex": 8,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 8,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 4,
+        "index": 9,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 0,
+        "index": 10,
+        "hidIndex": 14,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 1,
+        "index": 11,
+        "hidIndex": 13,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 2,
+        "index": 12,
+        "hidIndex": 12,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 3,
+        "index": 13,
+        "hidIndex": 11,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 4,
+        "index": 14,
+        "hidIndex": 10,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      }
+    ]
+  },
+  {
+    "id": "mini",
+    "name": "Stream Deck Mini",
+    "models": [
+      "mini"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      }
+    ]
+  },
+  {
+    "id": "xl",
+    "name": "Stream Deck XL",
+    "models": [
+      "xl"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 4,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 5,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 6,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 7,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 8,
+        "hidIndex": 8,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 9,
+        "hidIndex": 9,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 10,
+        "hidIndex": 10,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 11,
+        "hidIndex": 11,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 4,
+        "index": 12,
+        "hidIndex": 12,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 5,
+        "index": 13,
+        "hidIndex": 13,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 6,
+        "index": 14,
+        "hidIndex": 14,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 7,
+        "index": 15,
+        "hidIndex": 15,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 0,
+        "index": 16,
+        "hidIndex": 16,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 1,
+        "index": 17,
+        "hidIndex": 17,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 2,
+        "index": 18,
+        "hidIndex": 18,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 3,
+        "index": 19,
+        "hidIndex": 19,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 4,
+        "index": 20,
+        "hidIndex": 20,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 5,
+        "index": 21,
+        "hidIndex": 21,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 6,
+        "index": 22,
+        "hidIndex": 22,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 7,
+        "index": 23,
+        "hidIndex": 23,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 0,
+        "index": 24,
+        "hidIndex": 24,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 1,
+        "index": 25,
+        "hidIndex": 25,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 2,
+        "index": 26,
+        "hidIndex": 26,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 3,
+        "index": 27,
+        "hidIndex": 27,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 4,
+        "index": 28,
+        "hidIndex": 28,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 5,
+        "index": 29,
+        "hidIndex": 29,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 6,
+        "index": 30,
+        "hidIndex": 30,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 7,
+        "index": 31,
+        "hidIndex": 31,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      }
+    ]
+  },
+  {
+    "id": "plus",
+    "name": "Stream Deck +",
+    "models": [
+      "plus"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "type": "lcd-segment",
+        "row": 2,
+        "column": 0,
+        "columnSpan": 4,
+        "rowSpan": 1,
+        "id": 0,
+        "pixelSize": {
+          "width": 800,
+          "height": 100
+        },
+        "drawRegions": true
+      },
+      {
+        "type": "encoder",
+        "row": 3,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 3,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 3,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 3,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "hasLed": false,
+        "ledRingSteps": 0
+      }
+    ]
+  },
+  {
+    "id": "pedal",
+    "name": "Stream Deck Pedal",
+    "models": [
+      "pedal"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "none"
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "none"
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "none"
+      }
+    ]
+  },
+  {
+    "id": "neo",
+    "name": "Stream Deck Neo",
+    "models": [
+      "neo"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 0,
+        "index": 8,
+        "hidIndex": 8,
+        "feedbackType": "rgb"
+      },
+      {
+        "type": "lcd-segment",
+        "row": 2,
+        "column": 1,
+        "columnSpan": 2,
+        "rowSpan": 1,
+        "id": 0,
+        "pixelSize": {
+          "width": 248,
+          "height": 58
+        },
+        "drawRegions": false
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 3,
+        "index": 9,
+        "hidIndex": 9,
+        "feedbackType": "rgb"
+      }
+    ]
+  },
+  {
+    "id": "studio",
+    "name": "Stream Deck Studio",
+    "models": [
+      "studio"
+    ],
+    "controls": [
+      {
+        "type": "encoder",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "hasLed": true,
+        "ledRingSteps": 24
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 4,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 5,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 6,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 7,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 8,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 9,
+        "index": 8,
+        "hidIndex": 8,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 10,
+        "index": 9,
+        "hidIndex": 9,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 11,
+        "index": 10,
+        "hidIndex": 10,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 12,
+        "index": 11,
+        "hidIndex": 11,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 13,
+        "index": 12,
+        "hidIndex": 12,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 14,
+        "index": 13,
+        "hidIndex": 13,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 15,
+        "index": 14,
+        "hidIndex": 14,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 16,
+        "index": 15,
+        "hidIndex": 15,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 16,
+        "hidIndex": 16,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 17,
+        "hidIndex": 17,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 18,
+        "hidIndex": 18,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 4,
+        "index": 19,
+        "hidIndex": 19,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 5,
+        "index": 20,
+        "hidIndex": 20,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 6,
+        "index": 21,
+        "hidIndex": 21,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 7,
+        "index": 22,
+        "hidIndex": 22,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 8,
+        "index": 23,
+        "hidIndex": 23,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 9,
+        "index": 24,
+        "hidIndex": 24,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 10,
+        "index": 25,
+        "hidIndex": 25,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 11,
+        "index": 26,
+        "hidIndex": 26,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 12,
+        "index": 27,
+        "hidIndex": 27,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 13,
+        "index": 28,
+        "hidIndex": 28,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 14,
+        "index": 29,
+        "hidIndex": 29,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 15,
+        "index": 30,
+        "hidIndex": 30,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 16,
+        "index": 31,
+        "hidIndex": 31,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 144,
+          "height": 112
+        }
+      },
+      {
+        "type": "encoder",
+        "row": 0,
+        "column": 17,
+        "index": 1,
+        "hidIndex": 1,
+        "hasLed": true,
+        "ledRingSteps": 24,
+        "lcdRingOffset": 12
+      }
+    ]
+  },
+  {
+    "id": "6-module",
+    "name": "Stream Deck 6 Module",
+    "models": [
+      "6-module"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 80,
+          "height": 80
+        }
+      }
+    ]
+  },
+  {
+    "id": "15-module",
+    "name": "Stream Deck 15 Module",
+    "models": [
+      "15-module"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 4,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 8,
+        "hidIndex": 8,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 4,
+        "index": 9,
+        "hidIndex": 9,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 0,
+        "index": 10,
+        "hidIndex": 10,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 1,
+        "index": 11,
+        "hidIndex": 11,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 2,
+        "index": 12,
+        "hidIndex": 12,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 3,
+        "index": 13,
+        "hidIndex": 13,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 4,
+        "index": 14,
+        "hidIndex": 14,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      }
+    ]
+  },
+  {
+    "id": "32-module",
+    "name": "Stream Deck 32 Module",
+    "models": [
+      "32-module"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 4,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 5,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 6,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 7,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 8,
+        "hidIndex": 8,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 9,
+        "hidIndex": 9,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 10,
+        "hidIndex": 10,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 11,
+        "hidIndex": 11,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 4,
+        "index": 12,
+        "hidIndex": 12,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 5,
+        "index": 13,
+        "hidIndex": 13,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 6,
+        "index": 14,
+        "hidIndex": 14,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 7,
+        "index": 15,
+        "hidIndex": 15,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 0,
+        "index": 16,
+        "hidIndex": 16,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 1,
+        "index": 17,
+        "hidIndex": 17,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 2,
+        "index": 18,
+        "hidIndex": 18,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 3,
+        "index": 19,
+        "hidIndex": 19,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 4,
+        "index": 20,
+        "hidIndex": 20,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 5,
+        "index": 21,
+        "hidIndex": 21,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 6,
+        "index": 22,
+        "hidIndex": 22,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 7,
+        "index": 23,
+        "hidIndex": 23,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 0,
+        "index": 24,
+        "hidIndex": 24,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 1,
+        "index": 25,
+        "hidIndex": 25,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 2,
+        "index": 26,
+        "hidIndex": 26,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 3,
+        "index": 27,
+        "hidIndex": 27,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 4,
+        "index": 28,
+        "hidIndex": 28,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 5,
+        "index": 29,
+        "hidIndex": 29,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 6,
+        "index": 30,
+        "hidIndex": 30,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 7,
+        "index": 31,
+        "hidIndex": 31,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 96,
+          "height": 96
+        }
+      }
+    ]
+  },
+  {
+    "id": "15-module-scissor",
+    "name": "Stream Deck 15 Module (Scissor)",
+    "models": [
+      "15-module-scissor"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 4,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 8,
+        "hidIndex": 8,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 4,
+        "index": 9,
+        "hidIndex": 9,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 0,
+        "index": 10,
+        "hidIndex": 10,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 1,
+        "index": 11,
+        "hidIndex": 11,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 2,
+        "index": 12,
+        "hidIndex": 12,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 3,
+        "index": 13,
+        "hidIndex": 13,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 4,
+        "index": 14,
+        "hidIndex": 14,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 72,
+          "height": 72
+        }
+      }
+    ]
+  },
+  {
+    "id": "plus-xl",
+    "name": "Stream Deck + XL",
+    "models": [
+      "plus-xl"
+    ],
+    "controls": [
+      {
+        "type": "button",
+        "row": 0,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 1,
+        "index": 1,
+        "hidIndex": 1,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 2,
+        "index": 2,
+        "hidIndex": 2,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 3,
+        "index": 3,
+        "hidIndex": 3,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 4,
+        "index": 4,
+        "hidIndex": 4,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 5,
+        "index": 5,
+        "hidIndex": 5,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 6,
+        "index": 6,
+        "hidIndex": 6,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 7,
+        "index": 7,
+        "hidIndex": 7,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 0,
+        "column": 8,
+        "index": 8,
+        "hidIndex": 8,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 0,
+        "index": 9,
+        "hidIndex": 9,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 1,
+        "index": 10,
+        "hidIndex": 10,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 2,
+        "index": 11,
+        "hidIndex": 11,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 3,
+        "index": 12,
+        "hidIndex": 12,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 4,
+        "index": 13,
+        "hidIndex": 13,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 5,
+        "index": 14,
+        "hidIndex": 14,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 6,
+        "index": 15,
+        "hidIndex": 15,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 7,
+        "index": 16,
+        "hidIndex": 16,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 1,
+        "column": 8,
+        "index": 17,
+        "hidIndex": 17,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 0,
+        "index": 18,
+        "hidIndex": 18,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 1,
+        "index": 19,
+        "hidIndex": 19,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 2,
+        "index": 20,
+        "hidIndex": 20,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 3,
+        "index": 21,
+        "hidIndex": 21,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 4,
+        "index": 22,
+        "hidIndex": 22,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 5,
+        "index": 23,
+        "hidIndex": 23,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 6,
+        "index": 24,
+        "hidIndex": 24,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 7,
+        "index": 25,
+        "hidIndex": 25,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 2,
+        "column": 8,
+        "index": 26,
+        "hidIndex": 26,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 0,
+        "index": 27,
+        "hidIndex": 27,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 1,
+        "index": 28,
+        "hidIndex": 28,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 2,
+        "index": 29,
+        "hidIndex": 29,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 3,
+        "index": 30,
+        "hidIndex": 30,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 4,
+        "index": 31,
+        "hidIndex": 31,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 5,
+        "index": 32,
+        "hidIndex": 32,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 6,
+        "index": 33,
+        "hidIndex": 33,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 7,
+        "index": 34,
+        "hidIndex": 34,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "button",
+        "row": 3,
+        "column": 8,
+        "index": 35,
+        "hidIndex": 35,
+        "feedbackType": "lcd",
+        "pixelSize": {
+          "width": 112,
+          "height": 112
+        }
+      },
+      {
+        "type": "lcd-segment",
+        "row": 4,
+        "column": 0,
+        "columnSpan": 9,
+        "rowSpan": 1,
+        "id": 0,
+        "pixelSize": {
+          "width": 1200,
+          "height": 100
+        },
+        "drawRegions": true
+      },
+      {
+        "type": "encoder",
+        "row": 5,
+        "column": 0,
+        "index": 0,
+        "hidIndex": 0,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 5,
+        "column": 2,
+        "index": 1,
+        "hidIndex": 1,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 5,
+        "column": 3,
+        "index": 2,
+        "hidIndex": 2,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 5,
+        "column": 5,
+        "index": 3,
+        "hidIndex": 3,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 5,
+        "column": 6,
+        "index": 4,
+        "hidIndex": 4,
+        "hasLed": false,
+        "ledRingSteps": 0
+      },
+      {
+        "type": "encoder",
+        "row": 5,
+        "column": 8,
+        "index": 5,
+        "hidIndex": 5,
+        "hasLed": false,
+        "ledRingSteps": 0
+      }
+    ]
+  }
+]
