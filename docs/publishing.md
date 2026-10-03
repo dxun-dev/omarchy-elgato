@@ -1,5 +1,8 @@
 # Publication preparation
 
+> [!IMPORTANT]
+> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+
 Follow the [Omarchy publishing guide](https://plugins.omarchy.org/publish.html)
 and [development guide](https://plugins.omarchy.org/develop.html).
 

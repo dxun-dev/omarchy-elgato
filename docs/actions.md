@@ -1,5 +1,8 @@
 # Action packs
 
+> [!IMPORTANT]
+> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+
 Action packs add button and dial actions without rebuilding the plugin. Install
 one by copying its folder into `~/.config/omarchy-elgato/actions/` (or
 `$XDG_CONFIG_HOME/omarchy-elgato/actions/`). The folder name must match its ID.

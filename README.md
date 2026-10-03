@@ -1,5 +1,8 @@
 # Elgato Controls for Omarchy
 
+> [!IMPORTANT]
+> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+
 Configure Stream Deck buttons and dials, customize their displays, and control
 network Elgato Key Lights from the Omarchy Shell bar.
 

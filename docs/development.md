@@ -1,5 +1,8 @@
 # Development
 
+> [!IMPORTANT]
+> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+
 Keep a source checkout separate from the installed plugin folder. npm creates
 symlinks under `node_modules/.bin`; Omarchy rejects symlinks inside plugin folders.
 Run these commands from any source checkout location:

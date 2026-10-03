@@ -1,5 +1,8 @@
 # Using Elgato Controls
 
+> [!IMPORTANT]
+> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+
 The examples below run from the plugin directory and use its `bin/omarchy-elgato` helper.
 The UI provides the same configuration operations. The helper ships inside the
 plugin and is not installed globally on PATH. For an installed plugin:
