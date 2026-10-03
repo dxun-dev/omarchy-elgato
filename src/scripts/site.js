@@ -13,7 +13,7 @@ try {
 function applyTheme() {
   const [id, label] = themes[currentTheme];
   document.documentElement.dataset.theme = id;
-  themeButton.querySelector('span').textContent = label;
+  themeButton.querySelector('[data-theme-label]').textContent = label;
   themeButton.setAttribute(
     'aria-label',
     `Color theme: ${label}. Activate to change theme.`,

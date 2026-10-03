@@ -42,11 +42,12 @@
     </a>
   </nav>
   <button
-    class="cursor-pointer touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] text-accent bg-transparent border border-line py-[9px] px-3 text-[12px] max-[700px]:ml-auto max-[700px]:text-[10px] max-[700px]:p-[7px] font-mono"
+    class="inline-flex w-36 shrink-0 items-center justify-center gap-2 whitespace-nowrap max-[700px]:w-32 cursor-pointer touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] text-accent bg-transparent border border-line py-[9px] px-3 text-[12px] max-[700px]:ml-auto max-[700px]:text-[10px] max-[700px]:p-[7px] font-mono"
     id="theme"
     type="button"
     aria-label="Change color theme"
   >
-    ◐ <span>Tokyo Night</span>
+    <span aria-hidden="true">◐</span>
+    <span data-theme-label>Tokyo Night</span>
   </button>
 </header>
