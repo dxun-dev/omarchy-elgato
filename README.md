@@ -112,8 +112,15 @@ omarchy plugin remove dxun-dev.omarchy-elgato
 
 Disabling stops the daemon. Removal deletes or backs up the plugin through
 Omarchy. User profiles, icons, action packs, state, cache, and runtime dependencies
-remain available for reinstalling. To delete those too, first back up anything
-you want to keep and remove the locations in **User files** manually. System
+remain available for reinstalling.
+
+To also remove your personal settings, delete `~/.config/omarchy-elgato/` (or
+`$XDG_CONFIG_HOME/omarchy-elgato/` if you use a custom configuration directory).
+This directory contains your device mappings, pages and folders, custom icons,
+and user-installed action packs. Back up anything you want to keep before
+deleting it; removing these files resets your configuration for a future install.
+
+Other retained data can be removed using the locations in **User files**. System
 packages and the Stream Deck USB access rule installed during setup remain
 available after removal.
 

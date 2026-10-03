@@ -42,7 +42,7 @@ also checked when assigning through the CLI.
 `press` is an executable and its literal arguments, never an implicitly evaluated
 shell command. For a bundled executable use `["./handler", "next"]` and mark the
 handler executable. Other arguments are passed unchanged; file arguments should
-be absolute paths or paths relative to the pack directory. Shell, Node, Python,
+be absolute paths or paths relative to the pack directory. Shell, Node,
 and compiled handlers are supported through their executables. No interpreter
 is downloaded or installed automatically.
 
