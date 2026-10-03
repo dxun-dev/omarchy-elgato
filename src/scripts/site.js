@@ -1,4 +1,8 @@
-const themes = [['tokyo', 'Tokyo Night'], ['gruvbox', 'Gruvbox'], ['catppuccin', 'Catppuccin']];
+const themes = [
+  ['tokyo', 'Tokyo Night'],
+  ['gruvbox', 'Gruvbox'],
+  ['catppuccin', 'Catppuccin'],
+];
 const themeButton = document.querySelector('#theme');
 let currentTheme = 0;
 try {
@@ -10,19 +14,30 @@ function applyTheme() {
   const [id, label] = themes[currentTheme];
   document.documentElement.dataset.theme = id;
   themeButton.querySelector('span').textContent = label;
-  themeButton.setAttribute('aria-label', `Color theme: ${label}. Activate to change theme.`);
-  document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+  themeButton.setAttribute(
+    'aria-label',
+    `Color theme: ${label}. Activate to change theme.`,
+  );
+  document.querySelector('meta[name="theme-color"]').content = getComputedStyle(
+    document.documentElement,
+  )
+    .getPropertyValue('--bg')
+    .trim();
 }
 applyTheme();
 themeButton.addEventListener('click', () => {
   currentTheme = (currentTheme + 1) % themes.length;
   applyTheme();
-  try { localStorage.setItem('elgato-site-theme', themes[currentTheme][0]); } catch {}
+  try {
+    localStorage.setItem('elgato-site-theme', themes[currentTheme][0]);
+  } catch {}
 });
 document.querySelector('#copy').addEventListener('click', async () => {
   const status = document.querySelector('#copy-status');
   try {
-    await navigator.clipboard.writeText(document.querySelector('#install-command').textContent);
+    await navigator.clipboard.writeText(
+      document.querySelector('#install-command').textContent,
+    );
     status.textContent = 'Install command copied.';
   } catch {
     status.textContent = 'Select the command and copy it manually.';

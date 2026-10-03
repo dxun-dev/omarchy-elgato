@@ -1,38 +1,56 @@
 # Elgato Controls for Omarchy — website
 
-This branch contains the GitHub Pages website for Elgato Controls for Omarchy.
-The plugin source and installation documentation live on the [main branch](https://github.com/dxun-dev/omarchy-elgato/tree/main).
+The project website uses **Astro** for static site generation and **Tailwind CSS v4**
+through its Vite plugin. The current Elgato / Omarchy design, locally hosted fonts,
+three color themes, screenshots, and installation-command copying are preserved.
 
-## Local preview
+The plugin source and guides live on the [main branch](https://github.com/dxun-dev/omarchy-elgato/tree/main).
+Keep website changes on `website`; do not merge this site-only branch into `main`.
 
-Requires Node.js 22.18 or newer. No dependencies or build step are needed.
+## Development
+
+Requires Node.js 22.18 or newer.
 
 ```bash
+npm ci
 npm run dev
 ```
 
-Open http://localhost:8000. Use `PORT=8001 npm run dev` to choose another port.
+Open **http://localhost:4321/omarchy-elgato/**. Astro reloads as source files change.
 
-## Files
+```bash
+npm run build
+npm run preview
+```
 
-- `docs/index.html`: homepage and content.
-- `docs/style.css`: layout, typography, and theme colors.
-- `docs/site.js`: theme selection and install-command copying.
-- `docs/site-assets/`: illustration icon, editor screenshot, and licensed fonts.
-- `docs/previews/`: dial and Key Light screenshots.
-- `scripts/preview-site.mjs`: local Node.js preview server.
+The production build is written to `dist/`. Preview uses the same repository base
+path as GitHub Pages. Generated output and Astro caches are ignored by Git.
+
+## Structure
+
+- `src/pages/index.astro`: homepage content and sections.
+- `src/layouts/SiteLayout.astro`: document metadata, global styles, and shared shell.
+- `src/components/`: header, footer, and Stream Deck illustration.
+- `src/styles/global.css`: Tailwind v4 import, theme tokens, component styles, and responsive rules.
+- `src/scripts/site.js`: theme persistence and clipboard behavior.
+- `src/assets/fonts/`: locally hosted Geist and JetBrains Mono, with licenses.
+- `public/`: screenshots, favicon, and files copied directly into the build.
+- `astro.config.mjs`: static output, GitHub Pages URL/base, and Tailwind Vite integration.
+
+Add pages under `src/pages/` and reuse the shared layout. Prefix public asset and
+internal route URLs with `import.meta.env.BASE_URL` so they work on GitHub Pages.
+Fonts are bundled from CSS; Astro resolves their generated URLs automatically.
 
 ## Publishing
 
-Push the `website` branch, then select **Settings → Pages → Deploy from a branch → website → /docs**.
-The published URL is https://dxun-dev.github.io/omarchy-elgato/.
-See [publishing instructions](docs/publishing.md) for details.
+Set repository **Settings → Pages → Source** to **GitHub Actions**, then push
+`website`. The workflow builds with Astro and deploys `dist/` to:
 
-Keep website changes on `website` and plugin development on `main`.
-Do not merge the site-only branch into `main`: it intentionally omits plugin files.
+https://dxun-dev.github.io/omarchy-elgato/
+
+See [publishing instructions](docs/publishing.md) for deployment details.
 
 ## License
 
-Website code uses the [MIT license](LICENSE). Geist and JetBrains Mono are
-locally hosted with their respective licenses in `docs/site-assets/fonts/`.
-This community project is not affiliated with Elgato or Corsair.
+Website code uses the [MIT license](LICENSE). Font licenses are included in
+`src/assets/fonts/`. This community project is not affiliated with Elgato or Corsair.

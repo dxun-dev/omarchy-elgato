@@ -8,7 +8,19 @@
     "node": ">=22.18"
   },
   "scripts": {
-    "dev": "node scripts/preview-site.mjs",
-    "site:preview": "node scripts/preview-site.mjs"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "site:preview": "astro preview",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0"
   }
 }

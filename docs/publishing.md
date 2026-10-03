@@ -1,31 +1,35 @@
-# Publishing the website
+# Publishing the Astro website
 
-The site is maintained on the dedicated `website` branch. Plugin development
-and documentation remain on `main`. The homepage links to the plugin guides
-on GitHub rather than duplicating them here.
+Website development lives on `website`; plugin development stays on `main`.
 
-## GitHub Pages
+## GitHub Pages setup
 
-1. Push the branch: `git push -u origin website`.
-2. Open repository **Settings → Pages**.
-3. Set **Source** to **Deploy from a branch**.
-4. Choose **website** and **/docs**, then save.
+1. Open repository **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. If the `github-pages` environment restricts deployment branches, allow `website`
+   under **Settings → Environments → github-pages**.
+4. Push the branch: `git push -u origin website`.
 
-The site URL is https://dxun-dev.github.io/omarchy-elgato/.
-Later pushes to `website` update the site automatically. No build step or
-GitHub Actions workflow is required. `docs/.nojekyll` disables Jekyll processing.
-All local asset paths are relative, supporting the repository URL and a future
-custom domain.
+`.github/workflows/deploy.yml` uses the official Astro action to install from
+`package-lock.json`, build, and upload the site. A separate deployment job publishes
+the artifact. Pushes to `website` trigger deployment; manual runs must also target
+`website`. No plugin build or plugin dependencies are involved.
 
-## Preview and checks
+The published URL is https://dxun-dev.github.io/omarchy-elgato/.
 
-Run `npm run dev` and visit http://localhost:8000. Check desktop and mobile
-widths, theme switching, installation-command copying, and documentation links.
-The server binds only to the local machine. Override its port with `PORT`.
+## Local validation
 
-## Typography and assets
+Run `npm ci`, then `npm run build` and `npm run preview`.
+Visit http://localhost:4321/omarchy-elgato/ and check desktop/mobile widths,
+themes, installation-command copying, screenshots, and documentation links.
+Use `npm run dev` for development with automatic reloads.
 
-Section titles use locally hosted Geist (24–28px, weight 600); smaller
-subheadings use Geist (18px, weight 500). The hero title uses JetBrains Mono
-(24–30px, weight 500), with a separate decorative wordmark. Font licenses are
-included alongside the font files. Screenshots come from the plugin project.
+## Configuration and assets
+
+`astro.config.mjs` declares static output, `site: 'https://dxun-dev.github.io'`,
+and `base: '/omarchy-elgato'`. Homepage public assets use `import.meta.env.BASE_URL`;
+CSS font imports are bundled automatically. Tailwind CSS v4 uses the
+`@tailwindcss/vite` plugin, with CSS-first theme tokens in `src/styles/global.css`.
+
+For a future custom domain, change `site`, remove or update `base`, and add the
+requested domain to `public/CNAME`. Generated files in `dist/` are not committed.
