@@ -8,94 +8,40 @@ network Elgato Key Lights from the Omarchy Shell bar.
 
 ![Stream Deck button editor](preview.png)
 
-[Dial and LCD editor](docs/previews/dials.png) ·
-[Key Light controls](docs/previews/key-lights.png)
-
-## Features
-
-- Configurable keys, dial turns, and dial presses with suitable action choices.
-- Application launchers, audio and microphone controls, keyboard keys, workspace
-  navigation, and grouped Key Light controls.
-- Independent mappings, pages, and nested folders for each device model.
-- Custom icons, captions, colors, and state-specific icons for toggle actions.
-- Per-dial LCD artwork on the Stream Deck Plus and other LCD-capable models.
-- Offline device previews and optional user-installed action packs.
-
-Stream Deck communication uses
-[`@elgato-stream-deck/node`](https://github.com/Julusian/node-elgato-stream-deck).
-The interface uses QML and runs within Omarchy Shell; the backend uses Node.js.
+[Documentation](https://omarchy-elgato.dxun.dev/docs/) ·
+[Usage guide](https://omarchy-elgato.dxun.dev/docs/usage/) ·
+[Action packs](https://omarchy-elgato.dxun.dev/docs/action-packs/)
 
 ## Requirements
 
 Omarchy Quattro with Omarchy Shell and the `omarchy plugin` commands.
-First enable checks system requirements and opens a terminal prompt if setup is
-needed. Accept the prompt to install missing packages through `omarchy pkg add`
-and configure Stream Deck USB access. Administrator authentication may be
-requested. The plugin then prepares its locked Node.js runtime automatically.
+First enable checks system requirements and asks before installing missing
+packages or configuring Stream Deck USB access. Administrator authentication
+may be requested. Setup includes Node.js 22.18+, npm, artwork tools, Avahi,
+audio controls, keyboard input, and application-launch tools. Runtime dependencies
+are prepared automatically in the user-data directory; first setup needs internet
+access. Reconnect the Stream Deck after USB access setup if needed.
 
-Setup covers Node.js 22.18+, npm, ImageMagick, Fontconfig and a font, Avahi,
-WirePlumber, keyboard input, and application-launch tools. Most of these are
-already part of Omarchy. USB rules grant access to the active desktop user for
-supported Stream Deck devices; other USB devices are unaffected. Reconnect the
-Stream Deck if it is not detected after setup.
-
-Actions for optional applications appear only when their executable is
-available. User-installed action packs provide their own dependency checks.
+Physical hardware verification is incomplete. See
+[compatibility and limitations](https://omarchy-elgato.dxun.dev/docs/getting-started/#compatibility-and-limitations)
+for supported models and features.
 
 ## Install
-
-Install and enable through Omarchy:
 
 ```bash
 omarchy plugin add https://github.com/dxun-dev/omarchy-elgato.git --enable
 ```
 
-Omarchy asks where to place the widget. On first enable, accept any system setup
-prompt; the service then installs its locked runtime dependencies in the user
-data directory. This requires internet access and may take a moment. Click the
-Elgato icon when it appears to configure your devices.
+Choose where to place the widget, accept any first-enable setup prompt, then
+click the Elgato icon to configure your devices. Without `--enable`, setup waits
+until the plugin is enabled. If setup is declined or fails, use **Retry setup**
+in the editor. For an earlier development install, disable `omarchy-elgato`
+before enabling this plugin; existing profiles, icons, and action packs are preserved.
 
-Without `--enable`, setup waits until you enable the plugin. If you decline the
-system setup prompt, no packages or USB rules are changed; use **Retry setup**
-in the editor when you are ready.
-
-For an earlier development install, disable `omarchy-elgato` before enabling
-this plugin. Existing profiles, icons, and action packs are preserved.
-
-## Use and configure
-
-Click the Elgato bar icon to open the editor. Choose a connected device or an
-offline model, select a button or dial, and assign an action. Use the display
-settings for icons, text, background colors, and dial LCD artwork. Stateful
-actions expose an icon setting for each reported state; launchers keep a single
-icon. **Detach** opens the editor in a separate window; **Dock** returns it to the
-bar. Escape closes the editor or cancels an active edit.
-
-Move the widget with:
-
-```bash
-omarchy bar move dxun-dev.omarchy-elgato --section left
-```
-
-See [the usage guide](docs/usage.md) for pages, folders, colors, status icons,
-and CLI examples. See [action packs](docs/actions.md) to add your own actions.
-
-## User files
-
-All paths respect the corresponding XDG environment variable.
-
-| Purpose | Default location |
-| --- | --- |
-| Mappings and pages | `~/.config/omarchy-elgato/profile.json` |
-| Custom icons | `~/.config/omarchy-elgato/icons/` |
-| Action packs | `~/.config/omarchy-elgato/actions/` |
-| Status and discovered-light inventory | `~/.local/state/omarchy-elgato/` |
-| Generated artwork cache | `~/.cache/omarchy-elgato/` |
-| Runtime dependencies | `~/.local/share/omarchy-elgato/runtime/` |
-
-`OMARCHY_ELGATO_RUNTIME` can override the dependency location.
-`OMARCHY_ELGATO_FONT` can select a font file; otherwise Fontconfig resolves the
-system's sans-serif font. Applications and icons use XDG data directories.
+See [getting started](https://omarchy-elgato.dxun.dev/docs/getting-started/) for
+setup details and [troubleshooting](https://omarchy-elgato.dxun.dev/docs/troubleshooting/)
+for diagnostics. The helper ships inside the plugin at `bin/omarchy-elgato`;
+it is not installed globally on PATH.
 
 ## Update
 
@@ -103,8 +49,8 @@ system's sans-serif font. Applications and icons use XDG data directories.
 omarchy plugin update dxun-dev.omarchy-elgato
 ```
 
-Omarchy reloads the plugin. The service refreshes runtime dependencies when
-needed, preserving profiles, icons, action packs, and bar placement.
+Omarchy reloads the plugin and refreshes runtime dependencies when needed,
+preserving profiles, icons, action packs, and bar placement.
 
 ## Disable or remove
 
@@ -113,64 +59,29 @@ omarchy plugin disable dxun-dev.omarchy-elgato
 omarchy plugin remove dxun-dev.omarchy-elgato
 ```
 
-Disabling stops the daemon. Removal deletes or backs up the plugin through
-Omarchy. User profiles, icons, action packs, state, cache, and runtime dependencies
-remain available for reinstalling.
+Disabling stops the service. Removal deletes or backs up the plugin through
+Omarchy. Profiles, custom icons, action packs, state, cache, and runtime dependencies
+remain available for reinstalling. System packages and the USB access rule added
+during setup also remain.
 
-To also remove your personal settings, delete `~/.config/omarchy-elgato/` (or
-`$XDG_CONFIG_HOME/omarchy-elgato/` if you use a custom configuration directory).
-This directory contains your device mappings, pages and folders, custom icons,
-and user-installed action packs. Back up anything you want to keep before
-deleting it; removing these files resets your configuration for a future install.
+To reset personal settings, back up and then remove `~/.config/omarchy-elgato/`
+(or `$XDG_CONFIG_HOME/omarchy-elgato/`). This resets mappings, pages, folders,
+custom icons, and user-installed action packs. See
+[user files](https://omarchy-elgato.dxun.dev/docs/getting-started/#user-files)
+for the remaining retained-data locations.
 
-Other retained data can be removed using the locations in **User files**. System
-packages and the Stream Deck USB access rule installed during setup remain
-available after removal.
+## Documentation and contributions
 
-## Compatibility and limitations
+Detailed documentation is maintained on the `site` branch and published at
+[omarchy-elgato.dxun.dev/docs/](https://omarchy-elgato.dxun.dev/docs/).
+If the site is unavailable, browse the [Markdown guides on GitHub](https://github.com/dxun-dev/omarchy-elgato/tree/site/src/pages/docs).
 
-Model layouts cover Classic variants, Plus, Mini, XL, Neo, Pedal, Studio, Plus XL,
-and supported Modules. Multiple units of the same model share mappings and page
-state. Additional models and dial LEDs have automated mock coverage; physical
-hardware verification is incomplete. The Neo information screen has clock/date,
-page, microphone mute, and light status. Touch gestures, automatic touch
-navigation, Studio NFC, Network Dock transport, Wave-specific controls, and
-Facecam controls are not implemented.
+- [Plugin development and release validation](https://omarchy-elgato.dxun.dev/docs/development/): builds, tests, local installation, and packaging. Plugin contributions target `main`.
+- [Site contributions](https://github.com/dxun-dev/omarchy-elgato/blob/site/README.md): documentation, design, and Astro development. Site contributions target `site`.
+- [Release notes](CHANGELOG.md): plugin version history.
 
-Action packs provide command actions and status queries. Live tile providers
-and column reservations, such as Herdr agent columns, are future work.
-
-## Troubleshooting
-
-The editor shows runtime preparation progress and failure details. After
-resolving the problem (for example, restoring internet access), click **Retry
-setup**. For more detail, check `journalctl --user -t omarchy-shell`. You can also
-retry through Omarchy:
-
-```bash
-omarchy plugin disable dxun-dev.omarchy-elgato
-omarchy plugin enable dxun-dev.omarchy-elgato
-```
-
-For detailed diagnostics, run
-`~/.config/omarchy/plugins/dxun-dev.omarchy-elgato/bin/omarchy-elgato doctor`.
-Manual `bin/omarchy-elgato setup` remains available to repair the runtime.
-To check or repair system requirements, run
-`bin/omarchy-elgato install-requirements` in a terminal. Reconnect the Stream Deck
-after USB access setup if needed. Network lights must be reachable on the local
-network and discoverable through Avahi.
-
-For action packs, run `bin/omarchy-elgato action-packs`. Runtime and status-query
-errors are reported by `bin/omarchy-elgato status --json`. Shell load errors
-appear in `journalctl --user -t omarchy-shell`.
-
-## Development and publication
-
-See [release notes](CHANGELOG.md) for version history.
-
-See [development](docs/development.md) for builds, tests, local installation,
-and validation. [Publication preparation](docs/publishing.md) records the
-release validation and submission checklist.
+When behavior changes, update the relevant site guide and this README's lifecycle
+instructions if affected. The detailed guides are not duplicated on `main`.
 
 ## License and attribution
 
