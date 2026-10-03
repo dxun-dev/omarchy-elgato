@@ -29,6 +29,23 @@ For action packs, run `bin/omarchy-elgato action-packs`. Runtime and status-quer
 errors are reported by `bin/omarchy-elgato status --json`. Shell load errors
 appear in `journalctl --user -t omarchy-shell`.
 
+## Runtime preparation
+
+Installation and updates use `omarchy plugin add … --enable` and
+`omarchy plugin update`. Omarchy owns discovery, placement, and service lifetime.
+On service startup, the launcher prepares locked npm dependencies outside the
+plugin directory when absent or outdated. Successful preparation is recorded
+against the package files, Node.js version, platform, and architecture; unchanged
+runtimes are checked without downloading dependencies. A preparation failure
+stops automatic restarts, avoiding repeated downloads. The panel shows
+preparation progress and failure details; **Retry setup** restarts the service
+through shell IPC. Disabling and re-enabling is also supported.
+First enable opens a terminal confirmation for missing system packages,
+Stream Deck USB access rules, and Avahi discovery. Packages are installed using
+`omarchy pkg add`; USB access and service changes use administrator
+authentication. Removal is handled by Omarchy and preserves user data as
+documented in the README.
+
 ## Hardware support
 
 See [compatibility and limitations](../getting-started/#compatibility-and-limitations) for implemented features and outstanding hardware verification.

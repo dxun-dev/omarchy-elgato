@@ -93,3 +93,35 @@ Outputs are `preview.png`, `docs/previews/dials.png`, and
 rapid edits, caption snapshots, selection/page changes, and closing the editor.
 It requires the same shell components as preview generation and uses isolated
 sample data.
+
+## Repository and identity
+
+- Public repository: `https://github.com/dxun-dev/omarchy-elgato`.
+- Maintainer SSH remote: `git@github.com:dxun-dev/omarchy-elgato.git`.
+- Permanent plugin ID: `dxun-dev.omarchy-elgato`. The manifest, QML identity, and
+  documented Omarchy commands use this ID.
+- The user-data directory stays `omarchy-elgato`, preserving existing profiles,
+  icons, and action packs. Disable the old `omarchy-elgato` development plugin
+  before enabling the new ID to avoid duplicate hardware services.
+
+Author attribution is publisher metadata, not a dependency on a particular
+machine. Keep the license copyright and third-party notices.
+
+## Release validation
+
+1. Build and test the backend; include `dist/` in the public Git repository.
+2. Package a clean plugin folder and run `omarchy plugin validate` against it.
+3. Validate the QML against the target Omarchy Shell imports.
+4. Test installation in a fresh XDG configuration/data directory. The repository
+   clone must contain every setup/runtime file and no symlinks or `node_modules`.
+5. Verify first-enable runtime preparation, bar/panel operation, disable/re-enable, update, and removal.
+   User-owned profiles and extensions should be preserved.
+6. Review the README, MIT license, third-party notices, preview, version, and
+   declared hardware limitations for the release.
+7. Submit the repository link, category, and tags using the marketplace form.
+
+Follow the [Omarchy publishing guide](https://plugins.omarchy.org/publish.html)
+when preparing the public repository and submitting a marketplace listing.
+Keep the root manifest, README, license, and third-party notices with the plugin.
+The README documents requirements, installation, updates, safe removal, and
+retained data; detailed guides live here on the site.

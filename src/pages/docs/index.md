@@ -25,4 +25,4 @@ The [plugin development guide](development/) covers builds, local installation, 
 
 ## About these guides
 
-These guides describe the Omarchy plugin. Website development uses a separate Astro project on the `site` branch. Command examples that use `bin/omarchy-elgato` run from the installed plugin directory or a plugin source checkout.
+These guides are the home for detailed Omarchy plugin documentation. The [plugin README](https://github.com/dxun-dev/omarchy-elgato#readme) provides a short installation, update, and removal reference. Website development uses a separate Astro project on the `site` branch. Command examples that use `bin/omarchy-elgato` run from the installed plugin directory or a plugin source checkout.

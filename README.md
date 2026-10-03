@@ -69,19 +69,21 @@ and internal route URLs; it resolves to `/` in development and production.
 
 ## How documentation is maintained
 
-Plugin guides live on `main` under `docs/`, with installation and troubleshooting
-in the plugin README. The site currently maintains **separate Markdown copies**
-under `src/pages/docs/`. They are not linked or synchronized during builds.
-The site content was imported from plugin commit `1a8c3dc` and adapted for site
-navigation. Builds use checked-in content and do not fetch `main`.
+The site is the single home for detailed plugin documentation under
+`src/pages/docs/`. The plugin README on `main` retains a short description,
+requirements, installation, updates, safe removal and retained-data notes,
+license/attribution, and links to these guides. Detailed Markdown guides are no
+longer duplicated on `main`. Its `docs/previews/` folder contains generated
+plugin screenshots rather than documentation text.
 
-When changing documented plugin behavior, update the corresponding guides on
-`main` and the site pages in a separate contribution targeting `site`. Review the
-content for consistency while retaining site-specific navigation and frontmatter.
+When changing plugin behavior, update the relevant guide in a contribution
+targeting `site`. Update the `main` README too if its requirements or lifecycle
+instructions change. The two branches share links, not a documentation-sync
+process; builds use the checked-in site guides without fetching `main`.
+
 Each site Markdown page supplies a title, description, slug, and shared layout;
 begin content headings at `##` because the layout renders the page title. Update
 `src/data/docs.js` when adding or reordering guides, and check relative links.
-
 Code blocks use plain text rendering so theme-aware styling remains in Tailwind
 utilities without inline syntax-highlighter styles.
 
