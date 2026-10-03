@@ -19,15 +19,14 @@ npm ci
 npm run dev
 ```
 
-Open **http://localhost:4321/omarchy-elgato/**. Astro reloads as source files change.
+Open **http://localhost:4321/**. Astro reloads as source files change.
 
 ```bash
 npm run build
 npm run preview
 ```
 
-The production build is written to `dist/`. Preview uses the same repository base
-path as GitHub Pages. Generated output and Astro caches are ignored by Git.
+The production build is written to `dist/`. Development and preview both serve the site at `/`. Generated output and Astro caches are ignored by Git.
 
 ## Structure
 
@@ -41,14 +40,14 @@ path as GitHub Pages. Generated output and Astro caches are ignored by Git.
 - `src/scripts/site.js`: theme persistence and clipboard behavior.
 - `src/assets/fonts/`: locally hosted Geist and JetBrains Mono, with licenses.
 - `public/`: screenshots, favicon, and files copied directly into the build.
-- `astro.config.mjs`: static output, GitHub Pages URL/base, and Tailwind Vite integration.
+- `astro.config.mjs`: static output, production domain, and Tailwind Vite integration.
 
 All visual styling uses Tailwind utility classes directly in Astro markup, including
 responsive variants, focus states, and illustration effects. Keep CSS limited to
 font declarations and shared theme variables; avoid component selectors and `@apply`.
 
 Add pages under `src/pages/` and reuse the shared layout. Prefix public asset and
-internal route URLs with `import.meta.env.BASE_URL` so they work on GitHub Pages.
+internal route URLs with `import.meta.env.BASE_URL` which is `/` for local development and production.
 Fonts are bundled from CSS; Astro resolves their generated URLs automatically.
 
 ## Documentation content
@@ -70,7 +69,7 @@ Tailwind utilities without inline syntax-highlighter styles.
 Set repository **Settings → Pages → Source** to **GitHub Actions**, then push
 `website`. The workflow builds with Astro and deploys `dist/` to:
 
-https://dxun-dev.github.io/omarchy-elgato/
+https://omarchy-elgato.dxun.dev/
 
 See [publishing instructions](docs/publishing.md) for deployment details.
 
