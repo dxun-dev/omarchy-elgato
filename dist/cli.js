@@ -10,7 +10,7 @@ import { loadProfile, profilePath, statusPath, stateDir, deckModels, deviceMappi
 import { catalog, setDialDisplay, setControlColor, setControl, setButtonText, setButtonDisplay } from './actions.js';
 import { availableLights, controlLights, lightStates } from './lights.js';
 const help = `omarchy-elgato — Elgato controls for Omarchy
-Usage: bin/elgato-control <command>
+Usage: bin/omarchy-elgato <command>
   init                         Create this plugin's independent profile
   profile                      Print profile JSON
   catalog                      Print available actions as JSON

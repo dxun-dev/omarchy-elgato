@@ -59,7 +59,7 @@ case ${1:-} in
   --request)
     write_state preparing 'Complete the requirements prompt in the terminal window.'
     if ! omarchy launch terminal bash "$plugin_dir/scripts/system-setup.sh" --install; then
-      write_state failed '' 'Could not open the setup terminal. Run bin/elgato-control install-requirements in a terminal.'
+      write_state failed '' 'Could not open the setup terminal. Run bin/omarchy-elgato install-requirements in a terminal.'
     fi
     ;;
   --install)

@@ -57,7 +57,7 @@ Panel {
   readonly property int deckColumns: selectedDevice === "studio" ? 8 : Math.max(1, ...selectedModel.controls.map(function(c) { return c.column + (c.columnSpan || 1) }))
   readonly property int deckRows: selectedDevice === "studio" ? Math.ceil(buttonControls.length / deckColumns) : Math.max(1, ...buttonControls.map(function(c) { return c.row + 1 }))
   readonly property bool hasLights: (status.lights || []).length > 0
-  readonly property string helper: Qt.resolvedUrl("bin/elgato-control").toString().replace("file://", "")
+  readonly property string helper: Qt.resolvedUrl("bin/omarchy-elgato").toString().replace("file://", "")
   property var actionOptions: []
   property double lastCatalogRefresh: 0
   readonly property var dialTurnActionOptions: actionOptions.filter(function(a) { return (a.controls || []).indexOf("dialTurn") >= 0 })

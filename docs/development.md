@@ -50,7 +50,7 @@ omarchy plugin validate /tmp/omarchy-elgato-release
 `package:plugin` builds and copies only distributable files, then validates the
 result. It excludes npm dependencies, local user data, and the Git working tree.
 The output directory must not already exist. It is a validation artifact, not an
-automatic marketplace submission. Run `bin/elgato-control doctor` after setup.
+automatic marketplace submission. Run `bin/omarchy-elgato doctor` after setup.
 
 For QML checks against an installed Omarchy Shell:
 
