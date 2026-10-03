@@ -17,8 +17,12 @@ network Elgato Key Lights from the Omarchy Shell bar.
 Omarchy Quattro with Omarchy Shell and the `omarchy plugin` commands.
 First enable checks system requirements and asks before installing missing
 packages or configuring Stream Deck USB access. Administrator authentication
-may be requested. Setup includes Node.js 22.18+, npm, artwork tools, Avahi,
-audio controls, keyboard input, and application-launch tools. Runtime dependencies
+may be requested. The complete package set setup can request is `nodejs` (22.18+), `npm`,
+`imagemagick`, `fontconfig`, `ttf-dejavu`, `avahi`, `wireplumber`, `wtype`,
+`uwsm`, `gtk3`, and `xdg-utils`, plus their package-manager dependencies.
+Only missing requirements are installed. Setup can replace
+`/etc/udev/rules.d/70-omarchy-elgato.rules`, reload/trigger hidraw rules, and
+start and enable `avahi-daemon.service` if inactive. Runtime dependencies
 are prepared automatically in the user-data directory; first setup needs internet
 access. Reconnect the Stream Deck after USB access setup if needed.
 
@@ -61,8 +65,16 @@ omarchy plugin remove dxun-dev.omarchy-elgato
 
 Disabling stops the service. Removal deletes or backs up the plugin through
 Omarchy. Profiles, custom icons, action packs, state, cache, and runtime dependencies
-remain available for reinstalling. System packages and the USB access rule added
-during setup also remain.
+remain available for reinstalling. System packages, npm cache/logs, the USB access rule, Avahi enablement,
+and install/removal backups also remain. Runtime setup seeds the bundled
+VOXtype action pack but does not install VOXtype itself.
+
+See the [complete installation inventory](https://omarchy-elgato.dxun.dev/docs/getting-started/#system-packages),
+[user-file inventory](https://omarchy-elgato.dxun.dev/docs/getting-started/#user-files),
+and [optional removal cleanup](https://omarchy-elgato.dxun.dev/docs/getting-started/#optional-cleanup-after-removal)
+for exact paths, USB device matches, npm/runtime contents, service changes,
+and commands to reverse them. Setup does not record prior package/service/rule
+state, so removal does not automatically undo shared system changes.
 
 To reset personal settings, back up and then remove `~/.config/omarchy-elgato/`
 (or `$XDG_CONFIG_HOME/omarchy-elgato/`). This resets mappings, pages, folders,
