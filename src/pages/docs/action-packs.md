@@ -92,9 +92,9 @@ when their pack is unavailable; invoking one reports an error. Reinstalling a
 pack with the same IDs restores those assignments.
 
 ```bash
-bin/elgato-control action-packs
-bin/elgato-control catalog
-bin/elgato-control set-device-key plus 1 ext:example/next
+bin/omarchy-elgato action-packs
+bin/omarchy-elgato catalog
+bin/omarchy-elgato set-device-key plus 1 ext:example/next
 ```
 
 `action-packs` lists the directory and any manifest/dependency errors. Change or
@@ -160,7 +160,7 @@ expose states. Key Lights report **Mixed** when some are on, and **Unavailable**
 when any known light cannot report its current state.
 
 ```bash
-bin/elgato-control set-state-icon plus 1 button on preset:mic_mute.svg
-bin/elgato-control set-state-icon plus 1 button off preset:mic_up.svg
-bin/elgato-control set-state-icon plus 1 button on automatic
+bin/omarchy-elgato set-state-icon plus 1 button on preset:mic_mute.svg
+bin/omarchy-elgato set-state-icon plus 1 button off preset:mic_up.svg
+bin/omarchy-elgato set-state-icon plus 1 button on automatic
 ```

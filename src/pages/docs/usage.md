@@ -5,8 +5,18 @@ description: 'Configure buttons, pages, folders, dials, artwork, and action-stat
 slug: 'usage'
 ---
 
-The examples below run from the plugin directory and use its `bin/elgato-control` helper.
-The UI provides the same configuration operations.
+The examples below run from the plugin directory and use its `bin/omarchy-elgato` helper.
+The UI provides the same configuration operations. This helper ships inside the
+plugin; it is not a global command on your PATH. For an installed plugin, change
+to its directory before running the examples:
+
+```bash
+cd ~/.config/omarchy/plugins/dxun-dev.omarchy-elgato
+bin/omarchy-elgato --help
+```
+
+If you use a custom XDG configuration directory, use
+`$XDG_CONFIG_HOME/omarchy/plugins/dxun-dev.omarchy-elgato` instead.
 
 ## Button icons
 
@@ -30,10 +40,10 @@ image refreshes the hardware artwork; removing it falls back to the action icon.
 Pedal and Neo's two RGB touch controls do not support image overrides.
 
 ```bash
-bin/elgato-control icons
-bin/elgato-control set-device-icon classic 1 preset:browser.svg
-bin/elgato-control set-device-icon plus 2 ~/Pictures/my-icon.png
-bin/elgato-control set-device-icon plus 2 automatic
+bin/omarchy-elgato icons
+bin/omarchy-elgato set-device-icon classic 1 preset:browser.svg
+bin/omarchy-elgato set-device-icon plus 2 ~/Pictures/my-icon.png
+bin/omarchy-elgato set-device-icon plus 2 automatic
 ```
 
 ## Button text
@@ -56,9 +66,9 @@ contains a custom caption or is absent for the action name. Legacy hidden captio
 and custom icon-only images remain supported.
 
 ```bash
-bin/elgato-control set-device-text classic 1 custom "My terminal"
-bin/elgato-control set-device-text classic 1 hidden
-bin/elgato-control set-device-text classic 1 automatic
+bin/omarchy-elgato set-device-text classic 1 custom "My terminal"
+bin/omarchy-elgato set-device-text classic 1 hidden
+bin/omarchy-elgato set-device-text classic 1 automatic
 ```
 
 ## Pages
@@ -86,10 +96,10 @@ page. Profile mutations are serialized to prevent page switching from overwritin
 concurrent mapping edits.
 
 ```bash
-bin/elgato-control page plus add Work
-bin/elgato-control page plus duplicate page-1 "Page 1 Copy"
-bin/elgato-control page-catalog plus
-bin/elgato-control set-device-key plus 8 page_next --page page-1
+bin/omarchy-elgato page plus add Work
+bin/omarchy-elgato page plus duplicate page-1 "Page 1 Copy"
+bin/omarchy-elgato page-catalog plus
+bin/omarchy-elgato set-device-key plus 8 page_next --page page-1
 ```
 
 ## Folders
@@ -113,8 +123,8 @@ same model. Up to 50 pages and folders combined and 32 levels of nesting are
 supported per model.
 
 ```bash
-bin/elgato-control folder-create plus page-1 2 Media
-bin/elgato-control folder-back plus
+bin/omarchy-elgato folder-create plus page-1 2 Media
+bin/omarchy-elgato folder-back plus
 ```
 
 ## Page buttons
@@ -170,9 +180,9 @@ The Stream Deck Plus dials do not have these LEDs. LED-capable models use a
 single color for the center and ring; physical LED hardware remains unverified.
 
 ```bash
-bin/elgato-control set-device-display classic 1 color-text
-bin/elgato-control set-device-color classic 1 button '#123456'
-bin/elgato-control set-device-color classic 1 text '#ffffff'
+bin/omarchy-elgato set-device-display classic 1 color-text
+bin/omarchy-elgato set-device-color classic 1 button '#123456'
+bin/omarchy-elgato set-device-color classic 1 text '#ffffff'
 ```
 
 ## LCD display above each dial
@@ -187,11 +197,11 @@ the original status tile while keeping custom settings for later use. LCD colors
 are separate from physical dial LED colors.
 
 ```bash
-bin/elgato-control set-dial-display plus 1 mode icon-text
-bin/elgato-control set-dial-display plus 1 icon preset:volume_up.svg
-bin/elgato-control set-dial-display plus 1 text Volume
-bin/elgato-control set-dial-display plus 1 background '#123456'
-bin/elgato-control set-dial-display plus 1 foreground '#ffffff'
+bin/omarchy-elgato set-dial-display plus 1 mode icon-text
+bin/omarchy-elgato set-dial-display plus 1 icon preset:volume_up.svg
+bin/omarchy-elgato set-dial-display plus 1 text Volume
+bin/omarchy-elgato set-dial-display plus 1 background '#123456'
+bin/omarchy-elgato set-dial-display plus 1 foreground '#ffffff'
 ```
 
 ## Optional action packs
@@ -201,7 +211,7 @@ Each pack has a versioned JSON manifest, optional icons, dependency checks,
 and literal command arrays for press/release. Actions declare which controls
 support them, including dial turns. Packs are user-owned and survive reinstalls.
 See [the action-pack format and examples](../action-packs/). Diagnose missing
-or invalid packs with `bin/elgato-control action-packs`.
+or invalid packs with `bin/omarchy-elgato action-packs`.
 
 Runtime preparation supplies an optional VOXtype **Discard recording** action pack;
 it is offered only when VOXtype is installed. Existing packs are preserved.

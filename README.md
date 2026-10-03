@@ -55,7 +55,7 @@ getting started, usage, action packs, troubleshooting, and plugin development gu
 Each Markdown page supplies a title, description, slug, and the shared docs layout.
 The layout renders the page title, so begin content headings at `##`.
 
-Documentation was imported from plugin `main` at commit `15e6b25`. Review and update
+Documentation was imported from plugin `main` at commit `1a8c3dc`. Review and update
 these pages when plugin behavior changes; builds use checked-in content and do not
 fetch documentation at runtime. Keep internal Markdown links relative to their
 current page, and update `src/data/docs.js` when adding or reordering guides.

@@ -25,4 +25,4 @@ The [plugin development guide](development/) covers builds, local installation, 
 
 ## About these guides
 
-These guides describe the Omarchy plugin. Website development uses a separate Astro project on the `website` branch. Command examples that use `bin/elgato-control` run from the installed plugin directory or a plugin source checkout.
+These guides describe the Omarchy plugin. Website development uses a separate Astro project on the `website` branch. Command examples that use `bin/omarchy-elgato` run from the installed plugin directory or a plugin source checkout.

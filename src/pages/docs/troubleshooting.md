@@ -18,15 +18,15 @@ omarchy plugin enable dxun-dev.omarchy-elgato
 ```
 
 For detailed diagnostics, run
-`~/.config/omarchy/plugins/dxun-dev.omarchy-elgato/bin/elgato-control doctor`.
-Manual `bin/elgato-control setup` remains available to repair the runtime.
+`~/.config/omarchy/plugins/dxun-dev.omarchy-elgato/bin/omarchy-elgato doctor`.
+Manual `bin/omarchy-elgato setup` remains available to repair the runtime.
 To check or repair system requirements, run
-`bin/elgato-control install-requirements` in a terminal. Reconnect the Stream Deck
+`bin/omarchy-elgato install-requirements` in a terminal. Reconnect the Stream Deck
 after USB access setup if needed. Network lights must be reachable on the local
 network and discoverable through Avahi.
 
-For action packs, run `bin/elgato-control action-packs`. Runtime and status-query
-errors are reported by `bin/elgato-control status --json`. Shell load errors
+For action packs, run `bin/omarchy-elgato action-packs`. Runtime and status-query
+errors are reported by `bin/omarchy-elgato status --json`. Shell load errors
 appear in `journalctl --user -t omarchy-shell`.
 
 ## Hardware support
