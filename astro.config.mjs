@@ -6,5 +6,6 @@ export default defineConfig({
   base: '/omarchy-elgato',
   trailingSlash: 'always',
   output: 'static',
+  markdown: { syntaxHighlight: false },
   vite: { plugins: [tailwindcss()] },
 });

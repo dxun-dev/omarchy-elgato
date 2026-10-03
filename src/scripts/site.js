@@ -32,11 +32,14 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('elgato-site-theme', themes[currentTheme][0]);
   } catch {}
 });
-document.querySelector('#copy').addEventListener('click', async () => {
+document.querySelector('#copy')?.addEventListener('click', async () => {
   const status = document.querySelector('#copy-status');
   try {
     await navigator.clipboard.writeText(
-      document.querySelector('#install-command').textContent,
+      document
+        .querySelector('#install-command')
+        .textContent.trim()
+        .replace(/\s+/g, ' '),
     );
     status.textContent = 'Install command copied.';
   } catch {

@@ -1,0 +1,155 @@
+---
+import SiteLayout from './SiteLayout.astro';
+import { docsNavigation, docsPath } from '../data/docs.js';
+const { frontmatter, headings = [] } = Astro.props;
+const { title, description, slug = '' } = frontmatter;
+const current = docsNavigation.findIndex((page) => page.slug === slug);
+const previous = docsNavigation[current - 1];
+const next = docsNavigation[current + 1];
+const sections = headings.filter((heading) => heading.depth === 2);
+---
+
+<SiteLayout title={`${title} | Omarchy / Elgato`} description={description}>
+  <main id="main" class="mx-auto max-w-[1500px] px-[5%] py-12 lg:py-16">
+    <div class="mb-10 flex flex-wrap items-center gap-3 font-mono text-xs text-muted">
+      <a
+        href={import.meta.env.BASE_URL}
+        class="hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+      >
+        Home
+      </a>
+      <span aria-hidden="true">/</span>
+      <a
+        href={docsPath()}
+        class="hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+      >
+        Docs
+      </a>
+      {slug && (
+        <>
+          <span aria-hidden="true">/</span>
+          <span class="text-foreground">{title}</span>
+        </>
+      )}
+    </div>
+    <div class="grid items-start gap-10 lg:grid-cols-[200px_minmax(0,1fr)] xl:grid-cols-[200px_minmax(0,1fr)_180px] xl:gap-14">
+      <aside class="border-b border-line pb-6 lg:sticky lg:top-8 lg:border-b-0 lg:pb-0">
+        <p class="mb-4 font-mono text-[11px] font-semibold tracking-[2px] text-accent">
+          DOCUMENTATION
+        </p>
+        <nav
+          aria-label="Documentation"
+          class="grid grid-cols-2 gap-2 text-sm sm:grid-cols-3 lg:grid-cols-1"
+        >
+          {docsNavigation.map((page) => (
+            <a
+              href={docsPath(page.slug)}
+              aria-current={slug === page.slug ? 'page' : undefined}
+              class:list={[
+                'border-l-2 px-3 py-2 transition-colors motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4',
+                slug === page.slug
+                  ? 'border-accent bg-surface text-accent'
+                  : 'border-transparent text-muted hover:border-line hover:text-foreground',
+              ]}
+            >
+              {page.title}
+            </a>
+          ))}
+        </nav>
+        <a
+          href="https://github.com/dxun-dev/omarchy-elgato/tree/main"
+          class="mt-6 inline-block text-xs text-muted underline underline-offset-4 hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+        >
+          Plugin source ↗
+        </a>
+      </aside>
+      <article class="min-w-0 max-w-[780px]">
+        <header class="mb-10 border-b border-line pb-8">
+          <p class="mb-4 font-mono text-[11px] font-semibold tracking-[2px] text-accent">
+            OMARCHY / ELGATO
+          </p>
+          <h1 class="mb-4 font-mono text-2xl font-medium leading-snug tracking-tight text-balance sm:text-3xl">
+            {title}
+          </h1>
+          <p class="max-w-2xl text-[15px] leading-relaxed text-muted">
+            {description}
+          </p>
+        </header>
+        {sections.length > 0 && (
+          <details class="mb-8 border border-line bg-surface p-4 xl:hidden">
+            <summary class="cursor-pointer text-sm text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4">
+              On this page
+            </summary>
+            <nav
+              aria-label="On this page"
+              class="mt-4 grid gap-2 text-sm text-muted"
+            >
+              {sections.map((section) => (
+                <a
+                  href={`#${section.slug}`}
+                  class="hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+                >
+                  {section.text}
+                </a>
+              ))}
+            </nav>
+          </details>
+        )}
+        <div class="text-[15px] leading-7 text-muted wrap-anywhere [&_h2]:mt-12 [&_h2]:mb-5 [&_h2]:scroll-mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:leading-snug [&_h2]:tracking-tight [&_h2]:text-foreground sm:[&_h2]:text-[28px] [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:tracking-tight [&_h3]:text-foreground [&_p]:my-5 [&_ul]:my-5 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:my-5 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:my-2 [&_li::marker]:text-accent [&_strong]:font-semibold [&_strong]:text-foreground [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-foreground [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-accent [&_a:focus-visible]:outline-offset-4 [&_code]:rounded-sm [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-foreground [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:border [&_pre]:border-line [&_pre]:bg-deep [&_pre]:p-5 [&_pre]:leading-6 [&_pre_code]:rounded-none [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-accent [&_table]:my-6 [&_table]:block [&_table]:w-full [&_table]:overflow-x-auto [&_table]:text-left [&_table]:text-sm [&_th]:border-b [&_th]:border-line [&_th]:px-4 [&_th]:py-3 [&_th]:font-semibold [&_th]:text-foreground [&_td]:border-b [&_td]:border-line [&_td]:px-4 [&_td]:py-3 [&_blockquote]:my-6 [&_blockquote]:border-l-2 [&_blockquote]:border-accent [&_blockquote]:pl-5 [&_hr]:my-10 [&_hr]:border-line [&_img]:my-6 [&_img]:w-full [&_img]:border [&_img]:border-line">
+          <slot />
+        </div>
+        <nav
+          aria-label="Previous and next documentation"
+          class="mt-14 grid grid-cols-2 gap-4 border-t border-line pt-6 text-sm"
+        >
+          <div>
+            {previous && (
+              <a
+                href={docsPath(previous.slug)}
+                class="block border border-line p-4 hover:bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+              >
+                <span class="mb-2 block font-mono text-[10px] text-muted">
+                  ← PREVIOUS
+                </span>
+                <span class="text-accent">{previous.title}</span>
+              </a>
+            )}
+          </div>
+          <div>
+            {next && (
+              <a
+                href={docsPath(next.slug)}
+                class="block border border-line p-4 text-right hover:bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+              >
+                <span class="mb-2 block font-mono text-[10px] text-muted">
+                  NEXT →
+                </span>
+                <span class="text-accent">{next.title}</span>
+              </a>
+            )}
+          </div>
+        </nav>
+      </article>
+      {sections.length > 0 && (
+        <aside class="sticky top-8 hidden xl:block">
+          <p class="mb-4 font-mono text-[11px] font-semibold tracking-[2px] text-accent">
+            ON THIS PAGE
+          </p>
+          <nav
+            aria-label="On this page"
+            class="grid gap-3 border-l border-line pl-4 text-xs leading-relaxed text-muted"
+          >
+            {sections.map((section) => (
+              <a
+                href={`#${section.slug}`}
+                class="hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+              >
+                {section.text}
+              </a>
+            ))}
+          </nav>
+        </aside>
+      )}
+    </div>
+  </main>
+</SiteLayout>
