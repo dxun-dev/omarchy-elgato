@@ -15,7 +15,8 @@
     "dev": "npm run install:local -- --offline && omarchy restart shell",
     "package:plugin": "npm run build && node scripts/package.mjs",
     "previews": "npm run build && node scripts/generate-previews.mjs",
-    "test:editor": "npm run build && node scripts/generate-previews.mjs --verify && node scripts/verify-service.mjs"
+    "test:editor": "npm run build && node scripts/generate-previews.mjs --verify && node scripts/verify-service.mjs",
+    "site:preview": "node scripts/preview-site.mjs"
   },
   "dependencies": {
     "@elgato-stream-deck/node": "^7.7.1",
