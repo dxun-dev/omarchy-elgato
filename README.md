@@ -1,5 +1,8 @@
 # Omarchy / Elgato — website
 
+> [!IMPORTANT]
+> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+
 The project website uses **Astro** for static site generation and **Tailwind CSS v4**
 through its Vite plugin. The current Elgato / Omarchy design, locally hosted fonts,
 three color themes, screenshots, and installation-command copying are preserved.

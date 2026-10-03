@@ -1,5 +1,8 @@
 # Publishing the Astro website
 
+> [!IMPORTANT]
+> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+
 Website development lives on `website`; plugin development stays on `main`.
 
 ## GitHub Pages setup
