@@ -1,20 +1,49 @@
-<header class="nav">
-  <a class="brand" href="#" aria-label="Elgato Controls home">
-    <span class="brand-icon" aria-hidden="true">
+<header class="flex items-center bg-background h-[86px] py-0 px-[5%] gap-[35px] border-b border-line max-[1000px]:gap-5 max-[700px]:h-auto max-[700px]:flex-wrap max-[700px]:min-h-19 max-[700px]:py-[15px] max-[700px]:px-[5%] max-[700px]:gap-3">
+  <a
+    class="text-inherit no-underline touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] font-bold flex items-center text-[20px] tracking-[-1px] gap-3 max-[700px]:text-[16px] font-mono"
+    href="#"
+    aria-label="Elgato Controls home"
+  >
+    <span
+      class="text-accent text-[32px] max-[700px]:text-[24px]"
+      aria-hidden="true"
+    >
       ⌘
     </span>
     <span>
-      elgato<span class="brand-sub"> / omarchy</span>
+      elgato
+      <span class="font-normal text-muted text-[15px] max-[1000px]:hidden">
+        {' '}
+        / omarchy
+      </span>
     </span>
   </a>
-  <nav aria-label="Main navigation">
-    <a href="#controls">Controls</a>
-    <a href="#setup">Setup</a>
-    <a href="https://github.com/dxun-dev/omarchy-elgato">GitHub ↗</a>
+  <nav
+    class="flex ml-auto gap-7 text-[13px] max-[700px]:w-full max-[700px]:justify-between max-[700px]:order-[3] max-[700px]:text-[11px] max-[700px]:gap-[10px]"
+    aria-label="Main navigation"
+  >
+    <a
+      class="text-inherit no-underline touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] hover:text-accent"
+      href="#controls"
+    >
+      Controls
+    </a>
+    <a
+      class="text-inherit no-underline touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] hover:text-accent"
+      href="#setup"
+    >
+      Setup
+    </a>
+    <a
+      class="text-inherit no-underline touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] hover:text-accent"
+      href="https://github.com/dxun-dev/omarchy-elgato"
+    >
+      GitHub ↗
+    </a>
   </nav>
   <button
+    class="cursor-pointer touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] text-accent bg-transparent border border-line py-[9px] px-3 text-[12px] max-[700px]:ml-auto max-[700px]:text-[10px] max-[700px]:p-[7px] font-mono"
     id="theme"
-    class="theme"
     type="button"
     aria-label="Change color theme"
   >

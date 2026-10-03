@@ -31,11 +31,15 @@ path as GitHub Pages. Generated output and Astro caches are ignored by Git.
 - `src/pages/index.astro`: homepage content and sections.
 - `src/layouts/SiteLayout.astro`: document metadata, global styles, and shared shell.
 - `src/components/`: header, footer, and Stream Deck illustration.
-- `src/styles/global.css`: Tailwind v4 import, theme tokens, component styles, and responsive rules.
+- `src/styles/global.css`: Tailwind v4 import, font declarations, and theme tokens only.
 - `src/scripts/site.js`: theme persistence and clipboard behavior.
 - `src/assets/fonts/`: locally hosted Geist and JetBrains Mono, with licenses.
 - `public/`: screenshots, favicon, and files copied directly into the build.
 - `astro.config.mjs`: static output, GitHub Pages URL/base, and Tailwind Vite integration.
+
+All visual styling uses Tailwind utility classes directly in Astro markup, including
+responsive variants, focus states, and illustration effects. Keep CSS limited to
+font declarations and shared theme variables; avoid component selectors and `@apply`.
 
 Add pages under `src/pages/` and reuse the shared layout. Prefix public asset and
 internal route URLs with `import.meta.env.BASE_URL` so they work on GitHub Pages.

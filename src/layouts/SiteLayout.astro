@@ -9,7 +9,11 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="tokyo">
+<html
+  class="scroll-smooth scroll-pt-[95px] motion-reduce:scroll-auto selection:bg-accent selection:text-ink"
+  lang="en"
+  data-theme="tokyo"
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,8 +27,11 @@ const {
     />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
   </head>
-  <body>
-    <a class="skip" href="#main">
+  <body class="bg-background text-foreground font-sans m-0 leading-[1.6]">
+    <a
+      class="text-ink no-underline touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] absolute bg-accent left-5 top-[-80px] z-[20] p-3 focus:top-[10px]"
+      href="#main"
+    >
       Skip to content
     </a>
     <Header />
