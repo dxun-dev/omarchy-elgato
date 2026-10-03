@@ -1,171 +1,38 @@
-# Elgato Controls for Omarchy
+# Elgato Controls for Omarchy — website
 
-Configure Stream Deck buttons and dials, customize their displays, and control
-network Elgato Key Lights from the Omarchy Shell bar.
+This branch contains the GitHub Pages website for Elgato Controls for Omarchy.
+The plugin source and installation documentation live on the [main branch](https://github.com/dxun-dev/omarchy-elgato/tree/main).
 
-![Stream Deck button editor](preview.png)
+## Local preview
 
-[Dial and LCD editor](docs/previews/dials.png) ·
-[Key Light controls](docs/previews/key-lights.png)
-
-## Features
-
-- Configurable keys, dial turns, and dial presses with suitable action choices.
-- Application launchers, audio and microphone controls, keyboard keys, workspace
-  navigation, and grouped Key Light controls.
-- Independent mappings, pages, and nested folders for each device model.
-- Custom icons, captions, colors, and state-specific icons for toggle actions.
-- Per-dial LCD artwork on the Stream Deck Plus and other LCD-capable models.
-- Offline device previews and optional user-installed action packs.
-
-Stream Deck communication uses
-[`@elgato-stream-deck/node`](https://github.com/Julusian/node-elgato-stream-deck).
-The interface uses QML and runs within Omarchy Shell; the backend uses Node.js.
-
-## Requirements
-
-Omarchy Quattro with Omarchy Shell and the `omarchy plugin` commands.
-First enable checks system requirements and opens a terminal prompt if setup is
-needed. Accept the prompt to install missing packages through `omarchy pkg add`
-and configure Stream Deck USB access. Administrator authentication may be
-requested. The plugin then prepares its locked Node.js runtime automatically.
-
-Setup covers Node.js 22.18+, npm, ImageMagick, Fontconfig and a font, Avahi,
-WirePlumber, keyboard input, and application-launch tools. Most of these are
-already part of Omarchy. USB rules grant access to the active desktop user for
-supported Stream Deck devices; other USB devices are unaffected. Reconnect the
-Stream Deck if it is not detected after setup.
-
-Actions for optional applications appear only when their executable is
-available. User-installed action packs provide their own dependency checks.
-
-## Install
-
-Install and enable through Omarchy:
+Requires Node.js 22.18 or newer. No dependencies or build step are needed.
 
 ```bash
-omarchy plugin add https://github.com/dxun-dev/omarchy-elgato.git --enable
+npm run dev
 ```
 
-Omarchy asks where to place the widget. On first enable, accept any system setup
-prompt; the service then installs its locked runtime dependencies in the user
-data directory. This requires internet access and may take a moment. Click the
-Elgato icon when it appears to configure your devices.
+Open http://localhost:8000. Use `PORT=8001 npm run dev` to choose another port.
 
-Without `--enable`, setup waits until you enable the plugin. If you decline the
-system setup prompt, no packages or USB rules are changed; use **Retry setup**
-in the editor when you are ready.
+## Files
 
-For an earlier development install, disable `omarchy-elgato` before enabling
-this plugin. Existing profiles, icons, and action packs are preserved.
+- `docs/index.html`: homepage and content.
+- `docs/style.css`: layout, typography, and theme colors.
+- `docs/site.js`: theme selection and install-command copying.
+- `docs/site-assets/`: illustration icon, editor screenshot, and licensed fonts.
+- `docs/previews/`: dial and Key Light screenshots.
+- `scripts/preview-site.mjs`: local Node.js preview server.
 
-## Use and configure
+## Publishing
 
-Click the Elgato bar icon to open the editor. Choose a connected device or an
-offline model, select a button or dial, and assign an action. Use the display
-settings for icons, text, background colors, and dial LCD artwork. Stateful
-actions expose an icon setting for each reported state; launchers keep a single
-icon. **Detach** opens the editor in a separate window; **Dock** returns it to the
-bar. Escape closes the editor or cancels an active edit.
+Push the `website` branch, then select **Settings → Pages → Deploy from a branch → website → /docs**.
+The published URL is https://dxun-dev.github.io/omarchy-elgato/.
+See [publishing instructions](docs/publishing.md) for details.
 
-Move the widget with:
+Keep website changes on `website` and plugin development on `main`.
+Do not merge the site-only branch into `main`: it intentionally omits plugin files.
 
-```bash
-omarchy bar move dxun-dev.omarchy-elgato --section left
-```
+## License
 
-See [the usage guide](docs/usage.md) for pages, folders, colors, status icons,
-and CLI examples. See [action packs](docs/actions.md) to add your own actions.
-
-## User files
-
-All paths respect the corresponding XDG environment variable.
-
-| Purpose | Default location |
-| --- | --- |
-| Mappings and pages | `~/.config/omarchy-elgato/profile.json` |
-| Custom icons | `~/.config/omarchy-elgato/icons/` |
-| Action packs | `~/.config/omarchy-elgato/actions/` |
-| Status and discovered-light inventory | `~/.local/state/omarchy-elgato/` |
-| Generated artwork cache | `~/.cache/omarchy-elgato/` |
-| Runtime dependencies | `~/.local/share/omarchy-elgato/runtime/` |
-
-`OMARCHY_ELGATO_RUNTIME` can override the dependency location.
-`OMARCHY_ELGATO_FONT` can select a font file; otherwise Fontconfig resolves the
-system's sans-serif font. Applications and icons use XDG data directories.
-
-## Update
-
-```bash
-omarchy plugin update dxun-dev.omarchy-elgato
-```
-
-Omarchy reloads the plugin. The service refreshes runtime dependencies when
-needed, preserving profiles, icons, action packs, and bar placement.
-
-## Disable or remove
-
-```bash
-omarchy plugin disable dxun-dev.omarchy-elgato
-omarchy plugin remove dxun-dev.omarchy-elgato
-```
-
-Disabling stops the daemon. Removal deletes or backs up the plugin through
-Omarchy. User profiles, icons, action packs, state, cache, and runtime dependencies
-remain available for reinstalling. To delete those too, first back up anything
-you want to keep and remove the locations in **User files** manually. System
-packages and the Stream Deck USB access rule installed during setup remain
-available after removal.
-
-## Compatibility and limitations
-
-Model layouts cover Classic variants, Plus, Mini, XL, Neo, Pedal, Studio, Plus XL,
-and supported Modules. Multiple units of the same model share mappings and page
-state. Additional models and dial LEDs have automated mock coverage; physical
-hardware verification is incomplete. The Neo information screen has clock/date,
-page, microphone mute, and light status. Touch gestures, automatic touch
-navigation, Studio NFC, Network Dock transport, Wave-specific controls, and
-Facecam controls are not implemented.
-
-Action packs provide command actions and status queries. Live tile providers
-and column reservations, such as Herdr agent columns, are future work.
-
-## Troubleshooting
-
-The editor shows runtime preparation progress and failure details. After
-resolving the problem (for example, restoring internet access), click **Retry
-setup**. For more detail, check `journalctl --user -t omarchy-shell`. You can also
-retry through Omarchy:
-
-```bash
-omarchy plugin disable dxun-dev.omarchy-elgato
-omarchy plugin enable dxun-dev.omarchy-elgato
-```
-
-For detailed diagnostics, run
-`~/.config/omarchy/plugins/dxun-dev.omarchy-elgato/bin/elgato-control doctor`.
-Manual `bin/elgato-control setup` remains available to repair the runtime.
-To check or repair system requirements, run
-`bin/elgato-control install-requirements` in a terminal. Reconnect the Stream Deck
-after USB access setup if needed. Network lights must be reachable on the local
-network and discoverable through Avahi.
-
-For action packs, run `bin/elgato-control action-packs`. Runtime and status-query
-errors are reported by `bin/elgato-control status --json`. Shell load errors
-appear in `journalctl --user -t omarchy-shell`.
-
-## Development and publication
-
-See [release notes](CHANGELOG.md) for version history.
-
-See [development](docs/development.md) for builds, tests, local installation,
-and validation. [Publication preparation](docs/publishing.md) records the
-release validation and submission checklist.
-
-## License and attribution
-
-MIT licensed. This project began as a port of
-[Amit Patel's Elgato Control](https://github.com/amitcpatel/omarchy-elgato-control).
-The [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md)
-are retained. Elgato product names identify compatible hardware and do not imply
-endorsement or affiliation.
+Website code uses the [MIT license](LICENSE). Geist and JetBrains Mono are
+locally hosted with their respective licenses in `docs/site-assets/fonts/`.
+This community project is not affiliated with Elgato or Corsair.
