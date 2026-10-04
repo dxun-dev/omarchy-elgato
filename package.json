@@ -15,7 +15,9 @@
     "dev": "npm run install:local -- --offline && omarchy restart shell",
     "package:plugin": "npm run build && node scripts/package.mjs",
     "previews": "npm run build && node scripts/generate-previews.mjs",
-    "test:editor": "npm run build && node scripts/generate-previews.mjs --verify && node scripts/verify-service.mjs"
+    "test:editor": "npm run build && node scripts/generate-previews.mjs --verify && node scripts/verify-service.mjs",
+    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.mjs\" \"test/**/*.mjs\" \"defaults/**/*.json\" \"examples/**/*.json\" \"*.json\" \"scripts/*.sh\" \"bin/omarchy-elgato\" && node scripts/format-qml.mjs",
+    "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.mjs\" \"test/**/*.mjs\" \"defaults/**/*.json\" \"examples/**/*.json\" \"*.json\" \"scripts/*.sh\" \"bin/omarchy-elgato\" && node scripts/format-qml.mjs --check"
   },
   "dependencies": {
     "@elgato-stream-deck/node": "^7.7.1",
@@ -23,6 +25,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-sh": "^0.20.2",
     "typescript": "^5.9.0"
   }
 }

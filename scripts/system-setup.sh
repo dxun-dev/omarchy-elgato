@@ -6,7 +6,7 @@ rule_source=$plugin_dir/assets/udev/70-omarchy-elgato.rules
 rule_target=/etc/udev/rules.d/70-omarchy-elgato.rules
 missing=()
 need_avahi=false
-node_ok() { "$1" -e 'const [a,b]=process.versions.node.split(".").map(Number);process.exit(a>22||(a===22&&b>=18)?0:1)' >/dev/null 2>&1; }
+node_ok() { "$1" -e 'const [a,b]=process.versions.node.split(".").map(Number);process.exit(a>22||(a===22&&b>=18)?0:1)' > /dev/null 2>&1; }
 if ! node_ok node && node_ok /usr/bin/node; then export PATH=/usr/bin:$PATH; fi
 add_missing() {
   local package=$1 candidate
@@ -18,8 +18,8 @@ check_system() {
   node_ok node || add_missing nodejs
   local command package
   while read -r command package; do
-    command -v "$command" >/dev/null 2>&1 || add_missing "$package"
-  done <<'PACKAGES'
+    command -v "$command" > /dev/null 2>&1 || add_missing "$package"
+  done << 'PACKAGES'
 npm npm
 magick imagemagick
 fc-match fontconfig
@@ -30,14 +30,15 @@ uwsm-app uwsm
 gtk-launch gtk3
 xdg-open xdg-utils
 PACKAGES
-  if command -v fc-match >/dev/null 2>&1; then
+  if command -v fc-match > /dev/null 2>&1; then
     local font
-    font=$(fc-match -f '%{file}' sans-serif 2>/dev/null) || font=''
+    font=$(fc-match -f '%{file}' sans-serif 2> /dev/null) || font=''
     [[ -f ${OMARCHY_ELGATO_FONT:-$font} ]] || add_missing ttf-dejavu
-  else add_missing ttf-dejavu
+  else
+    add_missing ttf-dejavu
   fi
   need_avahi=false
-  systemctl is-active --quiet avahi-daemon.service 2>/dev/null || need_avahi=true
+  systemctl is-active --quiet avahi-daemon.service 2> /dev/null || need_avahi=true
   [[ ${#missing[@]} == 0 && $need_avahi == false ]] && cmp -s "$rule_source" "$rule_target"
 }
 write_state() {
@@ -64,8 +65,11 @@ case ${1:-} in
     ;;
   --install)
     mkdir -p "$state_dir"
-    exec 8>"$state_dir/system-setup.lock"
-    flock -n 8 || { echo 'Setup is already open in another terminal.'; exit 0; }
+    exec 8> "$state_dir/system-setup.lock"
+    flock -n 8 || {
+      echo 'Setup is already open in another terminal.'
+      exit 0
+    }
     complete=false
     cleanup() {
       if [[ $complete != true ]]; then
@@ -88,7 +92,10 @@ case ${1:-} in
       [[ $need_avahi == false ]] || sudo systemctl enable --now avahi-daemon.service
       # Prefer a newly installed system Node over an outdated managed version.
       if ! node_ok node && node_ok /usr/bin/node; then export PATH=/usr/bin:$PATH; fi
-      if ! check_system; then echo 'Requirements could not be satisfied. Check the installation output.'; exit 1; fi
+      if ! check_system; then
+        echo 'Requirements could not be satisfied. Check the installation output.'
+        exit 1
+      fi
     fi
     write_state ready 'Requirements installed. Reconnect the Stream Deck if it is not detected.'
     complete=true
@@ -97,5 +104,8 @@ case ${1:-} in
       echo 'Enable the plugin through Omarchy to finish runtime preparation.'
     }
     ;;
-  *) echo 'Usage: system-setup.sh --check|--request|--install' >&2; exit 2 ;;
+  *)
+    echo 'Usage: system-setup.sh --check|--request|--install' >&2
+    exit 2
+    ;;
 esac

@@ -6,10 +6,7 @@
   "author": "Jase",
   "license": "MIT",
   "description": "Configure Stream Deck keys and dials, customize displays, and control network Key Lights.",
-  "kinds": [
-    "bar-widget",
-    "service"
-  ],
+  "kinds": ["bar-widget", "service"],
   "entryPoints": {
     "service": "Service.qml",
     "barWidget": "BarWidget.qml"
@@ -18,11 +15,7 @@
     "displayName": "Omarchy Elgato",
     "description": "Configure Stream Deck models and control Key Lights",
     "category": "System",
-    "aliases": [
-      "elgato",
-      "streamdeck",
-      "keylight"
-    ],
+    "aliases": ["elgato", "streamdeck", "keylight"],
     "allowMultiple": false,
     "defaultSection": "right"
   }

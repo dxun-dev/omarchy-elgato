@@ -1,0 +1,14 @@
+{
+  "singleQuote": true,
+  "tabWidth": 2,
+  "printWidth": 100,
+  "plugins": ["prettier-plugin-sh"],
+  "overrides": [
+    {
+      "files": ["bin/omarchy-elgato"],
+      "options": {
+        "parser": "sh"
+      }
+    }
+  ]
+}

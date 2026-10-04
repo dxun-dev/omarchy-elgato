@@ -15,25 +15,69 @@ import { lcdSVG, keyArtwork, lcdArtwork } from '../dist/artwork.js';
 
 const defaults = JSON.parse(await readFile(new URL('../defaults/profile.json', import.meta.url)));
 test('dial turns offer repeatable adjustments while presses retain launch and toggle actions', () => {
-  for (const action of ['none', 'volume_up', 'volume_down', 'mic_up', 'lights_warmer', 'workspace_next', 'page_previous', 'key_left']) {
+  for (const action of [
+    'none',
+    'volume_up',
+    'volume_down',
+    'mic_up',
+    'lights_warmer',
+    'workspace_next',
+    'page_previous',
+    'key_left',
+  ]) {
     assert.ok(actionControls(action).includes('dialTurn'), action);
     assert.ok(actionControls(action).includes('button'), action);
   }
-  for (const action of ['app:firefox', 'terminal', 'browser', 'volume_mute', 'media_play_pause', 'screenshot', 'voxtype_push_to_talk', 'folder:media', 'page:work', 'key_enter']) {
+  for (const action of [
+    'app:firefox',
+    'terminal',
+    'browser',
+    'volume_mute',
+    'media_play_pause',
+    'screenshot',
+    'voxtype_push_to_talk',
+    'folder:media',
+    'page:work',
+    'key_enter',
+  ]) {
     assert.ok(!actionControls(action).includes('dialTurn'), action);
     assert.ok(actionControls(action).includes('dialPress'), action);
     assert.ok(actionControls(action).includes('button'), action);
   }
 });
 test('private light hosts and IPv6 are accepted; public, loopback and URL injection are rejected', () => {
-  for (const h of ['192.168.1.5', '10.1.0.1', '172.16.1.2', '169.254.1.1', 'fd12::1', 'fe80::1', 'elgato-key-light.local']) assert.equal(validateHost(h), h);
-  for (const h of ['127.0.0.1', '::1', '8.8.8.8', '0.0.0.0', 'localhost', 'https://key.local', 'key.local/path', 'key.local@evil.com']) assert.throws(() => validateHost(h));
+  for (const h of [
+    '192.168.1.5',
+    '10.1.0.1',
+    '172.16.1.2',
+    '169.254.1.1',
+    'fd12::1',
+    'fe80::1',
+    'elgato-key-light.local',
+  ]) {
+    assert.equal(validateHost(h), h);
+  }
+  for (const h of [
+    '127.0.0.1',
+    '::1',
+    '8.8.8.8',
+    '0.0.0.0',
+    'localhost',
+    'https://key.local',
+    'key.local/path',
+    'key.local@evil.com',
+  ]) {
+    assert.throws(() => validateHost(h));
+  }
   assert.equal(isLocalAddress('::ffff:192.168.1.5'), true);
   assert.equal(isLocalAddress('172.32.1.1'), false);
 });
 test('Avahi discovery deduplicates and ignores malformed records', () => {
-  const lines = '=;eth0;IPv4;Left\\032Light;_elg._tcp;local;host.local;elgato-left.local;9123\n=;eth0;IPv4;Left\\032Light;_elg._tcp;local;host.local;elgato-left.local;9123\n=;eth0;IPv4;Bad;_elg._tcp;local;host.local;bad.local;999999';
-  assert.deepEqual(parseAvahi(lines), [{ name: 'Left Light', host: 'elgato-left.local', port: 9123 }]);
+  const lines =
+    '=;eth0;IPv4;Left\\032Light;_elg._tcp;local;host.local;elgato-left.local;9123\n=;eth0;IPv4;Left\\032Light;_elg._tcp;local;host.local;elgato-left.local;9123\n=;eth0;IPv4;Bad;_elg._tcp;local;host.local;bad.local;999999';
+  assert.deepEqual(parseAvahi(lines), [
+    { name: 'Left Light', host: 'elgato-left.local', port: 9123 },
+  ]);
 });
 test('light payloads clamp brightness and convert Kelvin; missing values fail', () => {
   assert.deepEqual(lightPayload('brightness', {}, 500), { brightness: 100, on: 1 });
@@ -45,7 +89,15 @@ test('light payloads clamp brightness and convert Kelvin; missing values fail', 
 });
 test('Classic and Plus have separate valid profiles, malformed profiles fail', () => {
   assert.equal(validateProfile(defaults).classicKeys.length, 15);
-  for (const patch of [{ brightness: -1 }, { keys: [] }, { classicKeys: [] }, { dials: [] }, { lights: [{ host: 'x', name: 'x', port: 0 }] }]) assert.throws(() => validateProfile({ ...defaults, ...patch }));
+  for (const patch of [
+    { brightness: -1 },
+    { keys: [] },
+    { classicKeys: [] },
+    { dials: [] },
+    { lights: [{ host: 'x', name: 'x', port: 0 }] },
+  ]) {
+    assert.throws(() => validateProfile({ ...defaults, ...patch }));
+  }
 });
 test('action commands use argument arrays, unknown and malicious actions fail', async () => {
   assert.deepEqual(commandFor('key_enter'), ['wtype', '-k', 'Return']);
@@ -54,28 +106,52 @@ test('action commands use argument arrays, unknown and malicious actions fail', 
   assert.equal(commandFor('unknown'), null);
 });
 test('Classic generations and Plus are selected; unsupported models ignored', () => {
-  for (const model of ['original', 'originalv2', 'original-mk2']) assert.equal(deviceKind(model), 'classic');
-  assert.equal(deviceKind('plus'), 'plus'); assert.equal(deviceKind('xl'), 'xl'); assert.equal(deviceKind('network-dock'), null); assert.equal(deviceKind('galleon-k100'), null);
+  for (const model of ['original', 'originalv2', 'original-mk2']) {
+    assert.equal(deviceKind(model), 'classic');
+  }
+  assert.equal(deviceKind('plus'), 'plus');
+  assert.equal(deviceKind('xl'), 'xl');
+  assert.equal(deviceKind('network-dock'), null);
+  assert.equal(deviceKind('galleon-k100'), null);
 });
 test('LCD labels escape markup', () => {
-  const p = structuredClone(defaults); p.dials[0].label = '<tag>&';
+  const p = structuredClone(defaults);
+  p.dials[0].label = '<tag>&';
   assert.ok(lcdSVG(p, []).includes('&lt;tag&gt;&amp;'));
 });
 test('artwork renders at Classic and Plus dimensions without sending USB reports', async () => {
-  for (const size of [72, 120]) assert.equal((await keyArtwork(defaults.keys[0], size, size)).length, size * size * 3);
+  for (const size of [72, 120]) {
+    assert.equal((await keyArtwork(defaults.keys[0], size, size)).length, size * size * 3);
+  }
   assert.equal((await lcdArtwork(defaults, [], 800, 100)).length, 800 * 100 * 3);
 });
 test('device events route Classic/Plus keys and dials; release keeps original held action', async () => {
-  const originalList = streamDeck.listStreamDecks, originalOpen = streamDeck.openStreamDeck;
-  const plus = Object.assign(new EventEmitter(), { PRODUCT_NAME: 'Plus', CONTROLS: [], close: async () => {} });
-  const classic = Object.assign(new EventEmitter(), { PRODUCT_NAME: 'Classic', CONTROLS: [], close: async () => {} });
-  streamDeck.listStreamDecks = async () => [{ model: 'plus', path: 'plus' }, { model: 'original', path: 'classic' }];
-  streamDeck.openStreamDeck = async path => path === 'plus' ? plus : classic;
+  const originalList = streamDeck.listStreamDecks;
+  const originalOpen = streamDeck.openStreamDeck;
+  const plus = Object.assign(new EventEmitter(), {
+    PRODUCT_NAME: 'Plus',
+    CONTROLS: [],
+    close: async () => {},
+  });
+  const classic = Object.assign(new EventEmitter(), {
+    PRODUCT_NAME: 'Classic',
+    CONTROLS: [],
+    close: async () => {},
+  });
+  streamDeck.listStreamDecks = async () => [
+    { model: 'plus', path: 'plus' },
+    { model: 'original', path: 'classic' },
+  ];
+  streamDeck.openStreamDeck = async (path) => (path === 'plus' ? plus : classic);
   const actions = [];
   try {
-    const d = new Daemon(false, async (action, release) => { actions.push([action, release]); });
-    d.profile = structuredClone(defaults); d.render = () => {};
-    d.profile.keys[0].action = 'voxtype_push_to_talk'; d.profile.classicKeys[14].action = 'lock';
+    const d = new Daemon(false, async (action, release) => {
+      actions.push([action, release]);
+    });
+    d.profile = structuredClone(defaults);
+    d.render = () => {};
+    d.profile.keys[0].action = 'voxtype_push_to_talk';
+    d.profile.classicKeys[14].action = 'lock';
     await d.connect();
     plus.emit('down', { type: 'button', index: 0 });
     d.profile.keys[0].action = 'terminal';
@@ -83,93 +159,170 @@ test('device events route Classic/Plus keys and dials; release keeps original he
     classic.emit('down', { type: 'button', index: 14 });
     plus.emit('rotate', { type: 'encoder', index: 0 }, -2);
     await sleep(0);
-    assert.deepEqual(actions, [['voxtype_push_to_talk', false], ['voxtype_push_to_talk', true], ['lock', false], ['volume_down', false], ['volume_down', false]]);
+    assert.deepEqual(actions, [
+      ['voxtype_push_to_talk', false],
+      ['voxtype_push_to_talk', true],
+      ['lock', false],
+      ['volume_down', false],
+      ['volume_down', false],
+    ]);
     assert.equal(d.status.devices.length, 2);
     streamDeck.listStreamDecks = async () => [];
-    await d.connect(); assert.equal(d.devices.size, 0); assert.equal(d.status.classic, null);
-  } finally { streamDeck.listStreamDecks = originalList; streamDeck.openStreamDeck = originalOpen; }
+    await d.connect();
+    assert.equal(d.devices.size, 0);
+    assert.equal(d.status.classic, null);
+  } finally {
+    streamDeck.listStreamDecks = originalList;
+    streamDeck.openStreamDeck = originalOpen;
+  }
 });
 test('CLI isolates profile edits, rejects bad mapping, and daemon shuts down cleanly', async () => {
   const tmp = await mkdtemp(join(tmpdir(), 'omarchy-elgato-test-'));
-  const env = { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), XDG_STATE_HOME: join(tmp, 'state'), XDG_CACHE_HOME: join(tmp, 'cache'), PATH: '' };
+  const env = {
+    ...process.env,
+    XDG_CONFIG_HOME: join(tmp, 'config'),
+    XDG_STATE_HOME: join(tmp, 'state'),
+    XDG_CACHE_HOME: join(tmp, 'cache'),
+    PATH: '',
+  };
   const cli = new URL('../dist/cli.js', import.meta.url).pathname;
-  const command = (...args) => execFileSync(process.execPath, [cli, ...args], { env, encoding: 'utf8' });
+  const command = (...args) =>
+    execFileSync(process.execPath, [cli, ...args], { env, encoding: 'utf8' });
   try {
-    command('init'); command('set-classic-key', '15', 'key_enter'); command('set-key', '1', 'key_tab');
-    command('set-device-key', 'neo', '10', 'key_escape'); command('set-device-dial', 'plus-xl', '6', 'press', 'lock');
+    command('init');
+    command('set-classic-key', '15', 'key_enter');
+    command('set-key', '1', 'key_tab');
+    command('set-device-key', 'neo', '10', 'key_escape');
+    command('set-device-dial', 'plus-xl', '6', 'press', 'lock');
     assert.throws(() => command('set-device-key', 'neo', '11', 'lock'));
     assert.throws(() => command('set-device-key', 'unknown', '1', 'lock'));
     const profile = JSON.parse(command('profile'));
     assert.equal(profile.devices.neo.keys[9].action, 'key_escape');
     assert.equal(profile.devices['plus-xl'].dials[5].press, 'lock');
-    assert.equal(profile.classicKeys[14].action, 'key_enter'); assert.equal(profile.keys[0].action, 'key_tab');
+    assert.equal(profile.classicKeys[14].action, 'key_enter');
+    assert.equal(profile.keys[0].action, 'key_tab');
     assert.throws(() => command('set-classic-key', '16', 'lock'));
     assert.throws(() => command('set-dial', '1', 'bad', 'lock'));
-    const daemon = spawn(process.execPath, [cli, 'daemon', '--no-hardware'], { env, stdio: ['ignore', 'pipe', 'pipe'] });
-    let stderr = ''; daemon.stderr.on('data', chunk => { stderr += chunk; });
-    const exited = new Promise(resolve => daemon.once('exit', code => resolve(code)));
+    const daemon = spawn(process.execPath, [cli, 'daemon', '--no-hardware'], {
+      env,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    let stderr = '';
+    daemon.stderr.on('data', (chunk) => {
+      stderr += chunk;
+    });
+    const exited = new Promise((resolve) => daemon.once('exit', (code) => resolve(code)));
     try {
       let ready = false;
       for (let i = 0; i < 50; i++) {
-        try { ready = JSON.parse(await readFile(join(tmp, 'state/omarchy-elgato/status.json'))).running; } catch {}
-        if (ready) break;
+        try {
+          ready = JSON.parse(await readFile(join(tmp, 'state/omarchy-elgato/status.json'))).running;
+        } catch {}
+        if (ready) {
+          break;
+        }
         await sleep(50);
       }
-      assert.ok(ready, stderr); daemon.kill('SIGTERM');
+      assert.ok(ready, stderr);
+      daemon.kill('SIGTERM');
       assert.equal(await exited, 0, stderr);
       const status = JSON.parse(command('status', '--json'));
-      assert.equal(status.running, false); assert.equal(status.plus, null);
-      await writeFile(join(tmp, 'state/omarchy-elgato/status.json'), JSON.stringify({ running: true, updatedAt: 1, classic: { connected: true }, lights: [{ reachable: true }] }));
+      assert.equal(status.running, false);
+      assert.equal(status.plus, null);
+      await writeFile(
+        join(tmp, 'state/omarchy-elgato/status.json'),
+        JSON.stringify({
+          running: true,
+          updatedAt: 1,
+          classic: { connected: true },
+          lights: [{ reachable: true }],
+        }),
+      );
       const stale = JSON.parse(command('status', '--json'));
-      assert.equal(stale.running, false); assert.equal(stale.classic, null); assert.deepEqual(stale.lights, []);
-    } finally { if (daemon.exitCode === null) daemon.kill('SIGKILL'); }
-  } finally { await rm(tmp, { recursive: true, force: true }); }
+      assert.equal(stale.running, false);
+      assert.equal(stale.classic, null);
+      assert.deepEqual(stale.lights, []);
+    } finally {
+      if (daemon.exitCode === null) {
+        daemon.kill('SIGKILL');
+      }
+    }
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('model layouts match installed library factories without physical USB devices', async () => {
   const { DEVICE_MODELS } = await import('@elgato-stream-deck/core');
   for (const model of deckModels) {
     for (const id of model.models) {
-      const spec = DEVICE_MODELS.find(m => m.id === id);
+      const spec = DEVICE_MODELS.find((m) => m.id === id);
       assert.ok(spec, id);
       const hid = Object.assign(new EventEmitter(), {
         getDeviceInfo: async () => ({ vendorId: spec.vendorId, productId: spec.productIds[0] }),
-        getFeatureReport: async () => new Uint8Array(64), sendFeatureReport: async () => {},
-        sendReports: async () => {}, close: async () => {}
+        getFeatureReport: async () => new Uint8Array(64),
+        sendFeatureReport: async () => {},
+        sendReports: async () => {},
+        close: async () => {},
       });
       const deck = await spec.factory(hid, { encodeJPEG: async () => new Uint8Array() });
-      const layout = controls => controls.map(c => ({ type: c.type, index: c.index, row: c.row, column: c.column, feedbackType: c.feedbackType, pixelSize: c.pixelSize }));
+      const layout = (controls) =>
+        controls.map((c) => ({
+          type: c.type,
+          index: c.index,
+          row: c.row,
+          column: c.column,
+          feedbackType: c.feedbackType,
+          pixelSize: c.pixelSize,
+        }));
       assert.deepEqual(layout(deck.CONTROLS), layout(model.controls), id);
       await deck.close();
     }
   }
 });
 test('all model keys, encoder turns and presses route independent mappings; Pedal is action-only', async () => {
-  const originalList = streamDeck.listStreamDecks, originalOpen = streamDeck.openStreamDeck;
+  const originalList = streamDeck.listStreamDecks;
+  const originalOpen = streamDeck.openStreamDeck;
   const ledWrites = [];
-  const mocks = new Map(deckModels.map(m => [m.id, Object.assign(new EventEmitter(), {
-    PRODUCT_NAME: m.name, CONTROLS: m.controls, close: async () => {},
-    setBrightness: async () => { assert.notEqual(m.id, 'pedal'); },
-    fillKeyBuffer: async (index, buffer) => {
-      const c = m.controls.find(c => c.type === 'button' && c.index === index);
-      assert.equal(c.feedbackType, 'lcd'); assert.equal(buffer.length, c.pixelSize.width * c.pixelSize.height * 3);
-    },
-    fillKeyColor: async index => { assert.equal(m.controls.find(c => c.type === 'button' && c.index === index).feedbackType, 'rgb'); },
-    setEncoderColor: async (index, ...color) => {
-      assert.ok(m.controls.find(c => c.type === 'encoder' && c.index === index).hasLed);
-      ledWrites.push([m.id, index, 'center', color]);
-    },
-    setEncoderRingSingleColor: async (index, ...color) => {
-      assert.ok(m.controls.find(c => c.type === 'encoder' && c.index === index).ledRingSteps);
-      ledWrites.push([m.id, index, 'ring', color]);
-    },
-    fillLcd: async (id, buffer) => {
-      const c = m.controls.find(c => c.type === 'lcd-segment' && c.id === id);
-      assert.equal(buffer.length, c.pixelSize.width * c.pixelSize.height * 3);
-    }
-  })]));
-  streamDeck.listStreamDecks = async () => deckModels.map(m => ({ model: m.models[0], path: m.id }));
-  streamDeck.openStreamDeck = async path => mocks.get(path);
+  const mocks = new Map(
+    deckModels.map((m) => [
+      m.id,
+      Object.assign(new EventEmitter(), {
+        PRODUCT_NAME: m.name,
+        CONTROLS: m.controls,
+        close: async () => {},
+        setBrightness: async () => {
+          assert.notEqual(m.id, 'pedal');
+        },
+        fillKeyBuffer: async (index, buffer) => {
+          const c = m.controls.find((c) => c.type === 'button' && c.index === index);
+          assert.equal(c.feedbackType, 'lcd');
+          assert.equal(buffer.length, c.pixelSize.width * c.pixelSize.height * 3);
+        },
+        fillKeyColor: async (index) => {
+          assert.equal(
+            m.controls.find((c) => c.type === 'button' && c.index === index).feedbackType,
+            'rgb',
+          );
+        },
+        setEncoderColor: async (index, ...color) => {
+          assert.ok(m.controls.find((c) => c.type === 'encoder' && c.index === index).hasLed);
+          ledWrites.push([m.id, index, 'center', color]);
+        },
+        setEncoderRingSingleColor: async (index, ...color) => {
+          assert.ok(m.controls.find((c) => c.type === 'encoder' && c.index === index).ledRingSteps);
+          ledWrites.push([m.id, index, 'ring', color]);
+        },
+        fillLcd: async (id, buffer) => {
+          const c = m.controls.find((c) => c.type === 'lcd-segment' && c.id === id);
+          assert.equal(buffer.length, c.pixelSize.width * c.pixelSize.height * 3);
+        },
+      }),
+    ]),
+  );
+  streamDeck.listStreamDecks = async () =>
+    deckModels.map((m) => ({ model: m.models[0], path: m.id }));
+  streamDeck.openStreamDeck = async (path) => mocks.get(path);
   const actions = [];
   try {
     const daemon = new Daemon(false, async (action, release) => actions.push([action, release]));
@@ -177,60 +330,106 @@ test('all model keys, encoder turns and presses route independent mappings; Peda
     const expected = [];
     for (const m of deckModels) {
       const mapping = deviceMapping(daemon.profile, m.id);
-      if (m.id === 'pedal') assert.ok(mapping.keys.every(k => k.action === 'none'));
+      if (m.id === 'pedal') {
+        assert.ok(mapping.keys.every((k) => k.action === 'none'));
+      }
       mapping.keys.at(-1).action = 'key_enter';
-      for (const c of m.controls) if (c.type === 'encoder' && (c.hasLed || c.ledRingSteps)) mapping.dials[c.index].color = [12, 34, 56];
-      if (mapping.dials.length) { mapping.dials.at(-1).left = 'key_left'; mapping.dials.at(-1).press = 'key_tab'; }
+      for (const c of m.controls)
+        if (c.type === 'encoder' && (c.hasLed || c.ledRingSteps)) {
+          mapping.dials[c.index].color = [12, 34, 56];
+        }
+      if (mapping.dials.length) {
+        mapping.dials.at(-1).left = 'key_left';
+        mapping.dials.at(-1).press = 'key_tab';
+      }
     }
     await daemon.connect();
     await Promise.all([...daemon.artworkQueues.values()]);
     assert.equal(daemon.status.error, '');
-    const expectedLEDs = deckModels.flatMap(m => m.controls.flatMap(c => c.type !== 'encoder' ? [] : [...(c.hasLed ? [[m.id, c.index, 'center', [12, 34, 56]]] : []), ...(c.ledRingSteps ? [[m.id, c.index, 'ring', [12, 34, 56]]] : [])]));
+    const expectedLEDs = deckModels.flatMap((m) =>
+      m.controls.flatMap((c) =>
+        c.type !== 'encoder'
+          ? []
+          : [
+              ...(c.hasLed ? [[m.id, c.index, 'center', [12, 34, 56]]] : []),
+              ...(c.ledRingSteps ? [[m.id, c.index, 'ring', [12, 34, 56]]] : []),
+            ],
+      ),
+    );
     assert.deepEqual(ledWrites, expectedLEDs);
     for (const m of deckModels) {
-      const mock = mocks.get(m.id), mapping = deviceMapping(daemon.profile, m.id);
+      const mock = mocks.get(m.id);
+      const mapping = deviceMapping(daemon.profile, m.id);
       const button = { type: 'button', index: mapping.keys.length - 1 };
-      mock.emit('down', button); mock.emit('up', button);
+      mock.emit('down', button);
+      mock.emit('up', button);
       expected.push(['key_enter', false], ['key_enter', true]);
       if (mapping.dials.length) {
         const encoder = { type: 'encoder', index: mapping.dials.length - 1 };
-        mock.emit('rotate', encoder, -1); mock.emit('down', encoder); mock.emit('up', encoder);
+        mock.emit('rotate', encoder, -1);
+        mock.emit('down', encoder);
+        mock.emit('up', encoder);
         expected.push(['key_left', false], ['key_tab', false], ['key_tab', true]);
       }
     }
-    await sleep(0); assert.deepEqual(actions, expected);
+    await sleep(0);
+    assert.deepEqual(actions, expected);
     assert.equal(daemon.status.devices.length, deckModels.length);
-    streamDeck.listStreamDecks = async () => []; await daemon.connect(); assert.equal(daemon.status.pedal, null);
-  } finally { streamDeck.listStreamDecks = originalList; streamDeck.openStreamDeck = originalOpen; }
+    streamDeck.listStreamDecks = async () => [];
+    await daemon.connect();
+    assert.equal(daemon.status.pedal, null);
+  } finally {
+    streamDeck.listStreamDecks = originalList;
+    streamDeck.openStreamDeck = originalOpen;
+  }
 });
 
 test('icon catalog and CLI keep icon selection independent from actions and external to plugins', async () => {
   const tmp = await mkdtemp(join(tmpdir(), 'omarchy-elgato-icons-'));
-  const env = { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), XDG_STATE_HOME: join(tmp, 'state'), PATH: '' };
+  const env = {
+    ...process.env,
+    XDG_CONFIG_HOME: join(tmp, 'config'),
+    XDG_STATE_HOME: join(tmp, 'state'),
+    PATH: '',
+  };
   const cli = new URL('../dist/cli.js', import.meta.url).pathname;
-  const command = (...args) => execFileSync(process.execPath, [cli, ...args], { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const command = (...args) =>
+    execFileSync(process.execPath, [cli, ...args], {
+      env,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
   try {
     const initial = JSON.parse(command('icons'));
     assert.equal(initial.directory, join(tmp, 'config/omarchy-elgato/icons'));
-    assert.equal(initial.icons.filter(i => i.group === 'Preset').length, 11);
+    assert.equal(initial.icons.filter((i) => i.group === 'Preset').length, 11);
     const custom = join(initial.directory, 'My icon #1.svg');
-    await writeFile(custom, await readFile(new URL('../assets/keys/terminal.svg', import.meta.url)));
+    await writeFile(
+      custom,
+      await readFile(new URL('../assets/keys/terminal.svg', import.meta.url)),
+    );
     await writeFile(join(initial.directory, 'ignored.txt'), 'not an image');
     const catalog = JSON.parse(command('icons'));
-    assert.ok(catalog.icons.some(i => i.value === custom && i.url.includes('%23')));
+    assert.ok(catalog.icons.some((i) => i.value === custom && i.url.includes('%23')));
     assert.equal(catalog.icons.length, initial.icons.length + 1);
     command('set-device-icon', 'plus', '1', custom);
     command('set-device-key', 'plus', '1', 'key_enter');
     let p = JSON.parse(command('profile'));
-    assert.equal(p.keys[0].icon, custom); assert.equal(p.keys[0].action, 'key_enter');
+    assert.equal(p.keys[0].icon, custom);
+    assert.equal(p.keys[0].action, 'key_enter');
     command('set-device-icon', 'classic', '15', 'preset:browser.jpg'); // Old preset selections remain compatible.
-    p = JSON.parse(command('profile')); assert.equal(p.classicKeys[14].icon, 'preset:browser.svg');
+    p = JSON.parse(command('profile'));
+    assert.equal(p.classicKeys[14].icon, 'preset:browser.svg');
     assert.throws(() => command('set-device-icon', 'neo', '10', custom));
     assert.throws(() => command('set-device-icon', 'pedal', '1', custom));
     assert.throws(() => command('set-device-icon', 'plus', '9', custom));
     assert.throws(() => command('set-device-icon', 'plus', '1', 'preset:../browser.jpg'));
-    assert.throws(() => command('set-device-icon', 'plus', '1', join(initial.directory, 'missing.png')));
-    assert.throws(() => validateProfile({ ...p, keys: p.keys.map((k, i) => i ? k : { ...k, icon: 123 }) }));
+    assert.throws(() =>
+      command('set-device-icon', 'plus', '1', join(initial.directory, 'missing.png')),
+    );
+    assert.throws(() =>
+      validateProfile({ ...p, keys: p.keys.map((k, i) => (i ? k : { ...k, icon: 123 })) }),
+    );
     command('set-device-icon', 'plus', '1', 'automatic');
     assert.equal(JSON.parse(command('profile')).keys[0].icon, undefined);
     const pack = join(initial.directory, 'Minimal/Audio');
@@ -240,20 +439,23 @@ test('icon catalog and CLI keep icon selection independent from actions and exte
     await symlink(initial.directory, join(pack, 'cycle'));
     const packedCatalog = JSON.parse(command('icons'));
     assert.equal(packedCatalog.icons.length, initial.icons.length + 2);
-    assert.equal(packedCatalog.icons.find(i => i.value === packedIcon).group, 'Minimal/Audio');
-    assert.equal(packedCatalog.icons.filter(i => i.label === 'My icon #1.svg').length, 2);
+    assert.equal(packedCatalog.icons.find((i) => i.value === packedIcon).group, 'Minimal/Audio');
+    assert.equal(packedCatalog.icons.filter((i) => i.label === 'My icon #1.svg').length, 2);
     command('set-device-icon', 'plus', '1', packedIcon);
     assert.equal(JSON.parse(command('profile')).keys[0].icon, packedIcon);
     await rm(join(initial.directory, 'Minimal'), { recursive: true });
     assert.equal(JSON.parse(command('icons')).icons.length, initial.icons.length + 1);
     await rm(custom);
     assert.equal(JSON.parse(command('icons')).icons.length, initial.icons.length);
-  } finally { await rm(tmp, { recursive: true, force: true }); }
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 test('custom artwork fits aspect ratio, preserves black padding and refreshes after replacement', async () => {
   const { keyIcon, iconSignature } = await import('../dist/icons.js');
   const tmp = await mkdtemp(join(tmpdir(), 'omarchy-elgato-image-'));
-  const path = join(tmp, 'custom image.png'), key = { action: 'terminal', label: 'Terminal', icon: path };
+  const path = join(tmp, 'custom image.png');
+  const key = { action: 'terminal', label: 'Terminal', icon: path };
   try {
     execFileSync('magick', ['-size', '40x20', 'xc:red', path]);
     const signature = await iconSignature([key]);
@@ -267,19 +469,27 @@ test('custom artwork fits aspect ratio, preserves black padding and refreshes af
     assert.deepEqual([...blue.subarray(20 * 10 * 3, 20 * 10 * 3 + 3)], [0, 0, 255]);
     await rm(path);
     assert.ok((await keyIcon(key)).endsWith('terminal.svg'));
-  } finally { await rm(tmp, { recursive: true, force: true }); }
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('button text overrides survive action changes and support hidden and automatic modes', async () => {
   const tmp = await mkdtemp(join(tmpdir(), 'omarchy-elgato-text-'));
   const env = { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), PATH: '' };
   const cli = new URL('../dist/cli.js', import.meta.url).pathname;
-  const command = (...args) => execFileSync(process.execPath, [cli, ...args], { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const command = (...args) =>
+    execFileSync(process.execPath, [cli, ...args], {
+      env,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
   try {
     command('set-device-text', 'classic', '1', 'custom', 'My terminal');
     command('set-device-key', 'classic', '1', 'browser');
     let p = JSON.parse(command('profile'));
-    assert.equal(p.classicKeys[0].displayText, 'My terminal'); assert.equal(p.classicKeys[0].action, 'browser');
+    assert.equal(p.classicKeys[0].displayText, 'My terminal');
+    assert.equal(p.classicKeys[0].action, 'browser');
     command('set-device-text', 'classic', '1', 'hidden');
     assert.equal(JSON.parse(command('profile')).classicKeys[0].displayText, '');
     command('set-device-text', 'classic', '1', 'automatic');
@@ -287,54 +497,97 @@ test('button text overrides survive action changes and support hidden and automa
     assert.throws(() => command('set-device-text', 'neo', '10', 'hidden'));
     assert.throws(() => command('set-device-text', 'classic', '1', 'custom', 'x'.repeat(81)));
     assert.throws(() => command('set-device-text', 'classic', '1', 'custom', 'two\nlines'));
-    p.classicKeys[0].displayText = 123; assert.throws(() => validateProfile(p));
-  } finally { await rm(tmp, { recursive: true, force: true }); }
+    p.classicKeys[0].displayText = 123;
+    assert.throws(() => validateProfile(p));
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 test('rendered previews match button artwork; hidden text blanks caption-only keys', async () => {
   const { keyPreview } = await import('../dist/artwork.js');
   const hidden = { action: 'key_enter', label: 'Return', displayText: '' };
   const pixels = await keyArtwork(hidden, 120, 120);
-  assert.ok(pixels.every(byte => byte === 0));
+  assert.ok(pixels.every((byte) => byte === 0));
   const custom = { ...hidden, displayText: '@My terminal' };
-  assert.ok((await keyArtwork(custom, 120, 120)).some(byte => byte !== 0));
+  assert.ok((await keyArtwork(custom, 120, 120)).some((byte) => byte !== 0));
   const path = await keyPreview(custom);
   const preview = execFileSync('magick', [path, '-depth', '8', 'rgb:-']);
   assert.deepEqual(preview, await keyArtwork(custom, 120, 120));
   const preset = { action: 'terminal', label: 'Open Terminal' };
-  assert.notDeepEqual(await keyArtwork(preset, 120, 120), await keyArtwork({ ...preset, displayText: '' }, 120, 120));
-  assert.notDeepEqual(await keyArtwork({ ...preset, displayText: '' }, 120, 120), await keyArtwork({ ...preset, displayText: 'Shell' }, 120, 120));
+  assert.notDeepEqual(
+    await keyArtwork(preset, 120, 120),
+    await keyArtwork({ ...preset, displayText: '' }, 120, 120),
+  );
+  assert.notDeepEqual(
+    await keyArtwork({ ...preset, displayText: '' }, 120, 120),
+    await keyArtwork({ ...preset, displayText: 'Shell' }, 120, 120),
+  );
 });
 
 test('custom preset caption is readable at its normal output size', async () => {
-  const image = await keyArtwork({ action: 'terminal', label: 'Terminal', displayText: 'Shell' }, 120, 120);
+  const image = await keyArtwork(
+    { action: 'terminal', label: 'Terminal', displayText: 'Shell' },
+    120,
+    120,
+  );
   let whitePixels = 0;
-  for (let y = 100; y < 116; y++) for (let x = 0; x < 120; x++) {
-    const offset = (y * 120 + x) * 3;
-    if (image[offset] > 100 && image[offset + 1] > 100 && image[offset + 2] > 100) whitePixels++;
+  for (let y = 100; y < 116; y++) {
+    for (let x = 0; x < 120; x++) {
+      const offset = (y * 120 + x) * 3;
+      if (image[offset] > 100 && image[offset + 1] > 100 && image[offset + 2] > 100) {
+        whitePixels++;
+      }
+    }
   }
   assert.ok(whitePixels > 40, `Caption has only ${whitePixels} visible pixels`);
 });
 
 test('bundled presets render as grayscale white SVG artwork without glow or baked captions', async () => {
-  for (const action of ['terminal', 'browser', 'files', 'mic_mute', 'media_play_pause', 'screenshot', 'lock', 'lights_toggle']) {
-    const svg = await readFile(new URL('../assets/keys/' + action + '.svg', import.meta.url), 'utf8');
+  for (const action of [
+    'terminal',
+    'browser',
+    'files',
+    'mic_mute',
+    'media_play_pause',
+    'screenshot',
+    'lock',
+    'lights_toggle',
+  ]) {
+    const svg = await readFile(
+      new URL('../assets/keys/' + action + '.svg', import.meta.url),
+      'utf8',
+    );
     assert.ok(!/<(?:filter|text|image|linearGradient|radialGradient)\b/.test(svg));
     const image = await keyArtwork({ action, label: action, displayText: '' }, 120, 120);
-    assert.ok(image.some(byte => byte === 255));
+    assert.ok(image.some((byte) => byte === 255));
     const corner = (8 * 120 + 8) * 3;
-    assert.deepEqual([...image.subarray(corner, corner + 3)], [0, 0, 0], action + " background must stay black");
+    assert.deepEqual(
+      [...image.subarray(corner, corner + 3)],
+      [0, 0, 0],
+      action + ' background must stay black',
+    );
     for (let offset = 0; offset < image.length; offset += 3) {
-      assert.equal(image[offset], image[offset + 1]); assert.equal(image[offset], image[offset + 2]);
+      assert.equal(image[offset], image[offset + 1]);
+      assert.equal(image[offset], image[offset + 2]);
     }
   }
 });
 
-
 test('pages migrate existing mappings, isolate all controls, manage names and clean up links', async () => {
   const tmp = await mkdtemp(join(tmpdir(), 'omarchy-elgato-pages-'));
-  const env = { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), XDG_STATE_HOME: join(tmp, 'state'), PATH: '' };
+  const env = {
+    ...process.env,
+    XDG_CONFIG_HOME: join(tmp, 'config'),
+    XDG_STATE_HOME: join(tmp, 'state'),
+    PATH: '',
+  };
   const cli = new URL('../dist/cli.js', import.meta.url).pathname;
-  const command = (...args) => execFileSync(process.execPath, [cli, ...args], { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const command = (...args) =>
+    execFileSync(process.execPath, [cli, ...args], {
+      env,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
   try {
     command('init');
     let profile = JSON.parse(command('profile'));
@@ -360,8 +613,12 @@ test('pages migrate existing mappings, isolate all controls, manage names and cl
     assert.equal(JSON.parse(command('profile')).keys[7].label, 'Go to Office');
     const empty = JSON.parse(command('page', 'plus', 'add', 'Empty')).active;
     profile = JSON.parse(command('profile'));
-    assert.ok(profile.pages.plus.items[2].keys.every(k => k.action === 'none'));
-    assert.ok(profile.pages.plus.items[2].dials.every(d => d.left === 'none' && d.press === 'none' && d.right === 'none'));
+    assert.ok(profile.pages.plus.items[2].keys.every((k) => k.action === 'none'));
+    assert.ok(
+      profile.pages.plus.items[2].dials.every(
+        (d) => d.left === 'none' && d.press === 'none' && d.right === 'none',
+      ),
+    );
     assert.throws(() => command('page', 'plus', 'select', 'missing'));
     assert.throws(() => command('set-device-key', 'plus', '1', 'page:missing'));
     command('page', 'plus', 'delete', second);
@@ -371,12 +628,15 @@ test('pages migrate existing mappings, isolate all controls, manage names and cl
     command('page', 'plus', 'delete', 'page-1');
     profile = JSON.parse(command('profile'));
     assert.equal(profile.pages.plus.active, empty);
-    assert.ok(profile.keys.every(k => k.action === 'none'));
+    assert.ok(profile.keys.every((k) => k.action === 'none'));
     assert.equal(profile.pages.plus.items.length, 1);
     assert.throws(() => command('page', 'plus', 'delete', empty));
     assert.throws(() => command('page', 'plus', 'rename', empty, ''));
-    profile.pages.plus.active = 'invalid'; assert.throws(() => validateProfile(profile));
-  } finally { await rm(tmp, { recursive: true, force: true }); }
+    profile.pages.plus.active = 'invalid';
+    assert.throws(() => validateProfile(profile));
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 test('simulated page buttons change pages, redraw, wrap and preserve held releases', async () => {
   // Run in a separate process so persistence uses an isolated config directory.
@@ -424,44 +684,93 @@ test('simulated page buttons change pages, redraw, wrap and preserve held releas
     assert.ok(redraw.includes(second));
     assert.equal((await loadProfile()).pages.plus.active,'page-1');
   `;
-  try { execFileSync(process.execPath, ['--input-type=module', '-e', script], { cwd: new URL('../', import.meta.url), env: { ...process.env, XDG_CONFIG_HOME:join(tmp,'config'), XDG_STATE_HOME:join(tmp,'state') }, stdio: ['ignore','pipe','pipe'] }); }
-  finally { await rm(tmp, {recursive:true,force:true}); }
+  try {
+    execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: new URL('../', import.meta.url),
+      env: {
+        ...process.env,
+        XDG_CONFIG_HOME: join(tmp, 'config'),
+        XDG_STATE_HOME: join(tmp, 'state'),
+      },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('display modes keep saved text/icons and render text-only, combined, and icon-only', async () => {
   const tmp = await mkdtemp(join(tmpdir(), 'omarchy-elgato-display-'));
   const cli = new URL('../dist/cli.js', import.meta.url).pathname;
-  const command = (...args) => execFileSync(process.execPath, [cli, ...args], { env: { ...process.env, XDG_CONFIG_HOME:join(tmp,'config'), PATH:'' }, encoding:'utf8', stdio:['ignore','pipe','pipe'] });
+  const command = (...args) =>
+    execFileSync(process.execPath, [cli, ...args], {
+      env: { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), PATH: '' },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
   try {
-    command('set-device-text','plus','1','custom','Shell');
-    command('set-device-icon','plus','1','preset:terminal.svg');
-    for (const mode of ['text','icon-text','icon']) {
-      command('set-device-display','plus','1',mode);
+    command('set-device-text', 'plus', '1', 'custom', 'Shell');
+    command('set-device-icon', 'plus', '1', 'preset:terminal.svg');
+    for (const mode of ['text', 'icon-text', 'icon']) {
+      command('set-device-display', 'plus', '1', mode);
       const key = JSON.parse(command('profile')).keys[0];
-      assert.equal(key.displayMode,mode); assert.equal(key.displayText,'Shell'); assert.equal(key.icon,'preset:terminal.svg');
+      assert.equal(key.displayMode, mode);
+      assert.equal(key.displayText, 'Shell');
+      assert.equal(key.icon, 'preset:terminal.svg');
     }
-    assert.throws(()=>command('set-device-display','plus','1','invalid'));
-    assert.throws(()=>command('set-device-display','pedal','1','text'));
-    const base={action:'terminal',label:'Terminal',displayText:'Shell',icon:'preset:terminal.svg'};
-    const text=await keyArtwork({...base,displayMode:'text'},120,120);
-    assert.deepEqual(text,await keyArtwork({...base,icon:'preset:browser.svg',displayMode:'text'},120,120));
-    const icon=await keyArtwork({...base,displayMode:'icon'},120,120);
-    assert.deepEqual(icon,await keyArtwork({...base,displayText:'A completely different caption',displayMode:'icon'},120,120));
-    const combined=await keyArtwork({...base,displayMode:'icon-text'},120,120);
-    assert.notDeepEqual(text,icon); assert.notDeepEqual(combined,icon); assert.notDeepEqual(text,combined);
-    command('set-device-text','plus','1','hidden'); command('set-device-display','plus','1','icon-text');
-    assert.equal(JSON.parse(command('profile')).keys[0].displayText,undefined);
-  } finally { await rm(tmp,{recursive:true,force:true}); }
+    assert.throws(() => command('set-device-display', 'plus', '1', 'invalid'));
+    assert.throws(() => command('set-device-display', 'pedal', '1', 'text'));
+    const base = {
+      action: 'terminal',
+      label: 'Terminal',
+      displayText: 'Shell',
+      icon: 'preset:terminal.svg',
+    };
+    const text = await keyArtwork({ ...base, displayMode: 'text' }, 120, 120);
+    assert.deepEqual(
+      text,
+      await keyArtwork({ ...base, icon: 'preset:browser.svg', displayMode: 'text' }, 120, 120),
+    );
+    const icon = await keyArtwork({ ...base, displayMode: 'icon' }, 120, 120);
+    assert.deepEqual(
+      icon,
+      await keyArtwork(
+        { ...base, displayText: 'A completely different caption', displayMode: 'icon' },
+        120,
+        120,
+      ),
+    );
+    const combined = await keyArtwork({ ...base, displayMode: 'icon-text' }, 120, 120);
+    assert.notDeepEqual(text, icon);
+    assert.notDeepEqual(combined, icon);
+    assert.notDeepEqual(text, combined);
+    command('set-device-text', 'plus', '1', 'hidden');
+    command('set-device-display', 'plus', '1', 'icon-text');
+    assert.equal(JSON.parse(command('profile')).keys[0].displayText, undefined);
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('folders nest, preserve return paths, isolate assignments and clean up deleted links', async () => {
   const tmp = await mkdtemp(join(tmpdir(), 'omarchy-elgato-folders-'));
-  const env = { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), XDG_STATE_HOME: join(tmp, 'state'), PATH: '' };
+  const env = {
+    ...process.env,
+    XDG_CONFIG_HOME: join(tmp, 'config'),
+    XDG_STATE_HOME: join(tmp, 'state'),
+    PATH: '',
+  };
   const cli = new URL('../dist/cli.js', import.meta.url).pathname;
-  const command = (...args) => execFileSync(process.execPath, [cli, ...args], { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const command = (...args) =>
+    execFileSync(process.execPath, [cli, ...args], {
+      env,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
   const profile = () => JSON.parse(command('profile'));
   try {
-    command('init'); const original = profile().keys;
+    command('init');
+    const original = profile().keys;
     const folder = JSON.parse(command('folder-create', 'plus', 'page-1', '2', 'Media')).active;
     let p = profile();
     assert.equal(p.keys[1].action, 'folder:' + folder);
@@ -478,26 +787,38 @@ test('folders nest, preserve return paths, isolate assignments and clean up dele
     const nested = JSON.parse(command('folder-create', 'plus', folder, '3', 'Apps')).active;
     assert.deepEqual(profile().pages.plus.history, ['page-1', folder]);
     assert.throws(() => command('page', 'plus', 'select', folder));
-    command('folder-back', 'plus'); assert.equal(profile().pages.plus.active, folder);
-    command('folder-back', 'plus'); assert.equal(profile().pages.plus.active, 'page-1');
+    command('folder-back', 'plus');
+    assert.equal(profile().pages.plus.active, folder);
+    command('folder-back', 'plus');
+    assert.equal(profile().pages.plus.active, 'page-1');
     const work = JSON.parse(command('page', 'plus', 'add', 'Work')).active;
     command('set-device-key', 'plus', '2', 'folder:' + folder);
     command('page', 'plus', 'select', folder);
-    command('folder-back', 'plus'); assert.equal(profile().pages.plus.active, work);
+    command('folder-back', 'plus');
+    assert.equal(profile().pages.plus.active, work);
     command('page', 'plus', 'rename', folder, 'Audio');
     assert.equal(profile().keys[1].label, 'Audio');
-    assert.equal(profile().pages.plus.items.find(p => p.id === work).keys[1].label, 'Audio');
+    assert.equal(profile().pages.plus.items.find((p) => p.id === work).keys[1].label, 'Audio');
     command('page', 'plus', 'select', folder);
     command('page', 'plus', 'select', nested);
     command('page', 'plus', 'delete', folder);
-    p = profile(); assert.equal(p.pages.plus.active, 'page-1'); assert.deepEqual(p.pages.plus.history, []);
+    p = profile();
+    assert.equal(p.pages.plus.active, 'page-1');
+    assert.deepEqual(p.pages.plus.history, []);
     assert.equal(p.keys[1].action, 'none');
     command('page', 'plus', 'delete', 'page-1');
-    p = profile(); assert.equal(p.pages.plus.items[0].id, work); assert.equal(p.pages.plus.items[0].kind, undefined);
+    p = profile();
+    assert.equal(p.pages.plus.items[0].id, work);
+    assert.equal(p.pages.plus.items[0].kind, undefined);
     assert.throws(() => command('page', 'plus', 'delete', work));
-    p.pages.plus.history = ['missing']; assert.throws(() => validateProfile(p));
-    p = profile(); p.pages.plus.items.find(p => p.id === nested).keys[0].action = 'none'; assert.throws(() => validateProfile(p));
-  } finally { await rm(tmp, { recursive: true, force: true }); }
+    p.pages.plus.history = ['missing'];
+    assert.throws(() => validateProfile(p));
+    p = profile();
+    p.pages.plus.items.find((p) => p.id === nested).keys[0].action = 'none';
+    assert.throws(() => validateProfile(p));
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('physical folder buttons navigate, redraw, skip folders in page cycling and keep held releases', async () => {
@@ -535,8 +856,19 @@ test('physical folder buttons navigate, redraw, skip folders in page cycling and
     const {keyArtwork}=await import('./dist/artwork.js');
     for (const action of ['folder:'+folder,'folder_back']) assert.ok((await keyArtwork({action,label:'',displayMode:'icon'},120,120)).some(byte=>byte===255));
   `;
-  try { execFileSync(process.execPath, ['--input-type=module', '-e', script], { cwd: new URL('../', import.meta.url), env: { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), XDG_STATE_HOME: join(tmp, 'state') }, stdio: ['ignore', 'pipe', 'pipe'] }); }
-  finally { await rm(tmp, { recursive: true, force: true }); }
+  try {
+    execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: new URL('../', import.meta.url),
+      env: {
+        ...process.env,
+        XDG_CONFIG_HOME: join(tmp, 'config'),
+        XDG_STATE_HOME: join(tmp, 'state'),
+      },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('global page buttons switch connected models by case-sensitive names, skip missing matches and preserve local navigation', async () => {
@@ -589,8 +921,19 @@ test('global page buttons switch connected models by case-sensitive names, skip 
     await pageCommand('plus','delete',plusWork);
     p=await loadProfile();assert.equal(p.keys[1].action,'none');
   `;
-  try { execFileSync(process.execPath, ['--input-type=module', '-e', script], { cwd: new URL('../', import.meta.url), env: { ...process.env, XDG_CONFIG_HOME: join(tmp, 'config'), XDG_STATE_HOME: join(tmp, 'state') }, stdio: ['ignore', 'pipe', 'pipe'] }); }
-  finally { await rm(tmp, { recursive: true, force: true }); }
+  try {
+    execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: new URL('../', import.meta.url),
+      env: {
+        ...process.env,
+        XDG_CONFIG_HOME: join(tmp, 'config'),
+        XDG_STATE_HOME: join(tmp, 'state'),
+      },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('relative global page actions use each connected model order and skip folders', async () => {
@@ -634,24 +977,59 @@ test('relative global page actions use each connected model order and skip folde
     await navigatePage('plus','folder:'+folder);
     await navigatePage('plus','page_next');p=await loadProfile();assert.equal(p.pages.plus.active,beta);assert.deepEqual(p.pages.plus.history,[]);
   `;
-  try { execFileSync(process.execPath, ['--input-type=module', '-e', script], { cwd: new URL('../', import.meta.url), env: { ...process.env, XDG_CONFIG_HOME: join(tmp,'config'), XDG_STATE_HOME: join(tmp,'state') }, stdio:['ignore','pipe','pipe'] }); }
-  finally { await rm(tmp,{recursive:true,force:true}); }
+  try {
+    execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: new URL('../', import.meta.url),
+      env: {
+        ...process.env,
+        XDG_CONFIG_HOME: join(tmp, 'config'),
+        XDG_STATE_HOME: join(tmp, 'state'),
+      },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('solid colors render exactly and colored captions use their own foreground', async () => {
-  const key = { action: 'terminal', label: 'Terminal', displayMode: 'color', color: [12, 34, 56], textColor: [240, 20, 30] };
+  const key = {
+    action: 'terminal',
+    label: 'Terminal',
+    displayMode: 'color',
+    color: [12, 34, 56],
+    textColor: [240, 20, 30],
+  };
   const solid = await keyArtwork(key, 120, 120);
-  for (let i = 0; i < solid.length; i += 3) assert.deepEqual([...solid.subarray(i, i + 3)], key.color);
-  const caption = await keyArtwork({ ...key, displayMode: 'color-text', displayText: 'Hello' }, 120, 120);
+  for (let i = 0; i < solid.length; i += 3) {
+    assert.deepEqual([...solid.subarray(i, i + 3)], key.color);
+  }
+  const caption = await keyArtwork(
+    { ...key, displayMode: 'color-text', displayText: 'Hello' },
+    120,
+    120,
+  );
   assert.deepEqual([...caption.subarray(0, 3)], key.color);
-  assert.ok(caption.some((v, i) => i % 3 === 0 && v > 200), 'red text is drawn');
-  const green = await keyArtwork({ ...key, displayMode: 'color-text', displayText: 'Hello', textColor: [20, 240, 30] }, 120, 120);
+  assert.ok(
+    caption.some((v, i) => i % 3 === 0 && v > 200),
+    'red text is drawn',
+  );
+  const green = await keyArtwork(
+    { ...key, displayMode: 'color-text', displayText: 'Hello', textColor: [20, 240, 30] },
+    120,
+    120,
+  );
   assert.notDeepEqual(caption, green, 'text color participates in artwork cache');
 });
 test('color CLI validates capabilities, saves page colors, and rejects invalid colors', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'elgato-colors-'));
   const env = { ...process.env, XDG_CONFIG_HOME: dir, XDG_STATE_HOME: dir, XDG_CACHE_HOME: dir };
-  const command = (...args) => execFileSync(process.execPath, ['dist/cli.js', ...args], { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const command = (...args) =>
+    execFileSync(process.execPath, ['dist/cli.js', ...args], {
+      env,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
   try {
     command('set-device-display', 'classic', '1', 'color-text');
     command('set-device-color', 'classic', '1', 'button', '#123456');
@@ -666,46 +1044,77 @@ test('color CLI validates capabilities, saves page colors, and rejects invalid c
     assert.throws(() => command('set-device-color', 'pedal', '1', 'button', '#ffffff'));
     assert.throws(() => command('set-device-color', 'plus', '1', 'dial', '#ffffff'));
     assert.throws(() => command('set-device-color', 'classic', '1', 'button', '#zzzzzz'));
-    const ledModel = deckModels.find(m => m.controls.some(c => c.type === 'encoder' && (c.hasLed || c.ledRingSteps)));
+    const ledModel = deckModels.find((m) =>
+      m.controls.some((c) => c.type === 'encoder' && (c.hasLed || c.ledRingSteps)),
+    );
     if (ledModel) {
       command('set-device-color', ledModel.id, '1', 'dial', '#010203');
-      assert.deepEqual(JSON.parse(command('profile')).devices[ledModel.id].dials[0].color, [1, 2, 3]);
+      assert.deepEqual(
+        JSON.parse(command('profile')).devices[ledModel.id].dials[0].color,
+        [1, 2, 3],
+      );
     }
-  } finally { await rm(dir, { recursive: true, force: true }); }
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
 
 test('dial LCD displays render separate segments and save independent page settings', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'elgato-dial-display-'));
   const env = { ...process.env, XDG_CONFIG_HOME: dir, XDG_STATE_HOME: dir, XDG_CACHE_HOME: dir };
-  const command = (...args) => execFileSync(process.execPath, ['dist/cli.js', ...args], { env, encoding: 'utf8', stdio: ['ignore','pipe','pipe'] });
+  const command = (...args) =>
+    execFileSync(process.execPath, ['dist/cli.js', ...args], {
+      env,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
   try {
-    command('set-dial-display','plus','1','mode','color');
-    command('set-dial-display','plus','1','background','#123456');
-    command('set-dial-display','plus','2','mode','icon-text');
-    command('set-dial-display','plus','2','icon','preset:terminal.svg');
-    command('set-dial-display','plus','2','text','Volume');
-    command('set-dial-display','plus','2','foreground','#ff0000');
+    command('set-dial-display', 'plus', '1', 'mode', 'color');
+    command('set-dial-display', 'plus', '1', 'background', '#123456');
+    command('set-dial-display', 'plus', '2', 'mode', 'icon-text');
+    command('set-dial-display', 'plus', '2', 'icon', 'preset:terminal.svg');
+    command('set-dial-display', 'plus', '2', 'text', 'Volume');
+    command('set-dial-display', 'plus', '2', 'foreground', '#ff0000');
     const profile = JSON.parse(command('profile'));
-    assert.deepEqual(profile.dials[0].display.color,[18,52,86]);
-    assert.equal(profile.dials[1].display.displayText,'Volume');
-    const original = await lcdArtwork({ ...profile, dials: profile.dials.map(d => ({ ...d, display: undefined })) },[],800,100);
-    const rendered = await lcdArtwork(profile,[],800,100);
-    for (let y=0; y<100; y++) {
-      for (let x=0; x<200; x++) assert.deepEqual([...rendered.subarray((y*800+x)*3,(y*800+x)*3+3)],[18,52,86]);
-      assert.deepEqual(rendered.subarray((y*800+400)*3,(y*800+800)*3),original.subarray((y*800+400)*3,(y*800+800)*3));
+    assert.deepEqual(profile.dials[0].display.color, [18, 52, 86]);
+    assert.equal(profile.dials[1].display.displayText, 'Volume');
+    const original = await lcdArtwork(
+      { ...profile, dials: profile.dials.map((d) => ({ ...d, display: undefined })) },
+      [],
+      800,
+      100,
+    );
+    const rendered = await lcdArtwork(profile, [], 800, 100);
+    for (let y = 0; y < 100; y++) {
+      for (let x = 0; x < 200; x++) {
+        assert.deepEqual(
+          [...rendered.subarray((y * 800 + x) * 3, (y * 800 + x) * 3 + 3)],
+          [18, 52, 86],
+        );
+      }
+      assert.deepEqual(
+        rendered.subarray((y * 800 + 400) * 3, (y * 800 + 800) * 3),
+        original.subarray((y * 800 + 400) * 3, (y * 800 + 800) * 3),
+      );
     }
-    assert.notDeepEqual(rendered.subarray(600,1200),original.subarray(600,1200));
-    assert.equal(JSON.parse(command('dial-previews','plus')).length,4);
-    command('page','plus','add','Work');
-    const withPage = JSON.parse(command('profile')), page = withPage.pages.plus.items.at(-1).id;
-    command('set-dial-display','plus','1','mode','color-text','--page',page);
-    command('set-dial-display','plus','1','text','Work','--page',page);
-    assert.equal(JSON.parse(command('profile')).pages.plus.items.at(-1).dials[0].display.displayText,'Work');
-    assert.equal(JSON.parse(command('profile')).dials[0].display.displayMode,'color');
-    assert.throws(() => command('set-dial-display','classic','1','mode','color'));
-    assert.throws(() => command('set-dial-display','plus','5','mode','color'));
-    assert.throws(() => command('set-dial-display','plus','1','background','bad'));
-    command('set-dial-display','plus','1','mode','default');
-    assert.equal(JSON.parse(command('dial-previews','plus'))[0],'');
-  } finally { await rm(dir,{recursive:true,force:true}); }
+    assert.notDeepEqual(rendered.subarray(600, 1200), original.subarray(600, 1200));
+    assert.equal(JSON.parse(command('dial-previews', 'plus')).length, 4);
+    command('page', 'plus', 'add', 'Work');
+    const withPage = JSON.parse(command('profile'));
+    const page = withPage.pages.plus.items.at(-1).id;
+    command('set-dial-display', 'plus', '1', 'mode', 'color-text', '--page', page);
+    command('set-dial-display', 'plus', '1', 'text', 'Work', '--page', page);
+    assert.equal(
+      JSON.parse(command('profile')).pages.plus.items.at(-1).dials[0].display.displayText,
+      'Work',
+    );
+    assert.equal(JSON.parse(command('profile')).dials[0].display.displayMode, 'color');
+    assert.throws(() => command('set-dial-display', 'classic', '1', 'mode', 'color'));
+    assert.throws(() => command('set-dial-display', 'plus', '5', 'mode', 'color'));
+    assert.throws(() => command('set-dial-display', 'plus', '1', 'background', 'bad'));
+    command('set-dial-display', 'plus', '1', 'mode', 'default');
+    assert.equal(JSON.parse(command('dial-previews', 'plus'))[0], '');
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });

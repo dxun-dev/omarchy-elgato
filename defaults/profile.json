@@ -6,74 +6,42 @@
     {
       "label": "Terminal",
       "action": "terminal",
-      "color": [
-        0,
-        174,
-        239
-      ]
+      "color": [0, 174, 239]
     },
     {
       "label": "Browser",
       "action": "browser",
-      "color": [
-        255,
-        145,
-        0
-      ]
+      "color": [255, 145, 0]
     },
     {
       "label": "Files",
       "action": "files",
-      "color": [
-        70,
-        175,
-        115
-      ]
+      "color": [70, 175, 115]
     },
     {
       "label": "Mic",
       "action": "mic_mute",
-      "color": [
-        220,
-        65,
-        65
-      ]
+      "color": [220, 65, 65]
     },
     {
       "label": "Play/Pause",
       "action": "media_play_pause",
-      "color": [
-        155,
-        90,
-        220
-      ]
+      "color": [155, 90, 220]
     },
     {
       "label": "Capture",
       "action": "screenshot",
-      "color": [
-        65,
-        145,
-        235
-      ]
+      "color": [65, 145, 235]
     },
     {
       "label": "Lights",
       "action": "lights_toggle",
-      "color": [
-        255,
-        190,
-        45
-      ]
+      "color": [255, 190, 45]
     },
     {
       "label": "Lock",
       "action": "lock",
-      "color": [
-        145,
-        150,
-        160
-      ]
+      "color": [145, 150, 160]
     }
   ],
   "dials": [
@@ -106,137 +74,77 @@
     {
       "label": "Terminal",
       "action": "terminal",
-      "color": [
-        0,
-        174,
-        239
-      ]
+      "color": [0, 174, 239]
     },
     {
       "label": "Browser",
       "action": "browser",
-      "color": [
-        255,
-        145,
-        0
-      ]
+      "color": [255, 145, 0]
     },
     {
       "label": "Files",
       "action": "files",
-      "color": [
-        70,
-        175,
-        115
-      ]
+      "color": [70, 175, 115]
     },
     {
       "label": "Mic",
       "action": "mic_mute",
-      "color": [
-        220,
-        65,
-        65
-      ]
+      "color": [220, 65, 65]
     },
     {
       "label": "Play/Pause",
       "action": "media_play_pause",
-      "color": [
-        155,
-        90,
-        220
-      ]
+      "color": [155, 90, 220]
     },
     {
       "label": "Capture",
       "action": "screenshot",
-      "color": [
-        65,
-        145,
-        235
-      ]
+      "color": [65, 145, 235]
     },
     {
       "label": "Lights",
       "action": "lights_toggle",
-      "color": [
-        255,
-        190,
-        45
-      ]
+      "color": [255, 190, 45]
     },
     {
       "label": "Lock",
       "action": "lock",
-      "color": [
-        145,
-        150,
-        160
-      ]
+      "color": [145, 150, 160]
     },
     {
       "label": "Unassigned",
       "action": "none",
-      "color": [
-        40,
-        90,
-        130
-      ]
+      "color": [40, 90, 130]
     },
     {
       "label": "Unassigned",
       "action": "none",
-      "color": [
-        40,
-        90,
-        130
-      ]
+      "color": [40, 90, 130]
     },
     {
       "label": "Unassigned",
       "action": "none",
-      "color": [
-        40,
-        90,
-        130
-      ]
+      "color": [40, 90, 130]
     },
     {
       "label": "Unassigned",
       "action": "none",
-      "color": [
-        40,
-        90,
-        130
-      ]
+      "color": [40, 90, 130]
     },
     {
       "label": "Unassigned",
       "action": "none",
-      "color": [
-        40,
-        90,
-        130
-      ]
+      "color": [40, 90, 130]
     },
     {
       "label": "Unassigned",
       "action": "none",
-      "color": [
-        40,
-        90,
-        130
-      ]
+      "color": [40, 90, 130]
     },
     {
       "label": "Unassigned",
       "action": "none",
-      "color": [
-        40,
-        90,
-        130
-      ]
+      "color": [40, 90, 130]
     }
   ]
 }

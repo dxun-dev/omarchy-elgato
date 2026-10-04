@@ -25,12 +25,14 @@ test('plugin helper resolves its build outside the current directory and forward
   assert.equal(models.status, 0, models.stderr);
   const catalog = JSON.parse(models.stdout);
   assert.ok(Array.isArray(catalog));
-  assert.ok(catalog.some(model => model.id === 'plus'));
+  assert.ok(catalog.some((model) => model.id === 'plus'));
 });
 
 test('renamed helper can report status before first setup without creating a profile', async () => {
   const result = run('status', '--json');
   assert.equal(result.status, 0, result.stderr);
   assert.equal(JSON.parse(result.stdout).running, false);
-  await assert.rejects(access(join(env.XDG_CONFIG_HOME, 'omarchy-elgato/profile.json')), { code: 'ENOENT' });
+  await assert.rejects(access(join(env.XDG_CONFIG_HOME, 'omarchy-elgato/profile.json')), {
+    code: 'ENOENT',
+  });
 });

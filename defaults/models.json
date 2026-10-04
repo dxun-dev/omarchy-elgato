@@ -2,12 +2,7 @@
   {
     "id": "classic",
     "name": "Stream Deck Classic",
-    "models": [
-      "original",
-      "originalv2",
-      "original-mk2",
-      "original-mk2-scissor"
-    ],
+    "models": ["original", "originalv2", "original-mk2", "original-mk2-scissor"],
     "controls": [
       {
         "type": "button",
@@ -194,9 +189,7 @@
   {
     "id": "mini",
     "name": "Stream Deck Mini",
-    "models": [
-      "mini"
-    ],
+    "models": ["mini"],
     "controls": [
       {
         "type": "button",
@@ -275,9 +268,7 @@
   {
     "id": "xl",
     "name": "Stream Deck XL",
-    "models": [
-      "xl"
-    ],
+    "models": ["xl"],
     "controls": [
       {
         "type": "button",
@@ -668,9 +659,7 @@
   {
     "id": "plus",
     "name": "Stream Deck +",
-    "models": [
-      "plus"
-    ],
+    "models": ["plus"],
     "controls": [
       {
         "type": "button",
@@ -822,9 +811,7 @@
   {
     "id": "pedal",
     "name": "Stream Deck Pedal",
-    "models": [
-      "pedal"
-    ],
+    "models": ["pedal"],
     "controls": [
       {
         "type": "button",
@@ -855,9 +842,7 @@
   {
     "id": "neo",
     "name": "Stream Deck Neo",
-    "models": [
-      "neo"
-    ],
+    "models": ["neo"],
     "controls": [
       {
         "type": "button",
@@ -989,9 +974,7 @@
   {
     "id": "studio",
     "name": "Stream Deck Studio",
-    "models": [
-      "studio"
-    ],
+    "models": ["studio"],
     "controls": [
       {
         "type": "encoder",
@@ -1401,9 +1384,7 @@
   {
     "id": "6-module",
     "name": "Stream Deck 6 Module",
-    "models": [
-      "6-module"
-    ],
+    "models": ["6-module"],
     "controls": [
       {
         "type": "button",
@@ -1482,9 +1463,7 @@
   {
     "id": "15-module",
     "name": "Stream Deck 15 Module",
-    "models": [
-      "15-module"
-    ],
+    "models": ["15-module"],
     "controls": [
       {
         "type": "button",
@@ -1671,9 +1650,7 @@
   {
     "id": "32-module",
     "name": "Stream Deck 32 Module",
-    "models": [
-      "32-module"
-    ],
+    "models": ["32-module"],
     "controls": [
       {
         "type": "button",
@@ -2064,9 +2041,7 @@
   {
     "id": "15-module-scissor",
     "name": "Stream Deck 15 Module (Scissor)",
-    "models": [
-      "15-module-scissor"
-    ],
+    "models": ["15-module-scissor"],
     "controls": [
       {
         "type": "button",
@@ -2253,9 +2228,7 @@
   {
     "id": "plus-xl",
     "name": "Stream Deck + XL",
-    "models": [
-      "plus-xl"
-    ],
+    "models": ["plus-xl"],
     "controls": [
       {
         "type": "button",

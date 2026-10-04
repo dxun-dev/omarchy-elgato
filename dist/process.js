@@ -7,7 +7,10 @@ export async function run(file, args, timeout = 3000) {
 }
 export async function launch(args) {
     const child = spawn(args[0], args.slice(1), { detached: true, stdio: 'ignore' });
-    await new Promise((resolve, reject) => { child.once('spawn', resolve); child.once('error', reject); });
+    await new Promise((resolve, reject) => {
+        child.once('spawn', resolve);
+        child.once('error', reject);
+    });
     child.unref();
 }
 //# sourceMappingURL=process.js.map

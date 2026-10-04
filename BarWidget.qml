@@ -7,14 +7,30 @@ BarWidget {
   moduleName: "dxun-dev.omarchy-elgato"
 
   function injectPanel() {
-    if (!panelLoader.item) return
-    panelLoader.item.bar = root.bar
-    panelLoader.item.anchorItem = button
-    panelLoader.item.hostWidget = root
+    if (!panelLoader.item) {
+      return;
+    }
+    panelLoader.item.bar = root.bar;
+    panelLoader.item.anchorItem = button;
+    panelLoader.item.hostWidget = root;
   }
-  function open() { if (panelLoader.item) panelLoader.item.open() }
-  function close() { if (panelLoader.item) panelLoader.item.close() }
-  function closeForPopoutSwitch() { close() }
+
+  function open() {
+    if (panelLoader.item) {
+      panelLoader.item.open();
+    }
+  }
+
+  function close() {
+    if (panelLoader.item) {
+      panelLoader.item.close();
+    }
+  }
+
+  function closeForPopoutSwitch() {
+    close();
+  }
+
   readonly property bool opened: panelLoader.item ? panelLoader.item.opened === true : false
   readonly property bool connected: panelLoader.item ? panelLoader.item.connected === true : false
   readonly property bool popoutSwitchClosing: false
@@ -22,7 +38,6 @@ BarWidget {
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight
   onBarChanged: injectPanel()
-
 
   Loader {
     id: panelLoader
@@ -49,6 +64,9 @@ BarWidget {
         smooth: true
       }
     }
-    onPressed: function(mouseButton) { if (panelLoader.item) panelLoader.item.toggle() }
+    onPressed: function (mouseButton) {
+      if (panelLoader.item)
+        panelLoader.item.toggle();
+    }
   }
 }

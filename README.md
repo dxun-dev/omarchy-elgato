@@ -101,6 +101,26 @@ original project. Push changes to your fork and open a pull request targeting
 The linked guides above include checkout, checks, and submission commands.
 Keep plugin and site changes in separate pull requests and link them when related.
 
+The TypeScript backend is organized by responsibility:
+
+- `src/profile/`: shared types, model/page mappings, validation, and locked storage.
+- `src/actions/`: built-in definitions, metadata, catalogs, command execution, mappings, and appearance edits.
+- `src/cli/`: argument routing and command groups for navigation, appearance, mappings, information, and lights. `src/cli.ts` is the executable entry point.
+- `src/devices/models.ts`: supported hardware definitions and model lookup.
+- `src/paths.ts` and `src/atomic-json.ts`: data locations and atomic JSON writes.
+- `src/daemon.ts`, `src/pages.ts`, `src/lights.ts`, and `src/artwork.ts`: device orchestration, page navigation, lights, and rendering.
+
+Internal imports point directly to the module that owns each operation.
+`src/config.ts` and `src/actions.ts` retain the existing public exports for
+compatibility. Application discovery lives in `src/applications.ts`, and status
+reporting lives in `src/status.ts`. `Panel.qml` groups selection, queued saves,
+page editing, light controls, backend queries, and layout into labelled sections.
+
+Run `npm run format` to format plugin source, scripts, tests, JSON, and QML,
+or `npm run format:check` to check formatting. QML formatting requires Qt 6
+`qmlformat` (provided by `qt6-declarative` on Arch Linux). Rebuild with
+`npm run build` after formatting TypeScript to refresh the shipped `dist/` files.
+
 When behavior changes, update the relevant site guide and this README's lifecycle
 instructions if affected. The detailed guides are not duplicated on `main`.
 

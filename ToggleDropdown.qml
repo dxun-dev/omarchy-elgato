@@ -46,24 +46,37 @@ Item {
   // own keyCatcher so j/k inside the popup don't double-drive the panel
   // cursor.
   readonly property bool popupOpen: popup.opened
-  function open() { popup.open() }
-  function close() { popup.close() }
-  function toggle() { popup.opened ? popup.close() : popup.open() }
+
+  function open() {
+    popup.open();
+  }
+
+  function close() {
+    popup.close();
+  }
+
+  function toggle() {
+    popup.opened ? popup.close() : popup.open();
+  }
 
   signal changed(string value)
   signal hovered(bool isHovered)
 
   function optionValue(o) {
-    return (o && typeof o === "object") ? String(o.value) : String(o)
+    return (o && typeof o === "object") ? String(o.value) : String(o);
   }
+
   function optionLabel(o) {
-    return (o && typeof o === "object") ? String(o.label) : String(o)
+    return (o && typeof o === "object") ? String(o.label) : String(o);
   }
+
   function currentLabel() {
     for (var i = 0; i < options.length; i++) {
-      if (optionValue(options[i]) === value) return optionLabel(options[i])
+      if (optionValue(options[i]) === value) {
+        return optionLabel(options[i]);
+      }
     }
-    return value
+    return value;
   }
 
   implicitWidth: Style.spacing.dropdownWidth
@@ -103,13 +116,13 @@ Item {
         onHoveredChanged: root.hovered(hovered)
       }
 
-      Keys.onPressed: function(event) {
-        if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter
-            || event.key === Qt.Key_Space || event.key === Qt.Key_Down) {
-          popup.opened ? popup.close() : popup.open()
-          event.accepted = true
+      Keys.onPressed: function (event) {
+        if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space || event.key === Qt.Key_Down) {
+          popup.opened ? popup.close() : popup.open();
+          event.accepted = true;
         } else if (event.key === Qt.Key_Escape && popup.opened) {
-          popup.close(); event.accepted = true
+          popup.close();
+          event.accepted = true;
         }
       }
 
@@ -142,8 +155,8 @@ Item {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-          trigger.forceActiveFocus()
-          popup.opened ? popup.close() : popup.open()
+          trigger.forceActiveFocus();
+          popup.opened ? popup.close() : popup.open();
         }
       }
 
@@ -152,8 +165,7 @@ Item {
         x: 0
         y: trigger.height + Style.spacing.xxs
         width: trigger.width
-        implicitHeight: Math.min(root.options.length * root.popupRowHeight + Math.max(0, root.options.length - 1) * Style.spacing.labelGap + Style.spacing.xxs,
-                                 root.popupRowHeight * 8 + 7 * Style.spacing.labelGap + Style.spacing.xxs)
+        implicitHeight: Math.min(root.options.length * root.popupRowHeight + Math.max(0, root.options.length - 1) * Style.spacing.labelGap + Style.spacing.xxs, root.popupRowHeight * 8 + 7 * Style.spacing.labelGap + Style.spacing.xxs)
         padding: Style.spacing.hairline
         leftPadding: Border.left(root.popupBorderSpec) + Style.spacing.hairline
         rightPadding: Border.right(root.popupBorderSpec) + Style.spacing.hairline
@@ -169,8 +181,8 @@ Item {
         }
 
         onOpened: {
-          optionList.currentIndex = Math.max(0, optionList.indexOfValue(root.value))
-          optionList.forceActiveFocus()
+          optionList.currentIndex = Math.max(0, optionList.indexOfValue(root.value));
+          optionList.forceActiveFocus();
         }
 
         contentItem: ListView {
@@ -178,16 +190,19 @@ Item {
           spacing: Style.spacing.labelGap
 
           Keys.priority: Keys.BeforeItem
-          Keys.onPressed: function(event) {
-            if (event.key === Qt.Key_Escape) { popup.close(); event.accepted = true }
-            else if (event.key === Qt.Key_Down || event.text === "j") {
-              optionList.currentIndex = Math.min(root.options.length - 1, optionList.currentIndex + 1)
-              event.accepted = true
+          Keys.onPressed: function (event) {
+            if (event.key === Qt.Key_Escape) {
+              popup.close();
+              event.accepted = true;
+            } else if (event.key === Qt.Key_Down || event.text === "j") {
+              optionList.currentIndex = Math.min(root.options.length - 1, optionList.currentIndex + 1);
+              event.accepted = true;
             } else if (event.key === Qt.Key_Up || event.text === "k") {
-              optionList.currentIndex = Math.max(0, optionList.currentIndex - 1)
-              event.accepted = true
+              optionList.currentIndex = Math.max(0, optionList.currentIndex - 1);
+              event.accepted = true;
             } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-              optionList.selectCurrent(); event.accepted = true
+              optionList.selectCurrent();
+              event.accepted = true;
             }
           }
           implicitHeight: contentHeight
@@ -198,16 +213,20 @@ Item {
 
           function indexOfValue(v) {
             for (var i = 0; i < root.options.length; i++)
-              if (root.optionValue(root.options[i]) === v) return i
-            return -1
+              if (root.optionValue(root.options[i]) === v) {
+                return i;
+              }
+            return -1;
           }
 
           function selectCurrent() {
-            if (currentIndex < 0 || currentIndex >= root.options.length) return
-            var v = root.optionValue(root.options[currentIndex])
-            root.value = v
-            root.changed(v)
-            popup.close()
+            if (currentIndex < 0 || currentIndex >= root.options.length) {
+              return;
+            }
+            var v = root.optionValue(root.options[currentIndex]);
+            root.value = v;
+            root.changed(v);
+            popup.close();
           }
 
           delegate: Rectangle {
@@ -215,9 +234,7 @@ Item {
             required property int index
             width: optionList.width
             height: root.popupRowHeight
-            color: index === optionList.currentIndex
-              ? Style.hoverFillFor(root.foreground, root.accent)
-              : "transparent"
+            color: index === optionList.currentIndex ? Style.hoverFillFor(root.foreground, root.accent) : "transparent"
 
             Text {
               textFormat: Text.PlainText
