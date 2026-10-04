@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.0.1 — Initial release
+## 0.0.1 — Pre-release
 
-Prepared for the first public release; publication and tagging are pending.
+The plugin is a beta pre-release.
 
 ### Features
 
@@ -16,7 +16,7 @@ Prepared for the first public release; publication and tagging are pending.
 - Installation and updates through Omarchy's plugin commands, with automatic
   system-requirement prompts, Stream Deck USB access setup, automatic runtime
   preparation, visible setup errors, and retry from the editor.
-- Serialized profile initialization, migration, and edits; queued editor saves
+- Serialized profile initialization and edits; queued editor saves
   preserve captions when switching controls, pages, or closing the editor.
 
 ### Known limitations

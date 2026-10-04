@@ -1,7 +1,7 @@
 # Omarchy Elgato
 
 > [!IMPORTANT]
-> **Beta project.** Omarchy Elgato is currently in beta. Features and behavior may change.
+> **Beta project.** Omarchy Elgato is currently in beta. Features have beta stability and incomplete hardware verification.
 
 Configure Stream Deck buttons and dials, customize their displays, and control
 network Elgato Key Lights from the Omarchy Shell bar.
@@ -39,8 +39,7 @@ omarchy plugin add https://github.com/dxun-dev/omarchy-elgato.git --enable
 Choose where to place the widget, accept any first-enable setup prompt, then
 click the Elgato icon to configure your devices. Without `--enable`, setup waits
 until the plugin is enabled. If setup is declined or fails, use **Retry setup**
-in the editor. For an earlier development install, disable `omarchy-elgato`
-before enabling this plugin; existing profiles, icons, and action packs are preserved.
+in the editor.
 
 See [getting started](https://omarchy-elgato.dxun.dev/docs/getting-started/) for
 setup details and [troubleshooting](https://omarchy-elgato.dxun.dev/docs/troubleshooting/)
@@ -111,8 +110,7 @@ The TypeScript backend is organized by responsibility:
 - `src/daemon.ts`, `src/pages.ts`, `src/lights.ts`, and `src/artwork.ts`: device orchestration, page navigation, lights, and rendering.
 
 Internal imports point directly to the module that owns each operation.
-`src/config.ts` and `src/actions.ts` retain the existing public exports for
-compatibility. Application discovery lives in `src/applications.ts`, and status
+`src/config.ts` and `src/actions.ts` expose shared public exports. Application discovery lives in `src/applications.ts`, and status
 reporting lives in `src/status.ts`. `Panel.qml` groups selection, queued saves,
 page editing, light controls, backend queries, and layout into labelled sections.
 
@@ -126,7 +124,7 @@ instructions if affected. The detailed guides are not duplicated on `main`.
 
 ## License and attribution
 
-MIT licensed. This project began as a port of
+MIT licensed. This project is a port of
 [Amit Patel's Elgato Control](https://github.com/amitcpatel/omarchy-elgato-control).
 The [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md)
 are retained. Elgato product names identify compatible hardware and do not imply
