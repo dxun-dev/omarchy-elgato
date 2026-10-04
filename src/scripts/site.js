@@ -1,3 +1,5 @@
+import { initReveals } from './reveals.js';
+
 const themes = [
   ['tokyo', 'Tokyo Night'],
   ['gruvbox', 'Gruvbox'],
@@ -46,3 +48,5 @@ document.querySelector('#copy')?.addEventListener('click', async () => {
     status.textContent = 'Select the command and copy it manually.';
   }
 });
+
+initReveals();

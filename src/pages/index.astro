@@ -6,25 +6,38 @@ import StreamDeck from '../components/StreamDeck.astro';
 <SiteLayout>
   <main id="main">
     <section class="m-auto grid items-center overflow-hidden max-w-375 grid-cols-2 min-h-185 pt-[65px] px-[5%] pb-[70px] max-[1000px]:min-h-[650px] max-[700px]:grid-cols-1 max-[700px]:pt-[50px] max-[700px]:pb-5">
-      <div>
-        <p class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] font-mono">
+      <div data-reveal-group>
+        <p
+          data-reveal
+          class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] font-mono"
+        >
           <span class="inline-block bg-accent w-[7px] h-[7px] rounded-full mr-2 [box-shadow:0_0_12px_color-mix(in_srgb,_var(--accent),_transparent_55%)]"></span>{' '}
           Elgato for Omarchy
         </p>
         <div
+          data-reveal
           class="font-mono font-bold text-accent text-[clamp(64px,_7vw,_104px)] leading-[1.05] tracking-[-0.06em] mt-0 mx-0 mb-7 [text-shadow:0_4px_0_color-mix(in_srgb,_var(--accent)_20%,_transparent)]"
           aria-hidden="true"
         >
           elgato<span>.</span>
         </div>
-        <h1 class="font-mono font-medium text-balance text-[30px] leading-[1.35] tracking-tight mt-0 mx-0 mb-6 max-[700px]:text-[24px]">
+        <h1
+          data-reveal
+          class="font-mono font-medium text-balance text-[30px] leading-[1.35] tracking-tight mt-0 mx-0 mb-6 max-[700px]:text-[24px]"
+        >
           Your Elgato gear, at home on Omarchy.
         </h1>
-        <p class="text-muted max-w-[455px] text-[17px] leading-[1.8] max-[700px]:text-[14px]">
+        <p
+          data-reveal
+          class="text-muted max-w-[455px] text-[17px] leading-[1.8] max-[700px]:text-[14px]"
+        >
           Give your Elgato gear a home on Linux. Buttons, dials, and lights. All
           tuned to the way you work.
         </p>
-        <div class="flex items-center flex-wrap gap-5 mt-[30px] max-[700px]:gap-[14px]">
+        <div
+          data-reveal
+          class="flex items-center flex-wrap gap-5 mt-[30px] max-[700px]:gap-[14px]"
+        >
           <a
             class="text-ink no-underline touch-manipulation focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[5px] font-bold inline-flex items-center py-[14px] px-5 text-[12px] gap-[25px] border transition-[transform,background] duration-200 hover:-translate-y-[3px] bg-accent border-accent max-[700px]:text-[11px] max-[700px]:py-3 max-[700px]:px-[14px] max-[700px]:gap-[14px] motion-reduce:transition-none"
             href="#setup"
@@ -60,7 +73,10 @@ import StreamDeck from '../components/StreamDeck.astro';
       class="m-auto py-25 px-[5%] max-w-375 max-[700px]:py-[65px] max-[700px]:px-[5%]"
       id="controls"
     >
-      <div class="grid items-end grid-cols-2 mb-[50px] gap-[0_70px] max-[700px]:grid-cols-1 max-[700px]:gap-[25px]">
+      <div
+        data-reveal
+        class="grid items-end grid-cols-2 mb-[50px] gap-[0_70px] max-[700px]:grid-cols-1 max-[700px]:gap-[25px]"
+      >
         <p class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] col-span-full max-[700px]:mb-0 font-mono">
           01 / TAKE CONTROL
         </p>
@@ -72,7 +88,10 @@ import StreamDeck from '../components/StreamDeck.astro';
           Elgato icon in your Omarchy bar.
         </p>
       </div>
-      <article class="bg-surface overflow-hidden border border-line grid items-center [grid-template-columns:0.85fr_1.15fr] pt-[50px] pr-0 pb-[50px] pl-10 gap-10 max-[1000px]:pt-[30px] max-[1000px]:pr-0 max-[1000px]:pb-[30px] max-[1000px]:pl-[25px] max-[1000px]:gap-[25px] max-[700px]:grid-cols-1 max-[700px]:p-7 max-[700px]:gap-[30px]">
+      <article
+        data-reveal
+        class="bg-surface overflow-hidden border border-line grid items-center [grid-template-columns:0.85fr_1.15fr] pt-[50px] pr-0 pb-[50px] pl-10 gap-10 max-[1000px]:pt-[30px] max-[1000px]:pr-0 max-[1000px]:pb-[30px] max-[1000px]:pl-[25px] max-[1000px]:gap-[25px] max-[700px]:grid-cols-1 max-[700px]:p-7 max-[700px]:gap-[30px]"
+      >
         <div>
           <p class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] font-mono">
             STREAM DECK
@@ -118,8 +137,14 @@ import StreamDeck from '../components/StreamDeck.astro';
           />
         </figure>
       </article>
-      <div class="grid grid-cols-2 gap-6 mt-6 max-[700px]:grid-cols-1 max-[700px]:gap-5">
-        <article class="bg-surface overflow-hidden border border-line pb-0">
+      <div
+        data-reveal-group
+        class="grid grid-cols-2 gap-6 mt-6 max-[700px]:grid-cols-1 max-[700px]:gap-5"
+      >
+        <article
+          data-reveal
+          class="bg-surface overflow-hidden border border-line pb-0"
+        >
           <div class="pt-[35px] px-[35px] pb-[30px] max-[700px]:p-7">
             <p class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] font-mono">
               DIALS & DISPLAYS
@@ -147,7 +172,10 @@ import StreamDeck from '../components/StreamDeck.astro';
             loading="lazy"
           />
         </article>
-        <article class="[background:linear-gradient(_150deg,_var(--surface),_color-mix(in_srgb,_var(--yellow)_8%,_var(--surface))_)] overflow-hidden border border-line pb-0">
+        <article
+          data-reveal
+          class="[background:linear-gradient(_150deg,_var(--surface),_color-mix(in_srgb,_var(--yellow)_8%,_var(--surface))_)] overflow-hidden border border-line pb-0"
+        >
           <div class="pt-[35px] px-[35px] pb-[30px] max-[700px]:p-7">
             <p class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] font-mono">
               KEY LIGHTS
@@ -182,7 +210,10 @@ import StreamDeck from '../components/StreamDeck.astro';
       <p class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] font-mono">
         02 / BUILT TO BE YOURS
       </p>
-      <div class="flex items-end justify-between gap-[30px] max-[700px]:block">
+      <div
+        data-reveal
+        class="flex items-end justify-between gap-[30px] max-[700px]:block"
+      >
         <h2 class="font-semibold text-balance text-[28px] leading-[1.3] tracking-tight m-0 max-[700px]:text-[24px]">
           Same hardware. <span class="text-accent">Entirely your setup.</span>
         </h2>
@@ -192,8 +223,11 @@ import StreamDeck from '../components/StreamDeck.astro';
           Your controls should, too.
         </p>
       </div>
-      <div class="grid grid-cols-3 gap-10 mt-15 max-[700px]:grid-cols-1 max-[700px]:gap-[25px] max-[700px]:mt-[35px]">
-        <article class="border-t border-line pt-[22px]">
+      <div
+        data-reveal-group
+        class="grid grid-cols-3 gap-10 mt-15 max-[700px]:grid-cols-1 max-[700px]:gap-[25px] max-[700px]:mt-[35px]"
+      >
+        <article data-reveal class="border-t border-line pt-[22px]">
           <span class="text-accent text-[11px] font-mono">[01]</span>
           <h3 class="font-medium text-balance text-[18px] leading-[1.3] tracking-tight mt-5 mx-0 mb-[14px]">
             Make every key yours.
@@ -203,7 +237,7 @@ import StreamDeck from '../components/StreamDeck.astro';
             icon for each action state.
           </p>
         </article>
-        <article class="border-t border-line pt-[22px]">
+        <article data-reveal class="border-t border-line pt-[22px]">
           <span class="text-accent text-[11px] font-mono">[02]</span>
           <h3 class="font-medium text-balance text-[18px] leading-[1.3] tracking-tight mt-5 mx-0 mb-[14px]">
             Go beyond the defaults.
@@ -213,7 +247,7 @@ import StreamDeck from '../components/StreamDeck.astro';
             dependency checks.
           </p>
         </article>
-        <article class="border-t border-line pt-[22px]">
+        <article data-reveal class="border-t border-line pt-[22px]">
           <span class="text-accent text-[11px] font-mono">[03]</span>
           <h3 class="font-medium text-balance text-[18px] leading-[1.3] tracking-tight mt-5 mx-0 mb-[14px]">
             Plan it offline.
@@ -229,7 +263,7 @@ import StreamDeck from '../components/StreamDeck.astro';
       class="m-auto py-25 px-[5%] max-w-none bg-deep grid [grid-template-columns:1.4fr_0.6fr] gap-[70px] border-y border-line min-[1500px]:px-[calc((100vw_-_1350px)_/_2)] max-[1000px]:gap-[25px] max-[700px]:py-[65px] max-[700px]:px-[5%] max-[700px]:grid-cols-1"
       id="setup"
     >
-      <div>
+      <div data-reveal>
         <p class="font-semibold text-accent text-[11px] tracking-[2px] mt-0 mx-0 mb-[26px] font-mono">
           03 / LET’S GET CONNECTED
         </p>
@@ -282,7 +316,10 @@ import StreamDeck from '../components/StreamDeck.astro';
           </a>
         </div>
       </div>
-      <aside class="self-center border-l border-line p-[35px] text-[10px] max-[1000px]:p-5 max-[700px]:hidden font-mono">
+      <aside
+        data-reveal
+        class="self-center border-l border-line p-[35px] text-[10px] max-[1000px]:p-5 max-[700px]:hidden font-mono"
+      >
         <span class="text-accent text-[65px]" aria-hidden="true">
           ›_
         </span>
