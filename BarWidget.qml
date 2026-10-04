@@ -38,7 +38,7 @@ BarWidget {
     bar: root.bar
     text: ""
     dimmed: !root.connected
-    tooltipText: root.runtimePhase === "preparing" ? "Elgato Controls · Preparing runtime" : root.runtimePhase === "failed" ? "Elgato Controls · Setup failed" : root.connected ? "Elgato Controls · Connected" : "Elgato Controls · Disconnected"
+    tooltipText: root.runtimePhase === "preparing" ? "Omarchy Elgato · Preparing runtime" : root.runtimePhase === "failed" ? "Omarchy Elgato · Setup failed" : root.connected ? "Omarchy Elgato · Connected" : "Omarchy Elgato · Disconnected"
     iconComponent: Component {
       Image {
         anchors.centerIn: parent

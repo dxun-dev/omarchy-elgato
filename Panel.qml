@@ -528,7 +528,7 @@ Panel {
             id: headerTitle
             anchors.verticalCenter: parent.verticalCenter
             width: parent.width - Style.space(28) - detachButton.width - connectionLabel.implicitWidth - parent.spacing * 3
-            Text { text: "Elgato Controls"; color: Color.foreground; font.family: Style.font.family; font.pixelSize: 16; font.bold: true }
+            Text { text: "Omarchy Elgato"; color: Color.foreground; font.family: Style.font.family; font.pixelSize: 16; font.bold: true }
             Text { text: root.status.profile || "omarchy-elgato Default"; textFormat: Text.PlainText; color: Color.muted; font.family: Style.font.family; font.pixelSize: 11 }
           }
           PanelActionButton {
@@ -1001,7 +1001,7 @@ Panel {
     id: detachedWindow
     visible: false
     onVisibleChanged: if (!visible) root.commitPendingText()
-    title: "Elgato Controls"
+    title: "Omarchy Elgato"
     color: Color.background
     implicitWidth: Style.space(760)
     implicitHeight: Math.max(Style.space(520), content.implicitHeight + Style.space(32))

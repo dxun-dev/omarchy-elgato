@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "dxun-dev.omarchy-elgato",
-  "name": "Elgato Controls",
+  "name": "Omarchy Elgato",
   "version": "0.0.1",
   "author": "Jase",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "barWidget": "BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "Elgato Controls",
+    "displayName": "Omarchy Elgato",
     "description": "Configure Stream Deck models and control Key Lights",
     "category": "System",
     "aliases": [

@@ -74,7 +74,7 @@ case ${1:-} in
     }
     trap cleanup EXIT
     if ! check_system; then
-      echo 'Elgato Controls needs the following setup:'
+      echo 'Omarchy Elgato needs the following setup:'
       [[ ${#missing[@]} == 0 ]] || printf '  Install packages through Omarchy: %s\n' "${missing[*]}"
       cmp -s "$rule_source" "$rule_target" || echo '  Enable Stream Deck USB access for the active desktop user.'
       [[ $need_avahi == false ]] || echo '  Enable Avahi for Key Light discovery.'

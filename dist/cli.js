@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { loadProfile, profilePath, statusPath, stateDir, deckModels, deviceMapping } from './config.js';
 import { catalog, setDialDisplay, setControlColor, setControl, setButtonText, setButtonDisplay } from './actions.js';
 import { availableLights, controlLights, lightStates } from './lights.js';
-const help = `omarchy-elgato — Elgato controls for Omarchy
+const help = `omarchy-elgato — Omarchy Elgato
 Usage: bin/omarchy-elgato <command>
   init                         Create this plugin's independent profile
   profile                      Print profile JSON
@@ -76,7 +76,7 @@ async function main() {
         catch (error) {
             if (error.code !== 'ENOENT')
                 throw error;
-            status = { running: false, plus: null, classic: null, pedal: null, wave: null, lights: [], devices: [], profile: 'Elgato Controls' };
+            status = { running: false, plus: null, classic: null, pedal: null, wave: null, lights: [], devices: [], profile: 'Omarchy Elgato' };
         }
         if (!Number.isFinite(status.updatedAt) || Number(status.updatedAt) < Date.now() / 1000 - 10)
             status.running = false;

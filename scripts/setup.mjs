@@ -43,7 +43,7 @@ async function prepareRuntime() {
     // A failed install must not leave a marker claiming the runtime is current.
     await writeFile(marker, '');
     await writeRuntimeState('preparing');
-    console.log('Preparing Elgato Controls runtime…');
+    console.log('Preparing Omarchy Elgato runtime…');
     await cp(join(source,'package.json'),join(runtime,'package.json'));
     await cp(join(source,'package-lock.json'),join(runtime,'package-lock.json'));
     if (args.includes('--offline')) {

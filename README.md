@@ -1,7 +1,7 @@
-# Elgato Controls for Omarchy
+# Omarchy Elgato
 
 > [!IMPORTANT]
-> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+> **Beta project.** Omarchy Elgato is currently in beta. Features and behavior may change.
 
 Configure Stream Deck buttons and dials, customize their displays, and control
 network Elgato Key Lights from the Omarchy Shell bar.
@@ -91,6 +91,15 @@ If the site is unavailable, browse the [Markdown guides on GitHub](https://githu
 - [Plugin development and release validation](https://omarchy-elgato.dxun.dev/docs/development/): builds, tests, local installation, and packaging. Plugin contributions target `main`.
 - [Site contributions](https://github.com/dxun-dev/omarchy-elgato/blob/site/README.md): documentation, design, and Astro development. Site contributions target `site`.
 - [Release notes](CHANGELOG.md): plugin version history.
+
+Contribute through a [fork](https://github.com/dxun-dev/omarchy-elgato/fork),
+using a separate contribution branch. Clone your fork as `origin` and add
+`https://github.com/dxun-dev/omarchy-elgato.git` as `upstream` to track the
+original project. Push changes to your fork and open a pull request targeting
+`main` for the plugin or `site` for the website and documentation. Clear
+**Copy the main branch only** when creating your fork if you need both branches.
+The linked guides above include checkout, checks, and submission commands.
+Keep plugin and site changes in separate pull requests and link them when related.
 
 When behavior changes, update the relevant site guide and this README's lifecycle
 instructions if affected. The detailed guides are not duplicated on `main`.

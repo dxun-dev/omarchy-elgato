@@ -36,7 +36,7 @@ test('runtime preparation skips a ready runtime, repairs native modules, and pre
   const setup = () => spawnSync(process.execPath, ['scripts/setup.mjs', '--offline', '--if-needed'], { env, encoding: 'utf8' });
   const first = setup();
   assert.equal(first.status, 0, first.stderr);
-  assert.match(first.stdout, /Preparing Elgato Controls runtime/);
+  assert.match(first.stdout, /Preparing Omarchy Elgato runtime/);
   const statePath = join(process.env.XDG_STATE_HOME, 'omarchy-elgato/runtime-status.json');
   assert.equal(JSON.parse(await readFile(statePath, 'utf8')).phase, 'ready');
   const marker = join(runtime, '.runtime-ready');
