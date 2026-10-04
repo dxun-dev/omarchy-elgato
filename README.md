@@ -1,7 +1,7 @@
-# Omarchy / Elgato — site contributions
+# Omarchy Elgato — site contributions
 
 > [!IMPORTANT]
-> **Beta project.** Omarchy / Elgato is currently in beta. Features and behavior may change.
+> **Beta project.** Omarchy Elgato is currently in beta. Features and behavior may change.
 
 This branch contains the project's marketing site and documentation, built with
 **Astro** and **Tailwind CSS v4**. Production is https://omarchy-elgato.dxun.dev/.
@@ -10,31 +10,41 @@ plugin development lives on `main`, and site development lives on `site`.
 
 ## Contribute to the site
 
-Base site changes and pull requests on `site`. This branch intentionally omits
-the plugin source and must not be merged into `main`.
+Contributions use a fork of
+[dxun-dev/omarchy-elgato](https://github.com/dxun-dev/omarchy-elgato/fork).
+When creating the fork, clear **Copy the main branch only** so it includes
+`site` as well as `main`. Site and documentation pull requests target
+`dxun-dev/omarchy-elgato:site`; plugin pull requests target `main`.
+This branch omits the plugin source and must not be merged into `main`.
 
-For a new checkout:
+Replace `YOUR-USERNAME` with the GitHub account that owns your fork:
 
 ```bash
-git clone --branch site git@github.com:dxun-dev/omarchy-elgato.git omarchy-elgato-site
+git clone --branch site git@github.com:YOUR-USERNAME/omarchy-elgato.git omarchy-elgato-site
 cd omarchy-elgato-site
-npm ci
-npm run dev
-```
-
-If you already have the plugin checked out on `main`, use a separate worktree:
-
-```bash
-git fetch origin
-git worktree add ../omarchy-elgato-site site
-cd ../omarchy-elgato-site
+git remote add upstream https://github.com/dxun-dev/omarchy-elgato.git
+git fetch upstream
+git switch -c docs/my-change upstream/site
 npm ci
 npm run dev
 ```
 
 Requires Node.js 22.18 or newer. Open **http://localhost:4321/**; Astro reloads as
-source files change. Create a contribution branch from `site`, make your changes,
-and open a pull request targeting `site`.
+source files change. Use a descriptive contribution branch name.
+`origin` points to your fork; `upstream` points to the original project.
+For later contributions, fetch `upstream` again and start a new branch from
+`upstream/site`.
+
+If your fork is already checked out for plugin work, create a site worktree
+from that checkout instead:
+
+```bash
+git fetch upstream
+git worktree add -b docs/my-change ../omarchy-elgato-site upstream/site
+cd ../omarchy-elgato-site
+npm ci
+npm run dev
+```
 
 Before submitting:
 
@@ -45,8 +55,22 @@ npm run preview
 ```
 
 Check desktop and mobile layouts, all three themes, the install-command copy
-button, and navigation between documentation pages. Development and preview both
-serve from `/`. Generated output in `dist/` and Astro caches are ignored by Git.
+button, and navigation between documentation pages. Development, production
+builds, and preview serve from `/`. Generated output in `dist/` and Astro caches
+are ignored by Git.
+
+After checking your changes, commit and push the contribution branch to your fork:
+
+```bash
+git add <changed-files>
+git commit -m "Describe the site or documentation change"
+git push -u origin docs/my-change
+```
+
+Open a pull request with **base repository** `dxun-dev/omarchy-elgato`,
+**base branch** `site`, and your fork's contribution branch as the head.
+Describe the change and how you checked it. Contributors do not need write
+access to the original repository or to configure Pages on their fork.
 
 ## Where to make changes
 
@@ -65,7 +89,7 @@ serve from `/`. Generated output in `dist/` and Astro caches are ignored by Git.
 Use Tailwind utilities directly in Astro markup for styling. Keep CSS limited to
 fonts and theme variables; avoid component selectors and `@apply`. Reuse the
 shared layout when adding pages. Use `import.meta.env.BASE_URL` for public assets
-and internal route URLs; it resolves to `/` in development and production.
+and internal route URLs; it resolves to `/` in development and production builds.
 
 ## How documentation is maintained
 
@@ -91,19 +115,18 @@ utilities without inline syntax-highlighter styles.
 
 The workflow in `.github/workflows/deploy.yml` builds and deploys pushes to `site`.
 It uses the Astro action to install from `package-lock.json`, build `dist/`, and
-upload the Pages artifact, followed by a separate deployment job. Manual workflow
-runs must target `site`. GitHub Pages uses **GitHub Actions** as its publishing
-source because Astro requires a build step.
+upload the Pages artifact, followed by a separate deployment job. Both jobs
+require the upstream repository's numeric identity, a non-fork repository, and
+a push to `site`. Pull requests and manual runs do not deploy. A fork may show
+a skipped workflow run, but it does not build, upload, or deploy through this
+workflow. The identity guard does not depend on a maintainer username.
 
-In this repository's **Settings → Pages**, select **GitHub Actions** and set the
-custom domain to `omarchy-elgato.dxun.dev`. If the `github-pages` environment limits
-deployment branches, allow `site`. Configure the `omarchy-elgato` DNS CNAME to
-point to `dxun-dev.github.io`, then enable HTTPS after verification and certificate
-provisioning. `public/CNAME` is included in the build; it does not configure
-repository settings or DNS by itself.
-
-See [GitHub's publishing-source documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-and [custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+Contributors push to their forks and submit pull requests. Accepted site changes
+deploy after merging into upstream `site`; plugin changes update upstream
+`main` after acceptance. Repository branch protection controls who can accept
+changes; the workflow does not grant contributors repository write access.
+The Pages environment accepts only the `site` branch. GitHub Pages uses
+**GitHub Actions** as its publishing source because Astro requires a build step.
 
 ## License
 

@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/DocsLayout.astro
 title: 'Documentation'
-description: 'Everything you need to install, configure, and extend Omarchy / Elgato.'
+description: 'Everything you need to install, configure, and extend Omarchy Elgato.'
 slug: ''
 ---
 

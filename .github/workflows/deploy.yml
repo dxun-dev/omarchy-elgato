@@ -3,7 +3,6 @@ name: Deploy website to GitHub Pages
 on:
   push:
     branches: [site]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,7 +13,12 @@ concurrency:
 
 jobs:
   build:
-    if: github.ref == 'refs/heads/site'
+    # Repository identity survives renames and differs in every fork.
+    if: >-
+      github.repository_id == '1400619254' &&
+      !github.event.repository.fork &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/site'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -26,6 +30,11 @@ jobs:
 
   deploy:
     needs: build
+    if: >-
+      github.repository_id == '1400619254' &&
+      !github.event.repository.fork &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/site'
     runs-on: ubuntu-latest
     permissions:
       pages: write

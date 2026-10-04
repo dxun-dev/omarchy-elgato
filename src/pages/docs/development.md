@@ -7,6 +7,30 @@ slug: 'development'
 
 > These commands are for the **plugin on the main branch**, not this website branch. Use a separate plugin checkout so the website and plugin have independent dependencies.
 
+## Contribute through a fork
+
+Fork [dxun-dev/omarchy-elgato](https://github.com/dxun-dev/omarchy-elgato/fork)
+to your GitHub account. Clear **Copy the main branch only** when creating it
+if you also want to contribute to the site or documentation.
+Plugin contributions start from `main` and target `main`; site and documentation
+contributions start from `site` and target `site`.
+
+Replace `YOUR-USERNAME` with your fork owner's GitHub account:
+
+```bash
+git clone --branch main git@github.com:YOUR-USERNAME/omarchy-elgato.git
+cd omarchy-elgato
+git remote add upstream https://github.com/dxun-dev/omarchy-elgato.git
+git fetch upstream
+git switch -c fix/my-change upstream/main
+```
+
+`origin` is your fork; `upstream` is the original project. For later
+contributions, fetch `upstream` and create a new branch from `upstream/main`.
+Use a descriptive branch name and keep each pull request focused.
+
+## Build and test locally
+
 Keep a source checkout separate from the installed plugin folder. npm creates
 symlinks under `node_modules/.bin`; Omarchy rejects symlinks inside plugin folders.
 Run these commands from any source checkout location:
@@ -29,6 +53,30 @@ After edits, `npm run dev` builds, installs with existing dependencies, and
 restarts Omarchy Shell. The bar briefly disappears during the restart. Use
 `npm ci` again after dependency changes. The plugin never assumes a particular
 checkout directory, user name, connected serial number, or light address.
+
+## Submit your changes
+
+Run the checks relevant to your change, including `npm run check` and
+`npm test`. For editor changes, also run `npm run test:editor` and check the
+interface locally. Build and include updated `dist/` files when backend source
+changes; describe which hardware was tested if applicable.
+
+```bash
+git add <changed-files>
+git commit -m "Describe the plugin change"
+git push -u origin fix/my-change
+```
+
+Open a pull request with **base repository** `dxun-dev/omarchy-elgato`,
+**base branch** `main`, and your fork's contribution branch as the head.
+Describe the resulting behavior and validation. No write access to the original
+repository is needed.
+
+For site or documentation changes, follow the
+[site contribution instructions](https://github.com/dxun-dev/omarchy-elgato/blob/site/README.md)
+and submit a separate pull request targeting `site`. If a plugin change needs
+documentation updates, link the two pull requests. Keep the two branch histories
+separate; do not merge `site` into `main` or `main` into `site`.
 
 ## Repository layout
 
