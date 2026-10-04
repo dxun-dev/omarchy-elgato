@@ -33,7 +33,7 @@ are reused. The complete set the script can request is:
 | `xdg-utils` | `xdg-open` opens files and URLs. |
 
 The package manager may also install their dependencies. Setup does not record
-which packages were already installed. Omarchy supplies the surrounding tools:
+which packages it installs or reuses. Omarchy supplies the surrounding tools:
 `omarchy`, `omarchy-shell`, `bash`, `gum`, `jq`, `flock`, `sudo`,
 `systemctl`, `udevadm`, and standard filesystem utilities; the requirements
 script does not install these separately. Git is needed for repository-based
@@ -83,9 +83,6 @@ Elgato icon when it appears to configure your devices.
 Without `--enable`, setup waits until you enable the plugin. If you decline the
 system setup prompt, no packages or USB rules are changed; use **Retry setup**
 in the editor when you are ready.
-
-For an earlier development install, disable `omarchy-elgato` before enabling
-this plugin. Existing profiles, icons, and action packs are preserved.
 
 ## Use and configure
 
@@ -143,8 +140,7 @@ Setup seeds `actions/voxtype/` from the bundled example only if absent;
 it does not install the VOXtype application. Optional action applications and
 user action-pack dependencies are not automatically installed.
 
-Normal use creates `profile.json`, optionally a migration backup
-`profile.before-pages.json`, and `profile.lock` in the configuration directory.
+Normal use creates `profile.json` and `profile.lock` in the configuration directory.
 The state directory holds `status.json`, `light-inventory.json`,
 `runtime-status.json`, daemon/setup lock files, and temporary files used for
 atomic writes. Cache files include generated RGB artwork, SVGs, and PNG previews.
@@ -193,7 +189,7 @@ cache/logs, system packages, the udev rule, and Avahi's service configuration.
 Back up your settings before deleting them. To remove plugin-owned user data,
 delete these directories, substituting your XDG locations when set:
 
-- `~/.config/omarchy-elgato/`: mappings, migration backup, custom icons and action packs.
+- `~/.config/omarchy-elgato/`: mappings, custom icons and action packs.
 - `~/.local/state/omarchy-elgato/`: status, inventory and locks.
 - `~/.cache/omarchy-elgato/`: generated artwork.
 - `~/.local/share/omarchy-elgato/runtime/`: npm runtime; use your
@@ -213,10 +209,10 @@ sudo udevadm trigger --subsystem-match=hidraw --action=add
 ```
 
 Disconnect and reconnect the devices to reapply access under the remaining
-rules. If you had a custom rule at that path before setup, restore your own
+rules. If setup replaces a custom rule at that path, restore your own
 backup instead. Another Elgato integration may still need this rule.
 
-If setup enabled Avahi and no other application needs it, you can reverse that
+If setup enables Avahi and no other application needs it, you can reverse that
 change with `sudo systemctl disable --now avahi-daemon.service`. Keep it if
 other applications rely on local-network discovery. Likewise, review the package
 table above and your package-manager history before removing packages with
@@ -235,4 +231,4 @@ navigation, Studio NFC, Network Dock transport, Wave-specific controls, and
 Facecam controls are not implemented.
 
 Action packs provide command actions and status queries. Live tile providers
-and column reservations, such as Herdr agent columns, are future work.
+and column reservations, such as Herdr agent columns, are not supported.

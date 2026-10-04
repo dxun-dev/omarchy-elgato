@@ -59,7 +59,7 @@ checkout directory, user name, connected serial number, or light address.
 Run the checks relevant to your change, including `npm run check` and
 `npm test`. For editor changes, also run `npm run test:editor` and check the
 interface locally. Build and include updated `dist/` files when backend source
-changes; describe which hardware was tested if applicable.
+changes; describe your hardware checks where applicable.
 
 ```bash
 git add <changed-files>
@@ -69,7 +69,7 @@ git push -u origin fix/my-change
 
 Open a pull request with **base repository** `dxun-dev/omarchy-elgato`,
 **base branch** `main`, and your fork's contribution branch as the head.
-Describe the resulting behavior and validation. No write access to the original
+Describe the behavior and validation. No write access to the original
 repository is needed.
 
 For site or documentation changes, follow the
@@ -114,8 +114,7 @@ qmllint -I "$OMARCHY_PATH/shell" BarWidget.qml Panel.qml Service.qml
 ```
 
 Test bar click, Escape, detach/dock, shell restart, disable/re-enable, and removal
-before a release. Exercise hardware separately from mock tests and state which
-models were tested. Do not check personal profiles, status files, custom action
+before a release. Exercise hardware separately from mock tests and list the models in your hardware checks. Do not check personal profiles, status files, custom action
 packs, generated artwork caches, dependency folders, or private device logs into
 the repository. Tests use synthetic private-network addresses as fixtures.
 
@@ -148,9 +147,8 @@ sample data.
 - Maintainer SSH remote: `git@github.com:dxun-dev/omarchy-elgato.git`.
 - Permanent plugin ID: `dxun-dev.omarchy-elgato`. The manifest, QML identity, and
   documented Omarchy commands use this ID.
-- The user-data directory stays `omarchy-elgato`, preserving existing profiles,
-  icons, and action packs. Disable the old `omarchy-elgato` development plugin
-  before enabling the new ID to avoid duplicate hardware services.
+- The user-data directory is `omarchy-elgato` and contains profiles, icons,
+  and action packs.
 
 Author attribution is publisher metadata, not a dependency on a particular
 machine. Keep the license copyright and third-party notices.
@@ -163,7 +161,7 @@ machine. Keep the license copyright and third-party notices.
 4. Test installation in a fresh XDG configuration/data directory. The repository
    clone must contain every setup/runtime file and no symlinks or `node_modules`.
 5. Verify first-enable runtime preparation, bar/panel operation, disable/re-enable, update, and removal.
-   User-owned profiles and extensions should be preserved.
+   Check that user-owned profiles and extensions remain intact.
 6. Review the README, MIT license, third-party notices, preview, version, and
    declared hardware limitations for the release.
 7. Submit the repository link, category, and tags using the marketplace form.

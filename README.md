@@ -1,7 +1,7 @@
 # Omarchy Elgato — site contributions
 
 > [!IMPORTANT]
-> **Beta project.** Omarchy Elgato is currently in beta. Features and behavior may change.
+> **Beta project.** Omarchy Elgato is currently in beta. Features have beta stability and incomplete hardware verification.
 
 This branch contains the project's marketing site and documentation, built with
 **Astro** and **Tailwind CSS v4**. Production is https://omarchy-elgato.dxun.dev/.
@@ -69,7 +69,7 @@ git push -u origin docs/my-change
 
 Open a pull request with **base repository** `dxun-dev/omarchy-elgato`,
 **base branch** `site`, and your fork's contribution branch as the head.
-Describe the change and how you checked it. Contributors do not need write
+Describe the change and your validation checks. Contributors do not need write
 access to the original repository or to configure Pages on their fork.
 
 ## Where to make changes
@@ -96,8 +96,7 @@ and internal route URLs; it resolves to `/` in development and production builds
 The site is the single home for detailed plugin documentation under
 `src/pages/docs/`. The plugin README on `main` retains a short description,
 requirements, installation, updates, safe removal and retained-data notes,
-license/attribution, and links to these guides. Detailed Markdown guides are no
-longer duplicated on `main`. Its `docs/previews/` folder contains generated
+license/attribution, and links to these guides. Detailed Markdown guides live only on `site`. Its `docs/previews/` folder contains generated
 plugin screenshots rather than documentation text.
 
 When changing plugin behavior, update the relevant guide in a contribution

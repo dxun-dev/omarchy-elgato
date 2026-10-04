@@ -58,12 +58,12 @@ icon selection. The preview uses the same artwork as the device.
 Bundled presets are white SVG icons without glow or embedded captions. Captions
 remain independent of the assigned action and are limited to 80 characters on
 one line; long captions scale down to fit. Text embedded in your own image remains
-part of that image. Existing profiles retain their previous appearance until you
-choose a display mode.
+part of that image. Choose a display mode to control how the caption and icon
+appear on the button.
 
 The optional `displayMode` field is `text`, `icon-text`, `icon`, `color`, or `color-text`. `displayText`
-contains a custom caption or is absent for the action name. Legacy hidden captions
-and custom icon-only images remain supported.
+contains a custom caption or is absent for the action name. Use **Icon only**
+to display an image without a caption.
 
 ```bash
 bin/omarchy-elgato set-device-text classic 1 custom "My terminal"
@@ -73,9 +73,7 @@ bin/omarchy-elgato set-device-text classic 1 automatic
 
 ## Pages
 
-Each device model has its own pages and remembers its active page. Existing
-buttons, icons, captions, and dials become **Page 1** automatically. A pre-migration
-backup is saved as `profile.before-pages.json` alongside the profile. The page
+Each device model has its own pages and remembers its active page. The page
 selector below the device dropdown switches both the editor and physical device.
 Use **Add**, **Duplicate**, **Rename**, or **Delete** to manage pages. New pages
 start unassigned; duplicates copy all button and dial settings. Keep at least
@@ -85,12 +83,10 @@ to the deleted page. Up to 50 pages are supported per model.
 Assign **Next Page**, **Previous Page**, or **Go to [page name]** to a button,
 dial turn, or dial press. Next/previous wrap around; a single page stays selected.
 Navigation redraws hardware and preserves held push-to-talk releases. Pages are
-shared by connected devices of the same model, like the existing mappings.
-The selector works for offline models too. Swipe navigation is deferred.
+shared by connected devices of the same model. The selector works for offline
+models too. Swipe navigation is not supported.
 
-Pages are stored in `profile.json` under `pages[model]` with stable IDs. The first
-page continues to use the legacy `keys`, `classicKeys`, `dials`, or `devices`
-fields; additional pages carry independent mappings. CLI mapping/preview
+Each page has independent button and dial assignments. CLI mapping and preview
 commands accept `--page ID` to edit a specific page; otherwise they use the active
 page. Profile mutations are serialized to prevent page switching from overwriting
 concurrent mapping edits.
@@ -138,8 +134,8 @@ models are not changed. Folders do not participate in name matching.
 
 Matching uses the target page's current name, so renaming it updates global
 navigation automatically. If another device has duplicate matching page names,
-its first matching main page is selected. Existing text and icon choices remain
-editable on page buttons. Connected devices of the same model share page state.
+its first matching main page is selected. Text and icon choices are editable
+on page buttons. Connected devices of the same model share page state.
 
 CLI actions are `page:ID` for local buttons and `page_global:ID` for global
 buttons; the ID belongs to the button's own model.
@@ -147,8 +143,8 @@ buttons; the ID belongs to the button's own model.
 The Page target dropdown also offers **Next**, **Previous**, **First**, and **Last**.
 With Global checked, each connected model navigates its own main-page order,
 regardless of page names or page counts. Next and Previous wrap at the ends.
-Folders are skipped; navigation from a folder uses the main page it was entered
-from and clears the folder return path. First and Last choose each model's first
+Folders are skipped; navigation from a folder uses its entry main page
+and clears the folder return path. First and Last choose each model's first
 or last main page. CLI actions are `page_next`, `page_previous`, `page_first`,
 `page_last`, or their `page_global_` equivalents.
 
@@ -164,16 +160,16 @@ Dial turn dropdowns offer repeatable adjustments and navigation: output volume,
 microphone level, light brightness/temperature, workspace and page stepping, and
 directional/navigation keys. Launches, toggles, screenshots, and push-to-talk
 remain available on buttons and dial presses. Volume and other adjustments are
-also available on buttons. Existing assignments are preserved, including actions
-no longer offered for dial turns; CLI mappings remain unrestricted.
+also available on buttons. Use the dropdown for the selected control to choose
+an action. CLI mappings accept any valid action.
 
 ## Button and dial colors
 
 RGB-only buttons have a color picker with RGB sliders, presets, and hex entry.
 Display buttons also offer **Color only** and **Color and text** in Button display;
 the latter provides separate background and text colors. Colors are saved per
-page/folder and survive changes to actions and display modes. Existing buttons
-keep their appearance until a color display mode is selected.
+page/folder and survive changes to actions and display modes. Select a color
+display mode to apply background and text colors to a display button.
 
 Dials show **Dial LED color** only on models with a central LED or LED ring.
 The Stream Deck Plus dials do not have these LEDs. LED-capable models use a
@@ -192,8 +188,8 @@ Choose **Default status**, **Text only**, **Icon and text**, **Icon only**,
 **Color only**, or **Color and text**. Custom modes provide a background color;
 text modes also provide a text color and caption. Icon modes use the same
 **Browse icons** gallery as buttons. The preview uses the hardware artwork.
-Settings belong to each dial on the active page/folder. **Default status** restores
-the original status tile while keeping custom settings for later use. LCD colors
+Settings belong to each dial on the active page/folder. **Default status** displays
+the built-in status tile while keeping custom settings for later use. LCD colors
 are separate from physical dial LED colors.
 
 ```bash
@@ -216,7 +212,7 @@ or invalid packs with `bin/omarchy-elgato action-packs`.
 Runtime preparation supplies an optional VOXtype **Discard recording** action pack;
 it is offered only when VOXtype is installed. Existing packs are preserved.
 Live Herdr columns, Wave/Facecam editors, and additional hardware transports
-remain separate integration work. Touch navigation is unchanged.
+are not supported. Touch navigation is not supported.
 
 ## Reliability and Neo information
 
@@ -233,7 +229,7 @@ Default dial captions stay within their LCD cells. The Neo information screen
 shows the clock/date, active page or folder, default microphone mute state, and
 reachable lights that are on. It refreshes when those values change; physical
 Neo verification remains outstanding. Touch buttons remain ordinary assignable
-RGB controls; no automatic touch navigation is added.
+RGB controls without automatic touch navigation.
 
 ## Icons for action states
 
@@ -249,4 +245,4 @@ Action packs can supply status commands and default icons for arbitrary states;
 see [status and state icons](../action-packs/#status-and-state-icons). External
 changes update icons automatically. A failed status query uses the unavailable
 icon if assigned, otherwise the normal icon. Profiles retain their normal icon,
-and state overrides only apply to the action they were configured for.
+and state overrides only apply to their assigned action.

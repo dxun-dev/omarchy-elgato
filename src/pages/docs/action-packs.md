@@ -69,7 +69,7 @@ daemon shutdown. An action with `release` cannot declare `dialTurn` support.
 The handler definition captured on press is used for release, even if the
 manifest or assignment changes while held. Removing a manifest preserves this
 pairing. Removing a bundled executable while held can make release fail; external
-commands can still release if the pack folder has gone.
+commands can release even when the pack folder is absent.
 
 Example:
 
@@ -99,12 +99,13 @@ bin/omarchy-elgato set-device-key plus 1 ext:example/next
 
 `action-packs` lists the directory and any manifest/dependency errors. Change or
 remove a pack folder to update/uninstall it. There is no automatic Git fetching,
-package installation, or update mechanism in this first version.
+package installation, or update mechanism.
 
 ## Scope
 
-Version 1 provides command actions, status queries, and static icons per state. Live tile providers,
-column reservations, device editors, and custom settings forms are future work.
+Action packs provide command actions, status queries, and static icons per state.
+Live tile providers, column reservations, device editors, and custom settings
+forms are not supported.
 Herdr's live agent columns need that provider layer; they cannot be reproduced
 by a static action manifest alone. Touch navigation is not implemented.
 
