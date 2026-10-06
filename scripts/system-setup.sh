@@ -80,8 +80,16 @@ case ${1:-} in
     if ! check_system; then
       echo 'Omarchy Elgato needs the following setup:'
       [[ ${#missing[@]} == 0 ]] || printf '  Install packages through Omarchy: %s\n' "${missing[*]}"
-      cmp -s "$rule_source" "$rule_target" || echo '  Enable Stream Deck USB access for the active desktop user.'
-      [[ $need_avahi == false ]] || echo '  Enable Avahi for Key Light discovery.'
+      if ! cmp -s "$rule_source" "$rule_target"; then
+        printf '  Install USB access rule: %s (0644; replaces any existing file without backup).\n' "$rule_target"
+        echo '  Grant the active desktop user access to matched Stream Deck hidraw devices (0660 + uaccess).'
+        echo '  Reload udev rules and trigger add events for all hidraw devices.'
+      fi
+      [[ $need_avahi == false ]] || echo '  Enable and start avahi-daemon.service for Key Light discovery, including startup at boot.'
+      printf '  Write setup status and lock files under: %s\n' "$state_dir"
+      echo 'Packages, USB rules, and Avahi settings remain after plugin disable/removal.'
+      echo 'Setup does not restore previous state or roll back completed changes on failure.'
+      echo 'See README: Changes through the plugin lifecycle, User files, and Optional cleanup after removal.'
       gum confirm 'Install these requirements? Administrator authentication may be requested.' || exit 1
       [[ ${#missing[@]} == 0 ]] || omarchy pkg add "${missing[@]}"
       if ! cmp -s "$rule_source" "$rule_target"; then

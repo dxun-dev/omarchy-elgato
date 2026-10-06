@@ -86,6 +86,23 @@ systemd service installed for the plugin: Omarchy Shell owns its daemon.
 Actions for optional applications appear only when their executable is
 available. User-installed action packs provide their own dependency checks.
 
+## Changes through the plugin lifecycle
+
+| Stage | Changes and retained state |
+| --- | --- |
+| Add without enabling | Omarchy creates the installed plugin checkout. System packages, USB rules, Avahi, and runtime preparation wait until enablement. |
+| Enable / retry setup | Omarchy records enablement and bar placement in its shared shell configuration and starts the plugin service. After confirmation, setup installs missing packages, replaces the plugin USB rule when different, reloads udev and retriggers hidraw devices, and enables/starts inactive Avahi. Runtime preparation writes dependencies and its marker in the user data directory, seeds the absent VOXtype action pack, and writes setup state; npm may write shared cache/logs. |
+| Use | The daemon reads USB devices and discovers/controls network Key Lights. Configuration, icons, action packs, status, inventory, locks, artwork caches, and user-journal logs are stored as listed in **User files**. Assigned actions can launch applications, send keyboard input, change audio settings, and run action-pack commands. |
+| Update / re-enable | Omarchy updates and reloads the checkout. Startup repeats requirement checks; newly missing packages, a changed USB rule, or inactive Avahi require the same confirmation. A changed package lockfile or Node/platform signature refreshes the user runtime. Configuration is preserved. |
+| Disable | Omarchy records the disabled state and stops the daemon. Installed files, user data, runtime, packages, USB rule, and Avahi configuration remain; no system changes are reversed. |
+| Remove | Omarchy unloads the plugin and removes its checkout, or retains a backup for a non-Git install. User data, runtime, previous backups, shared caches/logs, packages, USB rule, and Avahi configuration remain. Follow **Optional cleanup after removal** to review and remove them. |
+
+The exact package list, privileged commands, USB matches, and affected system
+paths are in **System packages** and **System changes** above. User paths and
+backup locations are in **User files** below. Setup does not record previous
+package/service/rule state or roll back partially completed changes on failure;
+review the terminal output and package-manager history before retrying or cleanup.
+
 ## Install
 
 Install and enable through Omarchy. This is the complete end-user installation

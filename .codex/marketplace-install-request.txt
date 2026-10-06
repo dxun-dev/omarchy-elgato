@@ -1,0 +1,43 @@
+Subject: Omarchy Elgato standard installation: review manual override
+
+Plugin ID: dxun-dev.omarchy-elgato
+Repository: https://github.com/dxun-dev/omarchy-elgato
+Currently listed snapshot: 08cb4707ee5eec5379dbcd21cb1eec5d8e06c561
+
+Please review the registry's manual installation override. The plugin already
+supports this complete end-user entry point:
+
+omarchy plugin add https://github.com/dxun-dev/omarchy-elgato.git --enable
+
+Service.qml starts bin/omarchy-elgato daemon. Before requiring Node.js, the Bash
+launcher checks system requirements and opens a confirmation terminal when
+needed. On confirmation, scripts/system-setup.sh installs missing packages via
+omarchy pkg add, installs the narrowly matched udev rule using sudo, enables
+Avahi when inactive, and resumes the service through shell IPC. Runtime setup
+runs npm ci --omit=dev outside the plugin directory and verifies native modules.
+The compiled backend is shipped. Users do not need manual clone/build/npm/setup
+commands; they do need setup consent, administrator authentication when needed,
+and internet access. Optional applications such as VOXtype are not installed.
+
+main's README and site's getting-started guide now have matching install/update/
+removal guidance and file inventories, including package-owned files and caches,
+udev rules, Avahi unit links/runtime files, Omarchy shell config, plugin source,
+profile migration backups, runtime dependencies, logs, and local/removal backups.
+These documentation changes and a new missing-Node bootstrap regression test
+are local and must be published before requesting verification of a newer SHA.
+
+Current registry evidence has no findings but declares installer,
+service-management, package-manager, and privilege capabilities. The current
+standard-installation workflow accepts passed scans or installer-only reviews,
+so this plugin does not satisfy its automatic eligibility. Please advise on or
+review the supported policy path for consent-based package/service/USB setup.
+Do not omit capabilities or bypass the policy to remove the manual label.
+
+Reference:
+https://github.com/omacom/omarchy-plugin-marketplace/blob/main/VERIFICATION.md
+https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml
+
+Once the updated main commit is published, use its full SHA for a newer-commit
+review. A marketplace maintainer must also approve any standard-installation
+change under the applicable policy. The public label has not been changed by
+these local edits.
