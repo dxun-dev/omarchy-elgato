@@ -1,6 +1,15 @@
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, writeFile, cp, chmod, symlink, rm } from 'node:fs/promises';
+import {
+  mkdtemp,
+  mkdir,
+  readFile,
+  writeFile,
+  cp,
+  chmod,
+  symlink,
+  rm,
+} from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -46,7 +55,10 @@ async function fixture(name) {
     await chmod(join(bin, command), 0o755);
   }
   await executable('gum', 'exit "${DECLINE:-0}"');
-  await executable('sudo', 'echo "$*" >> "$TEST_DIR/admin-commands"\nexec "$@"');
+  await executable(
+    'sudo',
+    'echo "$*" >> "$TEST_DIR/admin-commands"\nexec "$@"',
+  );
   await executable(
     'systemctl',
     'if [[ $1 == is-active ]]; then [[ -f $TEST_DIR/avahi-active ]]; else touch="$TEST_DIR/avahi-active"; printf active > "$touch"; fi',
@@ -84,10 +96,16 @@ done
     TEST_DIR: directory,
   };
   const run = (mode, extra = {}) =>
-    spawnSync('/usr/bin/bash', [script, mode], { env: { ...env, ...extra }, encoding: 'utf8' });
+    spawnSync('/usr/bin/bash', [script, mode], {
+      env: { ...env, ...extra },
+      encoding: 'utf8',
+    });
   const state = async () =>
     JSON.parse(
-      await readFile(join(env.XDG_STATE_HOME, 'omarchy-elgato/runtime-status.json'), 'utf8'),
+      await readFile(
+        join(env.XDG_STATE_HOME, 'omarchy-elgato/runtime-status.json'),
+        'utf8',
+      ),
     );
   return { directory, executable, run, state };
 }
@@ -100,7 +118,9 @@ test('first enable requests a terminal prompt without installing anything', asyn
     /launch terminal bash .*--install/,
   );
   assert.equal((await f.state()).phase, 'preparing');
-  await assert.rejects(readFile(join(f.directory, 'admin-commands')), { code: 'ENOENT' });
+  await assert.rejects(readFile(join(f.directory, 'admin-commands')), {
+    code: 'ENOENT',
+  });
 });
 test('confirmation installs missing packages, narrow USB rules, and Avahi, then resumes service', async () => {
   const f = await fixture('install');
@@ -120,7 +140,10 @@ test('confirmation installs missing packages, narrow USB rules, and Avahi, then 
   ]) {
     assert.ok(packages.split(/\s+/).includes(packageName));
   }
-  const rule = await readFile(join(f.directory, 'rules/70-omarchy-elgato.rules'), 'utf8');
+  const rule = await readFile(
+    join(f.directory, 'rules/70-omarchy-elgato.rules'),
+    'utf8',
+  );
   assert.match(rule, /TAG\+="uaccess"/);
   assert.doesNotMatch(rule, /SUBSYSTEM=="input"|0666/);
   assert.equal((await f.state()).phase, 'ready');
@@ -134,6 +157,46 @@ test('declining setup leaves packages and USB permissions unchanged and exposes 
   const f = await fixture('decline');
   assert.notEqual(f.run('--install', { DECLINE: '1' }).status, 0);
   assert.equal((await f.state()).phase, 'failed');
-  await assert.rejects(readFile(join(f.directory, 'admin-commands')), { code: 'ENOENT' });
-  await assert.rejects(readFile(join(f.directory, 'packages')), { code: 'ENOENT' });
+  await assert.rejects(readFile(join(f.directory, 'admin-commands')), {
+    code: 'ENOENT',
+  });
+  await assert.rejects(readFile(join(f.directory, 'packages')), {
+    code: 'ENOENT',
+  });
+});
+
+test('daemon first enable requests setup even when Node.js is unavailable', async () => {
+  const f = await fixture('daemon-bootstrap');
+  const helper = join(f.directory, 'bin/omarchy-elgato');
+  const source = (await readFile('bin/omarchy-elgato', 'utf8'))
+    .replaceAll('/usr/bin/node', join(f.directory, 'bin/system-node'))
+    .replace(
+      'export PATH=/usr/bin:$PATH',
+      'export PATH=' + join(f.directory, 'bin') + ':$PATH',
+    );
+  await writeFile(helper, source);
+  await mkdir(join(f.directory, 'dist'));
+  await writeFile(
+    join(f.directory, 'dist/cli.js'),
+    'throw new Error("Backend must not start before setup");',
+  );
+  const result = spawnSync('/usr/bin/bash', [helper, 'daemon'], {
+    env: {
+      ...process.env,
+      HOME: f.directory,
+      XDG_STATE_HOME: join(f.directory, 'state'),
+      PATH: join(f.directory, 'bin'),
+      TEST_DIR: f.directory,
+    },
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 78, result.stderr);
+  assert.match(
+    await readFile(join(f.directory, 'launch'), 'utf8'),
+    /launch terminal bash .*--install/,
+  );
+  assert.equal((await f.state()).phase, 'preparing');
+  await assert.rejects(readFile(join(f.directory, 'admin-commands')), {
+    code: 'ENOENT',
+  });
 });
