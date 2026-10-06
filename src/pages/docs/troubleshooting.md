@@ -19,7 +19,9 @@ omarchy plugin enable dxun-dev.omarchy-elgato
 
 For detailed diagnostics, run
 `~/.config/omarchy/plugins/dxun-dev.omarchy-elgato/bin/omarchy-elgato doctor`.
-Manual `bin/omarchy-elgato setup` remains available to repair the runtime.
+The following helper commands are optional repair tools. Normal installation
+only needs the Omarchy install command and its setup confirmations.
+`bin/omarchy-elgato setup` remains available to repair the runtime.
 To check or repair system requirements, run
 `bin/omarchy-elgato install-requirements` in a terminal. Reconnect the Stream Deck
 after USB access setup if needed. Network lights must be reachable on the local
